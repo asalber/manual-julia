@@ -1,0 +1,36 @@
+project:
+  type: book
+  output-dir: "docs"
+
+book:
+  title: "Manual de Julia"
+  author: "Alfredo Sánchez Alberca"
+  date: "1/6/2022"
+  image: cover.png
+  cover-image: cover.png
+  downloads: [pdf, epub]
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - tipos-datos.qmd
+    - estructuras-control.qmd
+    - tipos-datos-compuestos.qmd
+    - funciones.qmd
+    - graficos.qmd
+    - calculo-simbolico.qmd
+    - analisis-datos.qmd
+    - aplicaciones.qmd
+    - referencias.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+  epub:
+    cover-image: cover.png
+
+
+

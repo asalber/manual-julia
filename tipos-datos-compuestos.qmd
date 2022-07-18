@@ -1,0 +1,1438 @@
+# Tipos de datos compuestos
+
+## Colecciones de datos
+
+Colecciones de datos con distinta estructura y semántica.
+
+- Arrays
+  - Vectores
+  - Matrices
+- Tuplas
+- Diccionarios
+- Conjuntos
+
+## Arrays 
+
+Un **array** es una colección ordenada de datos de un mismo tipo.
+
+El tipo del array se infiere automáticamente a partir de los tipos de sus elementos. Si los elementos son de distintos tipos se convierten al tipo más específico de la jerarquía de tipos del que los tipos de los elementos son subtipos.
+
+Se construyen escribiendo sus elementos separados por comas, puntos y comas o espacios entre corchetes.
+
+```julia
+julia> [1, 2, 3]
+3-element Vector{Int64}:
+ 1
+ 2
+ 3
+
+julia> [1.0, "julia", true]
+3-element Vector{Any}:
+    1.0
+     "julia"
+ true
+```
+
+## Arrays multidimensionales
+
+Los arrays pueden estructurar sus elementos en múltiples dimensiones. Dependiendo el número de dimensiones tenemos distintos tipos de arrays:
+
+![](img/arrays.png){}
+
+### Funciones de arrays
+
+- `length(A)`: Devuelve el número de elementos del array `A`.
+- `eltype(A)`: Devuelve el tipo de los elementos del array `A`.
+- `ndims(A)`: Devuelve el número de dimensiones del array `A`.
+- `size(A)`: Devuelve una tupla con los tamaños de las dimensiones del array `A`.
+- `size(A, n)`: Devuelve el tamaño de la dimensión `n` del array `A`.
+- `axes(A)`: Devuelve una tupla con los índices válidos de cada dimensión del array `A`. 
+- `axes(A, n)`: Devuelve un rango con los índices válidos de la dimensión `n` del array `A`.
+- `eachindex(A)`: Devuelve un iterador sobre los índices de los elementos del array `A`.
+
+### Constructores de arrays
+
+- `zeros(dim)`: Devuelve un array de la dimensiones indicadas por la tupla `dim` con todos sus elementos ceros.
+- `ones(dim)`: Devuelve un array de la dimensiones indicadas por la tupla `dim` con todos sus elementos unos.
+- `fill(a, dim)`: Devuelve un array de la dimensiones indicadas por la tupla `dim` con todos sus elementos iguales `a`.
+- `rand(dim)`: Devuelve un array de la dimensiones indicadas por la tupla `dim` con todos sus elementos números aleatorios entre 0 y 1.
+- `trues(dim)`: Devuelve un array de la dimensiones indicadas por la tupla `dim` con todos sus elementos `true`.
+- `falses(dim)`: Devuelve un array de la dimensiones indicadas por la tupla `dim` con todos sus elementos `false`.
+
+### Ejemplos de constructores de arrays
+
+```julia
+julia> zeros(3)  # Vector de tamaño 3
+3-element Vector{Float64}:
+ 0.0
+ 0.0
+ 0.0
+
+julia> rand(3,2)  # Matriz de tamaño 3 x 2
+3×2 Matrix{Float64}:
+ 0.1469    0.891839
+ 0.953462  0.395681
+ 0.819468  0.720606
+
+julia> fill(π, 2, 2)
+2×2 Matrix{Irrational{:π}}:
+ π  π
+ π  π
+```
+
+### Redimensionamiento de arrays
+
+La siguientes funciones permiten cambiar las dimensiones de un array, reestructurando sus elementos:
+
+- `rehape(A, dim)`: Devuelve el array que resulta de redimiensionar el array `A` con las dimensiones indicadas por la tupla `dim`.
+- `permutedims(A)`: Devuelve el array de resulta de trasponer el array `A`.
+
+:::{.callout-warning}
+El array resultante debe tener los mismos elementos que el array original, por lo que si las dimensiones no son compatibles se produce un error.
+:::
+
+### Ejemplo de redimensionamiento de arrays
+
+```julia
+julia> v = [1, 2, 3, 4, 5, 6]
+6-element Vector{Int64}:
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+
+julia> reshape(v, 2, 3)
+2×3 Matrix{Int64}:
+ 1  3  5
+ 2  4  6
+
+julia> reshape(v, 3, 2)
+3×2 Matrix{Int64}:
+ 1  4
+ 2  5
+ 3  6
+
+julia> permutedims(reshape(v, 3, 2))
+2×3 Matrix{Int64}:
+ 1  2  3
+ 4  5  6
+```
+
+### Comprensión de arrays
+
+Una potente técnica de creación de arrays es la comprensión de arrays, que consiste en generar los elementos del array a partir de uno o varios iteradores.
+
+- `[exp for i = ite]`: Devuelve el vector cuyos elementos resultan de evaluar a expresión `exp` para cada valor `i` del iterador `ite`.
+
+- `[exp for i = ite if cond]`: Devuelve el vector cuyos elementos resultan de evaluar a expresión `exp` para cada valor `i` del iterador `ite` que cumpla la condición `cond`.
+
+Se pueden utilizar varios iteradores para crear arrays de varias dimensiones. 
+
+```julia
+julia> [i^2 for i = 1:4]
+4-element Vector{Int64}:
+  1
+  4
+  9
+ 16
+
+julia> [i^2 for i = 1:4 if i % 2 == 0]
+2-element Vector{Int64}:
+  4
+ 16
+
+julia> [i+j for i = 1:2, j = 3:4]
+2×2 Matrix{Int64}:
+ 4  5
+ 5  6
+```
+
+
+## Vectores
+
+Los vectores son arrays de una dimensión.
+
+Se construyen escribiendo sus elementos separados por comas o puntos y comas entre corchetes.
+
+```julia
+julia> v = [1, 2, 3]
+3-element Vector{Int64}:
+ 1
+ 2
+ 3
+
+julia> length(v)
+3
+
+julia> eltype(v)
+Int64
+
+julia> ndims(v)
+1
+
+julia> size(v)
+(3,)
+
+julia> eachindex(v)
+Base.OneTo(3)
+```
+### Acceso a los elementos de un vector
+
+El acceso a los elementos de un vector es mediante _índices_. Cada elemento del vector tiene asociado un índice entero que se corresponde con su posición desde 1 hasta el número de elementos. 
+
+- `v[i]`: Devuelve el elemento del vector `v` con índice `i`.
+
+:::{.callout-warning}
+Si se proporciona un índice no válido se produce un error.
+:::
+
+Las palabras reservadas `begin` y `end` se utilizan para referirse al primer y último índice de un vector.
+
+### Ejemplo de acceso a los elementos de un vector
+
+```julia
+julia> v = [2, 4, 6]
+3-element Vector{Int64}:
+ 2
+ 4
+ 6
+
+julia> v[2]
+4
+
+julia> v[end]
+6
+
+julia> v[4]
+ERROR: BoundsError: attempt to access 3-element Vector{Int64} at index [4]
+Stacktrace:
+ [1] getindex(A::Vector{Int64}, i1::Int64)
+   @ Base ./array.jl:861
+ [2] top-level scope
+   @ REPL[4]:1
+```
+
+### Acceso a múltiples elementos de un vector
+
+Es posible extraer varios elementos de un vector a la vez indicando los índices mediante un rango o un vector de enteros.
+
+- `v[i:j]`: Devuelve un vector con los elementos del vector `v` desde el índice `i` al `j`.
+- `v[u]`: Devuelve un vector con los elementos del vector `v` correspondientes a los índices del vector `u`.
+
+```julia
+julia> v = [2, 4, 6, 8];
+
+julia> v[2:3]
+2-element Vector{Int64}:
+ 4
+ 6
+
+julia> v[[2,4,3]]
+3-element Vector{Int64}:
+ 4
+ 8
+ 6
+```
+
+### Modificación de los elementos de un vector
+
+También es posible modificar un vector asignando nuevos elementos mediante los índices.
+
+- `v[i] = a`: Añade el elemento `a` al vector `v` en el índice `i`.
+
+```julia
+julia> v = [2, 4, 6]
+3-element Vector{Int64}:
+ 2
+ 4
+ 6
+
+julia> v[2] = 0
+0
+
+julia> v
+3-element Vector{Int64}:
+ 2
+ 0
+ 6
+```
+
+### Añadir elementos a un vector
+
+Las siguientes funciones permiten añadir elementos al final de un vector:
+
+- `push!(v, a)`: Añade el elemento `a` al final del vector `v`.
+- `append!(v, u)`: Añade los elementos del vector `u` al final del vector `v`.
+
+```julia
+julia> v = [];
+
+julia> push!(v, 1)
+1-element Vector{Any}:
+ 1
+
+julia> append!(v, [2, 3])
+3-element Vector{Any}:
+ 1
+ 2
+ 3
+
+julia> v
+3-element Vector{Any}:
+ 1
+ 2
+ 3
+```
+
+### Recorrer un vector
+
+Una operación habitual es recorrer los elementos de un vector para hacer cualquier operación con ellos. Existen dos posibilidades: recorrer el vector por índice o por valor.
+
+```julia
+julia> v = [2, 4, 6];
+
+julia> for i in v  # Recorrido por valor
+         println(i)
+       end
+2
+4
+6
+
+julia> for i in eachindex(v)  # Recorrido por índice
+         println(v[i])
+       end
+2
+4
+6
+```
+
+
+### Operaciones con vectores numéricos
+
+- `minimum(v)`: Devuelve el menor elemento del vector `v`.
+- `maximum(v)`: Devuelve el mayor elemento del vector `v`.
+- `argmin(v)`: Devuelve el índice del menor elemento del vector `v`.
+- `argmax(v)`: Devuelve el índice del mayor elemento del vector `v`.
+- `sum(v)`: Devuelve la suma de los elementos del vector `v`.
+- `prod(v)`: Devuelve el producto de los elementos del vector `v`.
+- `unique(v)`: Devuelve un vector con los elementos de `v` sin repetir.
+
+```julia
+julia> v = [4, 2, 3];
+
+julia> maximum(v)
+4
+
+julia> argmax(v)
+1
+
+julia> sum(v)
+9
+
+julia> prod(v)
+24
+```
+
+### Ordenación de vectores
+
+- `sort(v, rev=true)`: Devuelve el vector que resulta de ordenar en orden ascendente los elementos del vector `v`. Si se pasa `true` al parámetro `rev` el orden es descendente.
+- `sort!(v, rev=true)`: Ordena el vector `v` en orden ascendente. Si se pasa `true` al parámetro `rev` el orden es descendente. 
+- `reverse(v)`: Devuelve el vector con los elementos del vector `v` en orden inverso.
+- `reverse!(v)`: Modifica el vector `v` poniendo sus elementos en orden inverso.
+
+### Ejemplo de ordenación de vectores
+
+```julia
+julia> v = [4, 2, 3];
+
+julia> sort(v)
+3-element Vector{Int64}:
+ 2
+ 3
+ 4
+
+julia> reverse(v)
+3-element Vector{Int64}:
+ 3
+ 2
+ 4
+
+julia> v
+3-element Vector{Int64}:
+ 4
+ 2
+ 3
+
+julia> reverse!(v)
+3-element Vector{Int64}:
+ 3
+ 2
+ 4
+
+julia> v
+3-element Vector{Int64}:
+ 3
+ 2
+ 4
+```
+
+### Extensión de funciones a vectores
+
+Si una función recibe un parámetro del tipo de los elementos de un vector, se puede aplicar la función a cada uno de los elementos del vector, extendiendo la llamada de la función sobre los elementos del vector. Para ello basta con añadir un punto entre el nombre de la función y el paréntesis de los argumentos.
+
+- `f.(v)`: Devuelve el vector que resulta de aplicar la función `f` a cada uno de los elementos del vector `v`. 
+
+:::{.callout-warning}
+En la llamada a la función hay que pasarle com argumentos tantos vectores como parámetros tenga la función. Si los vectores son de distinto tamaño, se reciclan los de menor tamaño.
+:::
+
+:::{.callout-warning}
+Si la función no devuelve ningún valor el resultado es un vector de valores `nothing`.
+:::
+
+La extensión de funciones también funciona con operadores, poniendo el punto delante del operador.
+
+### Ejemplo de extensión de funciones a vectores
+
+```julia
+julia> v = [1, 4, 9];
+
+julia> sqrt.(v)
+3-element Vector{Float64}:
+ 1.0
+ 2.0
+ 3.0
+
+julia> v .^ 2
+3-element Vector{Int64}:
+  1
+ 16
+ 81
+
+julia> base = [2, ℯ, 10];
+
+julia> log.(base, v)
+3-element Vector{Float64}:
+ 0.0
+ 1.3862943611198906
+ 0.9542425094393249
+```
+
+### Filtrado de vectores
+
+Otra operación bastante común son los filtros de vectores. Se puede filtrar un vector a partir de un vector de booleanos del mismo tamaño. 
+
+- `v[u]`: Devuelve el vector con los elementos que tienen el mismo índice que los valores `true` del vector booleano `u`.
+
+Esto permite aplicar filtros a partir de condiciones que devuelvan un vector de booleanos.
+
+### Ejemplo de filtrado de vectores
+
+```julia
+julia> v = [1, 2, 3, 4];
+
+julia> v[[true, false, true, false]]
+2-element Vector{Int64}:
+ 1
+ 3
+
+julia> v .% 2 .== 0  # Condición
+4-element BitVector:
+ 0
+ 1
+ 0
+ 1
+
+julia> v[v .% 2 .== 0]  # Filtro de números pares
+2-element Vector{Int64}:
+ 2
+ 4
+```
+
+### Álgebra lineal con vectores
+
+- `u` + `v`: Devuelve el vector que resulta de la suma de los vetores `u` y `v`.
+- `u` - `v`: Devuelve el vector que resulta de la resta de los vetores `u` y `v`.
+- `a * v`: De vuelve el vector que resulta de multiplicar el vector `v` por el escalar `a`.
+- `v'`: Devuelve el vector que resulta de trasponer el vector `v`. Si `v` es un vector fila, `v'` es un vector columna y viceversa.
+
+Con el paquete [`LinearAlgebra`](https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/) también están disponibles las siguientes funciones:
+
+- `dot(u, v)`: Devuelve el producto escalar de los vectores `u` y `v`.
+- `norm(v)`: Devuelve la norma (módulo) del vector `v`.
+
+### Ejemplo de álgebra lineal con vectores
+
+```julia
+julia> u = [1, 2, 3]; v = [1, 0, 2];
+
+julia> u + v
+3-element Vector{Int64}:
+ 2
+ 2
+ 5
+
+julia> 2u
+3-element Vector{Int64}:
+ 2
+ 4
+ 6
+
+julia> dot(u, v)  # Producto escalar
+7
+
+julia> u'v  # Producto escalar
+7
+
+julia> norm(v)  # Norma o módulo
+2.23606797749979
+
+julia> u / norm(u)  # Vector unitario
+3-element Vector{Float64}:
+ 0.2672612419124244
+ 0.5345224838248488
+ 0.8017837257372732
+```
+
+## Matrices
+
+Las matrices son arrays de dos dimensiones (filas x columnas).
+
+Se construyen escribiendo sus elementos entre corchetes, separando los elementos por espacio y las filas por punto y coma `;`.
+
+```julia
+julia> A = [1 2 3; 4 5 6]
+2×3 Matrix{Int64}:
+ 1  2  3
+ 4  5  6
+
+julia> length(A)
+6
+
+julia> eltype(A)
+Int64
+
+julia> ndims(A)
+2
+
+julia> size(A)
+(2, 3)
+```
+
+### Acceso a los elementos de una matriz
+
+El acceso a los elementos de una matriz es mediante _índices_. Cada elemento de la matriz tiene asociado un par de índices enteros que se corresponde la fila y la columna que ocupa. 
+
+- `A[i, j]`: Devuelve el elemento de la matriz `A` con índice de fila `i` e índice de columna `j`.
+
+:::{.callout-warning}
+Si se proporciona algún índice no válido se produce un error.
+:::
+
+También se puede acceder a los elementos de una matriz mediante un único índice. En ese caso se obtiene el elemento con ese índice en el vector que resulta de concatenar los elementos de la matriz por columnas. 
+
+### Ejemplo de acceso a los elementos de una matriz
+
+```julia
+julia> A = reshape(1:6, 2, 3)
+2×3 reshape(::UnitRange{Int64}, 2, 3) with eltype Int64:
+ 1  3  5
+ 2  4  6
+
+julia> A[2, 1]
+2
+
+julia> A[4]
+4
+```
+### Acceso a múltiples elementos de una matriz
+
+Es posible extraer varios elementos de una matriz a la vez indicando los índices de las filas y las columnas mediante un rango o un vector de enteros.
+
+- `A[i:j, k:l]`: Devuelve una matriz con los elementos desde el índice de fila `i` al `j` y el índice de columna `k` al `l` de la matriz `A`.
+- `A[u, w]`: Devuelve una matriz con los elementos correspondientes a los índices de fila del vector `u` y los índices de columna del vector `w` de la matriz `A`.
+
+## Ejemplo de acceso a múltiples elementos de una matriz
+
+```julia
+julia> A = reshape(1:9, 3, :)
+3×3 reshape(::UnitRange{Int64}, 3, 3) with eltype Int64:
+ 1  4  7
+ 2  5  8
+ 3  6  9
+
+julia> A[1:2, 2:3]
+2×2 Matrix{Int64}:
+ 4  7
+ 5  8
+
+julia> A[[1, 3], [3, 1]]
+2×2 Matrix{Int64}:
+ 7  1
+ 9  3
+
+julia> A[2, :]  # Segundo vector fila
+3-element Vector{Int64}:
+ 2
+ 5
+ 8
+```
+
+### Modificación de los elementos de una matriz
+
+También es posible modificar una matriz asignando nuevos elementos mediante los índices de fila y columna.
+
+- `A[i, j] = a`: Añade el elemento `a` a la matriz `A` con el índice de fila `i` y el índice de columna `j`.
+
+```julia
+julia> A = zeros(2, 3)
+2×3 Matrix{Float64}:
+ 0.0  0.0  0.0
+ 0.0  0.0  0.0
+
+julia> A[2,3] = 1
+1
+
+julia> A
+2×3 Matrix{Float64}:
+ 0.0  0.0  0.0
+ 0.0  0.0  1.0
+```
+
+### Concatenación de matrices
+
+Dos o más matrices pueden concatenarse horizontal o verticalmente siempre que sus dimensiones sean compatibles.
+
+- `[A B]`: Devuelve la matriz que resulta de concatenar horizontalmente las matrices `A` y `B`. Ambas matrices deben tener el mismo número de filas.
+- `[A; B]`: Devuelve la matriz que resulta de concatenar verticalmente las matrices `A` y `B`. Ambas matrices deben tener el mismo número de columnas.
+
+### Ejemplo de concatenación de matrices
+
+```julia
+julia> A = zeros(2, 2)
+2×2 Matrix{Float64}:
+ 0.0  0.0
+ 0.0  0.0
+
+julia> B = ones(2, 1)
+2×1 Matrix{Float64}:
+ 1.0
+ 1.0
+
+julia> C = ones(1, 3)
+1×3 Matrix{Float64}:
+ 1.0  1.0  1.0
+
+julia> D = [A B]
+2×3 Matrix{Float64}:
+ 0.0  0.0  1.0
+ 0.0  0.0  1.0
+
+julia> [D ; C]
+3×3 Matrix{Float64}:
+ 0.0  0.0  1.0
+ 0.0  0.0  1.0
+ 1.0  1.0  1.0
+```
+
+### Concatenación de vectores
+
+También es posible concatenar varios vectores horizontalmente o verticalmente para formar una matriz. 
+
+- `hcat(v...)`: Devuelve la matriz que resulta de concatenar horizontalmente los vectores del vector `v`.
+- `vcat(v...)`: Devuelve la matriz que resulta de concatenar verticalmente los vectores del vector `v`.
+
+### Ejemplo de concatenación de vectores
+
+```julia
+julia> v = [[1, 2, 3], [4, 5, 6]]
+2-element Vector{Vector{Int64}}:
+ [1, 2, 3]
+ [4, 5, 6]
+
+julia> hcat(v...)
+3×2 Matrix{Int64}:
+ 1  4
+ 2  5
+ 3  6
+
+julia> v = [[1 2 3], [4 5 6]]
+2-element Vector{Matrix{Int64}}:
+ [1 2 3]
+ [4 5 6]
+
+julia> vcat(v...)
+2×3 Matrix{Int64}:
+ 1  2  3
+ 4  5  6
+```
+
+### Recorrido de matrices
+
+Una operación habitual es recorrer los elementos de una matriz para hacer una operación con ellos. El recorrido se suele hacer con dos bucles iterativos anidados.
+
+```julia
+julia> A = [1 2 3; 4 5 6]
+2×3 Matrix{Int64}:
+ 1  2  3
+ 4  5  6
+
+julia> for i = 1:size(A, 1), j = 1:size(A, 2)  # Recorrido por filas
+         println(A[i, j])
+       end
+1
+2
+3
+4
+5
+6
+
+julia> for j = 1:size(A, 2), i = 1:size(A, 1)  # Recorrido por columnas
+         println(A[i, j])
+       end
+1
+4
+2
+5
+3
+6
+```
+
+### Operaciones con matrices numéricas
+
+- `minimum(A)`: Devuelve el menor elemento de la matriz `A`.
+- `maximum(A)`: Devuelve el mayor elemento de la matriz `A`.
+- `argmin(A)`: Devuelve los índices de fila y columna del menor elemento de la matriz `A`.
+- `argmax(A)`: Devuelve los índices de fila y columna del mayor elemento de la matriz `A`.
+- `sum(A)`: Devuelve la suma de los elementos de la matriz `A`.
+- `prod(A)`: Devuelve el producto de los elementos de la matriz `A`.
+
+```julia
+julia> A = [1 2 3; 4 5 6]
+2×3 Matrix{Int64}:
+ 1  2  3
+ 4  5  6
+
+julia> minimum(A)
+1
+
+julia> argmax(A)
+CartesianIndex(2, 3)
+
+julia> sum(A)
+21
+
+julia> prod(A)
+720
+```
+
+### Extensión de funciones a matrices
+
+Al igual que para vectores, se puede aplicar una una función a todos los elementos de una matriz. Para ello basta con añadir un punto entre el nombre de la función y el paréntesis de los argumentos.
+
+- `f.(A)`: Devuelve la matriz que resulta de aplicar la función `f` a cada uno de los elementos de la matriz `A`. 
+
+:::{.callout-warning}
+En la llamada a la función hay que pasarle como argumentos tantos vectores como parámetros tenga la función. Si las matrices son de distinto tamaño, se reciclan las de menor tamaño.
+:::
+
+La extensión de funciones también funciona con operadores, poniendo el punto delante del operador.
+
+### Ejemplo de extensión de funciones a matrices
+
+```julia
+julia> A = [1 2 3; 4 5 6]
+2×3 Matrix{Int64}:
+ 1  2  3
+ 4  5  6
+
+julia> sqrt.(A)
+2×3 Matrix{Float64}:
+ 1.0  1.41421  1.73205
+ 2.0  2.23607  2.44949
+
+julia> A .+ 1
+2×3 Matrix{Int64}:
+ 2  3  4
+ 5  6  7
+```
+
+### Álgebra lineal con matrices
+
+- `A` + `B`: Devuelve la matriz que resulta de la suma de las matrices `A` y `B`. Ambas matrices deben tener las mismas dimensiones.
+- `A` - `B`: Devuelve la matriz que resulta de la resta de las matrices `A` y `B`. Ambas matrices deben tener las mismas dimensiones.
+- `a * A`: Devuelve la matriz que resulta de multiplicar la matriz `A` por el escalar `a`.
+- `A * B`: Devuelve la matriz producto de las matrices `A` y `B`. El número de columnas de `A` debe coincidir con el número de filas de `B`.
+- `A'`: Devuelve la matriz traspuesta de la matriz `A`.
+- `transpose(A)`: Devuelve la matriz traspuesta de la matriz `A`.
+
+### Ejemplo de álgebra lineal con matrices
+
+```julia
+julia> A = [1 2 3; 4 5 6]
+2×3 Matrix{Int64}:
+ 1  2  3
+ 4  5  6
+
+julia> B = [1 1 1; 2 2 2]
+2×3 Matrix{Int64}:
+ 1  1  1
+ 2  2  2
+
+julia> A + B
+2×3 Matrix{Int64}:
+ 2  3  4
+ 6  7  8
+
+julia> C = A'
+3×2 adjoint(::Matrix{Int64}) with eltype Int64:
+ 1  4
+ 2  5
+ 3  6
+
+julia> A * C
+2×2 Matrix{Int64}:
+ 14  32
+ 32  77
+
+julia> C * A
+3×3 Matrix{Int64}:
+ 17  22  27
+ 22  29  36
+ 27  36  45
+
+```
+
+### Álgebra lineal con matrices
+
+El paquete [`LinearAlgebra`](https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/) define las siguientes funciones:
+
+- `Matrix(I, n, n)`. Devuelve la matriz identidad de dimensión `n`.
+- `diag(A)`: Devuelve un vector con los elementos de la diagonal principal de la matriz `A`.
+- `norm(A)`: Devuelve la norma de Frobenius de la matriz `A`.
+- `tr(A)`: Devuelve la traza de la matriz cuadrada `A`.
+- `det(A)`: Devuelve el determinante de la matriz cuadrada `A`.
+- `inv(A)`: Devuelve la matriz inversa de la matriz cuadrada `A`.
+- `A \ B`: Devuelve el vector `x` solución del sistema de ecuaciones $Ax = B$, donde `A` es una matriz cuadrada y `B` es un vector del mismo tamaño que el número de filas o columnas de `A`.
+
+### Ejemplo de álgebra lineal con matrices
+
+```julia
+julia> Matrix(I, 3, 3)
+3×3 Matrix{Bool}:
+ 1  0  0
+ 0  1  0
+ 0  0  1
+
+julia> A = [1 2 3; 0 1 0; 1 0 1]
+3×3 Matrix{Int64}:
+ 1  2  3
+ 0  1  0
+ 1  0  1
+
+julia> diag(A)
+3-element Vector{Int64}:
+ 1
+ 1
+ 1
+
+julia> norm(A)
+4.123105625617661
+
+julia> tr(A)
+3
+
+julia> det(A)
+-2.0
+
+julia> inv(A)
+3×3 Matrix{Float64}:
+ -0.5   1.0   1.5
+  0.0   1.0   0.0
+  0.5  -1.0  -0.5
+
+julia> B = [10, 2, 4]
+3-element Vector{Int64}:
+ 10
+  2
+  4
+
+julia> A \ B  # Solución del sistema Ax = B
+3-element Vector{Float64}:
+ 3.0
+ 2.0
+ 1.0
+```
+
+### Álgebra lineal con matrices
+
+Otras funciones más avanzadas del paquete `LinearAlgebra` son:
+
+- `eigvals(A)`: Devuelve un vector con los autovalores de la matriz `A`. 
+- `eigvecs(A)`: Devuelve la matriz con los autovectores de la matriz `A`.
+- `factorize(A)`: Devuelve las matrices resultantes de la factorización de la matriz `A`. La factorización dependerá de las propiedades de `A` (ver [tipos de factorización](https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/#man-linalg-factorizations))
+
+### Ejemplos de Álgebra lineal con matrices
+
+```julia
+julia> A = [1 2; 3 1]
+2×2 Matrix{Int64}:
+ 1  2
+ 3  1
+
+julia> eigvals(A)
+2-element Vector{Float64}:
+ -1.4494897427831779
+  3.4494897427831783
+
+julia> eigvecs(A)
+2×2 Matrix{Float64}:
+ -0.632456  0.632456
+  0.774597  0.774597
+
+julia> B = [1 2; 2 1]
+2×2 Matrix{Int64}:
+ 1  2
+ 2  1
+
+julia> factorize(B)
+LU{Float64, Tridiagonal{Float64, Vector{Float64}}}
+L factor:
+2×2 Matrix{Float64}:
+ 1.0  0.0
+ 0.5  1.0
+U factor:
+2×2 Matrix{Float64}:
+ 2.0  1.0
+ 0.0  1.5
+```
+
+### Copia de tipos de datos compuestas
+
+En Julia cuando se asigna una variable de un tipo de datos compuesto a otra variable, no se hace una copia de la estructura de datos referenciada por la primera variable, sino que se la nueva variable apunta a la misma dirección de memoria de la estructura de datos (copia por referencia). El resultado son dos variables que apuntan a la misma estructura de datos y cualquier cambio en una de ellas se verá reflejado en la otra. 
+
+Para hacer copias por valor de un tipo de datos compuesto debe usarse explícitamente la siguiente función:
+
+- `b = copy(a)`: Crea una copia de la estructura de datos referencia por `a` y asigna su referencia a `b`.
+
+### Ejemplo de copia de tipos de datos compuestos
+
+```julia
+julia> v = [1, 2, 3];
+
+julia> u = copy(v);  # Copia por valor
+
+julia> u[2] = 0;
+
+julia> u
+3-element Vector{Int64}:
+ 1
+ 0
+ 3
+
+julia> v
+3-element Vector{Int64}:
+ 1
+ 2
+ 3
+
+julia> u = v;  # Copia por referencia
+
+julia> u[2]=0;
+
+julia> v
+3-element Vector{Int64}:
+ 1
+ 0
+ 3
+```
+
+## Tuplas
+
+Una tupla es una colección ordenada de tamaño fijo que puede contener elementos de distintos tipos. 
+
+Generalmente se usan para pasar parámetros o devolver valores de funciones.
+
+Se crean escribiendo sus elementos separados por comas entre paréntesis.
+
+:::{.callout-warning}
+Las tuplas son inmutables, es decir, una vez creadas no pueden cambiarse sus elementos.
+:::
+
+```julia
+julia> ()  # Tupla vacía
+()
+
+julia> (1, "enero", 2020) 
+(1, "enero", 2020)
+
+julia> t = (1, "enero", 2020)
+(1, "enero", 2020)
+
+julia> typeof(t)
+Tuple{Int64, String, Int64}
+```
+
+### Tuplas con nombres
+
+Es posible asignar un nombre a cada uno de los elementos de la tupla. Para ello cada elemento de la tupla con nombre debe escribirse con la sintaxis `nombre = valor`.
+
+```julia
+julia> t = (día = 1, mes = "enero", año =  2020)
+(día = 1, mes = "enero", año = 2020)
+
+julia> typeof(t)
+NamedTuple{(:día, :mes, :año), Tuple{Int64, String, Int64}}
+```
+
+:::{.callout-warning}
+No puede haber dos elementos con el mismo nombre en una tupla.
+:::
+
+La ventaja de usar tuplas con nombres es que podemos acceder a sus elementos por nombre, además de por índice.
+
+### Acceso a los elementos de una tupla
+
+Como las tuplas tienen orden, podemos acceder a sus elementos mediante índices, al igual que con los arrays de una dimensión. 
+
+- `t[i]`: Devuelve el elemento con íncide `i` de la tupla `t`.
+
+Si la tupla tiene nombres también es posible acceder a sus elementos mediante los nombres.
+
+- `t.x`: Devuelve el elemento con nombre `x` de la tupla `t`.
+
+```julia
+julia> t = (día = 1, mes = "enero", año =  2020)
+(día = 1, mes = "enero", año = 2020)
+
+julia> t[2]
+"enero"
+
+julia> t.año
+2020
+
+julia> 
+```
+
+### Asignación múltiple de tuplas
+
+Es posible asignar los elementos de una tupla a distintas variables en una sola asignación.
+
+`x, y, ... = t`: Asigna a las variables `x`, `y`, etc los elementos de la tupla `t` en orden. Si el número de variables es menor que el tamaño de la tupla, los últimos elementos quedan sin asignar.
+
+`x, y... = t`: Asigna el primer elemento de la tupla `t` a la variable `x` y la tupla con los elementos restantes a la variable `y`.
+
+### Ejemplo de asignación múltipe de tuplas
+
+```julia
+julia> t = (1, "enero", 2020)
+(1, "enero", 2020)
+
+julia> d, m, a = t
+(1, "enero", 2020)
+
+julia> d
+1
+
+julia> m
+"enero"
+
+julia> a
+2020
+
+julia> d, ma... = t 
+(1, "enero", 2020)
+
+julia> d
+1
+
+julia> ma
+("enero", 2020)
+```
+
+## Diccionarios
+
+Un diccionario es una colección asociativa sin orden cuyos elementos son pares formados por una _clave_ y un _valor_ asociado a la clave. 
+
+Se parecen a las tuplas con nombre, pero, a diferencia de estas, son mutables, es decir, su contenido se puede alterar.
+
+Se construyen con la siguiente constructor:
+
+- `Dic(k1 = v1, ...)`: Crea un diccionario con los pares indicados en formato `clave = valor`.
+
+:::{.callout-warning}
+En un diccionario no pueden existir dos pares con la misma clave, de modo que si se repite una clave se sobrescribe el par anterior.
+:::
+
+### Ejemplo de diccionarios
+
+```julia
+julia> Dict()  # Diccionario vacío
+Dict{Any, Any}()
+
+julia> d = Dict("ES" => "Euro", "US" => "Dollar", "CN" => "Yuan")
+Dict{String, String} with 3 entries:
+  "CN" => "Yuan"
+  "ES" => "Euro"
+  "US" => "Dollar"
+
+julia> typeof(d)
+Dict{String, String}
+```
+
+### Comprensión de diccionarios
+
+Al igual que para arrays se puede usar la técnica de compresión para generar diccionarios a partir de uno o varios iteradores.
+
+- `Dict(kexp => vexp for i = ite)`: Devuelve el diccionario cuyos pares están formados por la claves y valores resultan de evaluar las expresiones `kexp` y `vexp` respectivamente, para cada valor `i` del iterador `ite`.
+
+- `Dict(kexp => vexp for i = ite if cond)`: Devuelve el diccionario cuyos pares están formados por la claves y valores resultan de evaluar las expresiones `kexp` y `vexp` respectivamente, para cada valor `i` del iterador `ite` que cumpla condición `cond`.
+
+Se pueden utilizar más de un iterador después de la palabra reservada `for`.
+
+### Ejemplo de comprensión de diccionarios
+
+```julia
+julia> Dict(i => i^2 for i = 1:4)
+Dict{Int64, Int64} with 4 entries:
+  4 => 16
+  2 => 4
+  3 => 9
+  1 => 1
+
+julia> Dict(i => i^2 for i = 1:4 if i % 2 == 0)
+Dict{Int64, Int64} with 2 entries:
+  4 => 16
+  2 => 4
+
+julia> Dict((i, j) => i + j for i = 1:2, j = 3:4)
+Dict{Tuple{Int64, Int64}, Int64} with 4 entries:
+  (2, 4) => 6
+  (1, 3) => 4
+  (1, 4) => 5
+  (2, 3) => 5
+```
+
+### Acceso a los elementos de un diccionario
+
+Para acceder a los valores de un diccionario se utilizan sus claves asociadas entre corchetes.
+
+- `d[k]`: Devuelve el valor asociado a la clave `k` en el diccionario `d`.
+
+:::{.callout-warning}
+Si la clave no existe en el diccionario se produce un error.
+:::
+
+Para evitar errores es conveniente usar alguna de las siguientes funciones:
+
+- `haskey(d, k)`: Devuelve `true` la clave `k` está en diccionario `d` y `false` en caso contrario.
+- `get(d, k, v)`: Devuelve el valor asociado a la clave `k` en el diccionario `d` o el valor `v` si la clave `k` no existe.
+- `get!(d, k, v)`: Devuelve el valor asociado a la clave `k` en el diccionario `d`. Si la clave `k` no existe en el diccionario `d` añade el par con la clave `k` y el valor `v` y devuelve el valor `v`.
+
+### Ejemplo de acceso a los elementos de un diccionario
+
+```julia
+julia> d = Dict("ES" => "Euro", "US" => "Dollar", "CN" => "Yuan")
+Dict{String, String} with 3 entries:
+  "CN" => "Yuan"
+  "ES" => "Euro"
+  "US" => "Dollar"
+
+julia> d["ES"]
+"Euro"
+
+julia> d["JP"]
+ERROR: KeyError: key "JP" not found
+Stacktrace:
+ [1] getindex(h::Dict{String, String}, key::String)
+   @ Base ./dict.jl:481
+ [2] top-level scope
+   @ REPL[22]:1
+
+julia> get(d, "JP", "Dollar")
+"Dollar"
+
+julia> get!(d, "JP", "Yen")
+"Yen"
+
+julia> d
+Dict{String, String} with 4 entries:
+  "CN" => "Yuan"
+  "ES" => "Euro"
+  "JP" => "Yen"
+  "US" => "Dollar"
+```
+
+### Recorrido de las claves y valores de un diccionario
+
+Las siguientes funciones permiten obtener todas las claves, valores y pares de un diccionario.
+
+- `keys(d)`: Devuelve un iterador con las claves del diccionario `d`.
+- `values(d)`: Devuelve un iterador con las claves del diccionario `d`.
+
+Estos iteradores permiten recorrer fácilmente los pares de un diccionario.
+
+### Ejemplo de recorrido de las claves y valores de un diccionario
+
+```julia
+julia> d = Dict("ES" => "Euro", "US" => "Dollar", "CN" => "Yuan")
+Dict{String, String} with 3 entries:
+  "CN" => "Yuan"
+  "ES" => "Euro"
+  "US" => "Dollar"
+
+julia> keys(d)
+KeySet for a Dict{String, String} with 3 entries. Keys:
+  "CN"
+  "ES"
+  "US"
+
+julia> values(d)
+ValueIterator for a Dict{String, String} with 3 entries. Values:
+  "Yuan"
+  "Euro"
+  "Dollar"
+
+julia> for k = keys(d)
+         println("$k = $(d[k])")
+       end
+CN = Yuan
+ES = Euro
+US = Dollar
+
+julia> for (k, v) = d
+       println("$k = $v")
+       end
+CN = Yuan
+ES = Euro
+US = Dollar
+```
+
+### Añadir elementos a un diccionario
+
+Se pueden añadir pares nuevos a un diccionario de la siguiente manera:
+
+- `d[k] = v`: Añade el par con clave `k` y valor `v` al diccionario `d`. Si la clave `k` ya existía en el diccionario `d`, cambia su valor asociado por `v`.
+
+- `push!(d, k => v)`: Añade el par con clave `k` y valor asociado `v` al diccionario `d`.
+
+```julia
+julia> d = Dict("ES" => "Euro", "US" => "Dollar")
+Dict{String, String} with 2 entries:
+  "ES" => "Euro"
+  "US" => "Dollar"
+
+julia> d["CN"] = "Yuan"
+"Yuan"
+
+julia> push!(d, "JP" => "Yen")
+Dict{String, String} with 4 entries:
+  "CN" => "Yuan"
+  "ES" => "Euro"
+  "JP" => "Yen"
+  "US" => "Dollar"
+```
+
+### Eliminar elementos de un diccionario
+
+Para eliminar un par de un diccionario se utiliza la siguiente función:
+
+- `delete!(d, k)`: Elimina el par cuya clave es `k` del diccionario `d`.
+
+```julia
+julia> d = Dict("ES" => "Euro", "US" => "Dollar", "CN" => "Yuan")
+Dict{String, String} with 3 entries:
+  "CN" => "Yuan"
+  "ES" => "Euro"
+  "US" => "Dollar"
+
+julia> delete!(d, "US")
+Dict{String, String} with 2 entries:
+  "CN" => "Yuan"
+  "ES" => "Euro"
+```
+
+--- 
+
+## Conjuntos
+
+Un conjunto es una colección de elementos del mismo tipo sin orden y sin repeticiones.
+
+Se construyen con la siguiente constructor:
+
+- `Set(a)`: Crea un conjunto con los elementos del array `a`.
+
+Al igual que para arrays el tipo se infiere automáticamente a partir de los tipos de sus elementos. Si los elementos son de distintos tipos se convierten al tipo más específico de la jerarquía de tipos del que los tipos de los elementos son subtipos.
+
+:::{.callout-warning}
+Un conjunto no puede tener elementos repetidos, por lo que si el array contiene elementos repetidos solo se incluyen una vez.
+:::
+
+### Ejemplo de construcción de conjuntos
+
+```julia
+julia> Set()
+Set{Any}()
+
+julia> c = Set([1, "2", 3])
+Set{Any} with 3 elements:
+  "2"
+  3
+  1
+
+julia> typeof(c)
+Set{Any}
+```
+
+### Añadir elementos a un conjunto
+
+Para añadir elementos a un conjunto se utiliza la siguiente función:
+
+- `push!(c, e)`: Añade el elemento `e` al conjunto `c`.
+
+:::{.callout-warning}
+Si el elemento que se quiere añadir es de distinto tipo que los elemento del conjunto y no puede convertirse a este tipo, se produce un error.
+:::
+
+### Ejemplo de añadir elementos a un conjunto
+
+```julia
+julia> c = Set(1:3)
+Set{Int64} with 3 elements:
+  2
+  3
+  1
+
+julia> push!(c, 4)
+Set{Int64} with 4 elements:
+  4
+  2
+  3
+  1
+
+julia> push!(c, "cinco")
+ERROR: MethodError: Cannot `convert` an object of type String to an object of type Int64
+Closest candidates are:
+  convert(::Type{T}, ::T) where T<:Number at /usr/share/julia/base/number.jl:6
+  convert(::Type{T}, ::Number) where T<:Number at /usr/share/julia/base/number.jl:7
+  convert(::Type{T}, ::Base.TwicePrecision) where T<:Number at /usr/share/julia/base/twiceprecision.jl:262
+  ...
+```
+
+### Eliminar elementos de un conjunto
+
+Para eliminar elementos de un conjunto se utiliza la siguiente función: 
+
+- `delete!(c, e)`: Elimina el elemento `e` del conjunto `c`.
+
+```julia
+julia> c = Set(1:3)
+Set{Int64} with 3 elements:
+  2
+  3
+  1
+
+julia> delete!(c, 2)
+Set{Int64} with 2 elements:
+  3
+  1
+```
+
+### Recorrido de los elementos de un conjunto
+
+Un conjunto puede utilizarse también como un iterador para recorrer sus elementos.
+
+```julia
+julia> c = Set(1:3)
+Set{Int64} with 3 elements:
+  2
+  3
+  1
+
+julia> for i = c
+         println(i)
+       end
+2
+3
+1
+```
+
+### Pertenencia e inclusión de conjuntos
+
+- `in(e, c)`, `e ∈ c` : Devuelve `true` si el elemento `e` pertenece al conjunto `c` y `false` en caso contrario.
+- `e ∉ c`: Devuelve `true` si el elemento `e` no  pertenece al conjunto `c` y `false` en caso contrario.
+- `issubset(a, b)`, `a ⊆ b`: Devuelve `true` si todos los elementos de `a` pertenecen a `b` y `false` en caso contrario.
+- `a ⊈ b`: Devuelve `true` si hay algún elemento de `a` que no pertenece a `b`.
+- `a ⊊ b`: Devuelve `true` si el conjunto `a` está contenido estrictamente en el conjunto `b`, es decir, todos los elementos de `a` pertenecen a `b` pero `a` y `b` son distintos.
+- `isdisjoint(a, b)`: Devuelve `true` si los conjuntos `a` y `b` no tienen elementos en común y `false` en caso contrario.
+
+### Ejemplos de pertenencia e inclusión de conjuntos
+
+```julia
+julia> a = Set(1:3);
+
+julia> in(2, a)
+true
+
+julia> 3 ∉ a
+false
+
+julia> b = Set([3, 2, 1]);
+
+julia> a ⊊ b
+false
+
+julia> a ⊆ b
+true
+
+julia> isdisjoint(a, b)
+false
+```
+
+### Álgebra de conjuntos
+
+- `union(a, b)`, `a ∪ b`: Devuelve el conjunto unión de los conjuntos `a` y `b`.
+- `intersect(a, b)`, `a ∩ b`: Devuelve el conjunto intersección de los conjuntos `a` y `b`.
+- `setdiff(a, b)`: Devuelve el conjunto diferencia del conjunto `a` y `b`.
+- `symdiff(a, b)`: Devuelve el conjunto diferencia simétrica de los conjuntos `a` y `b`.
+
+
+Existen versiones de estas funciones acabadas en `!` que sobreescriben el conjunto dado como primer argumento con el resultado de la operación.
+
+### Ejemplo de álgebra de conjuntos
+
+```julia
+julia> a = Set(1:3)
+Set{Int64} with 3 elements:
+  2
+  3
+  1
+
+julia> b = Set(2:2:6)
+Set{Int64} with 3 elements:
+  4
+  6
+  2
+
+julia> union(a, b)
+Set{Int64} with 5 elements:
+  4
+  6
+  2
+  3
+  1
+
+julia> intersect(a, b)
+Set{Int64} with 1 element:
+  2
+
+julia> setdiff(a, b)
+Set{Int64} with 2 elements:
+  3
+  1
+
+julia> symdiff(a, b) == setdiff(a ∪ b, a ∩ b)
+true
+```

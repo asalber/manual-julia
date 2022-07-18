@@ -1,0 +1,204 @@
+# Gráficos
+
+## Paquetes gráficos
+
+Existen muchos paquetes para la representación gráfica en Julia. Los más usados son:
+
+- [Plots.jl](https://docs.juliaplots.org/)
+- [GadFly.jl](http://gadflyjl.org/).
+- [VegaLite.jl](https://www.queryverse.org/VegaLite.jl/stable/)
+
+
+## Gráficos con el paquete Plots.jl
+
+[Plots.js](https://docs.juliaplots.org/) es el paquete más usado por disponer de más posibilidades gráficas y ser bastante sencillo de usar.
+
+Implementa una interfaz para otras librerías gráficas (backends), por lo que en algunas ocasiones puede ser bastante lento al tener que llamar a otras librerías. 
+
+![](img/logos/plotsjl.png)
+
+### Backends de Plot.jl
+
+- [GR](https://gr-framework.org/). Es el backend pro defecto. Es bastante rápida y permite tanto gráficos 2D como 3D no interactivos. Se inicializa con la función `gr()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/gr/))
+- [PlotlyJS](https://plotly.com/). Es más lenta pero permite gráficos 2D y 3D interactivos con un montón de funcionalidades. Se inicializa con la función `plotlyjs()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/plotlyjs/))
+- [PyPlot](https://matplotlib.org/). Utiliza la librería gráfica Matplotlib de Python por lo que es bastante lenta. Sin embargo, tiene ofrece todas las posibilidades de Matplotlib que es bastante madura. Se inicializa con la función `pyplot()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/pyplot/))
+- [PGFPlotsX](). Utiliza la librería PGF/TikZ de $\LaTeX$ por lo que genera gráficos de muy alta calidad tanto en 2D como 3D, especialmente para publicaciones.Se inicializa con la función `pgfplotsx()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/pgfplotsx/))
+- UnicodePlots. Permite dibujar gráficos en la terminal. Los gráficos son de poca calidad pero funciona con gran rapidez. Se inicializa con la función `unicodeplots()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/unicodeplots/))
+
+### Gráfica de una función de una variable
+
+- `plot(f, min, max)`: Dibuja la gráfica de la función de una variable `f` para argumentos desde `xmin` a `xmax`. 
+
+```{julia}
+using Plots
+
+f(x) = exp(-x^2 / 2)
+plot(f, -3, 3)
+```
+
+<!-- 
+### Gráfica interactiva de una función de una variable
+
+```{julia}
+using Plots
+plotly()  # Usar la librería Plot.ly como back-end
+
+f(x) = exp(-x^2 / 2)
+plot(f, -3, 3)
+``` -->
+
+### Gráficas de varias funciones 
+
+- `plot!(f, xmin, xmax)`: Añade la gráfica de la función de una variable `f` para argumentos desde `xmin` a `xmax` al último gráfico realizado.
+
+```{julia}
+using Plots
+
+f(x) = sin(x)
+g(x) = cos(x)
+plot(f, -0, 2π)
+plot!(g)
+```
+
+### Añadir puntos a una gráfica
+
+- `scatter(x, y)`: Dibuja los puntos con coordenadas x en el vector `x` y coordenadas y en el vector `y`.
+
+```{julia}
+using Plots
+
+f(x) = sin(x)
+g(x) = cos(x)
+plot(f, -0, 2π)
+plot!(g)
+x = [π/4, 5π/4]
+y = sin.(x)
+scatter!(x, y)
+```
+
+### Ventana de graficación
+
+Es posible restringir el área de graficación (rango de valores de los ejes) de una función añadiendo los parámetros `xlims =(xmin, xmax)` para establecer el rango del eje x o `ylims = (ymin, ymax)` para establecer el rango del eje y. 
+
+```{julia}
+using Plots
+
+f(x) = 1 / x
+plot(f, -1, 1, ylims = (-10, 10))
+```
+
+### Restringir la gráfica al dominio
+
+Cuando una función no está definida para algún valor del rango de valores del eje x dado, la gráfica muestra una línea recta desde el punto de la gráfica anterior hasta el punto siguiente al punto donde la función no existe.
+
+Este comportamiento no es deseable puesto que si la función no existe en un punto no debería existir gráfica para ese punto. 
+
+La siguiente función del paquete `MATH229` se encarga de evitar esto.
+
+- `rangeclamp(f)`: Devuelve una función idéntica a la función `f` excepto para los puntos donde la función no existe o es infinito que devuelve `NaN`.
+
+### Ejemplo de restringir la gráfica al dominio
+
+```{julia}
+using Plots
+using MTH229
+
+f(x) = 1 / x
+plot(rangeclamp(f), -1, 1)
+```
+
+### Gráficas paramétricas
+
+La función `plot` también permite dibujar gráficas de funciones paramétricas pasándole las funciones de las coordenadas x e y. 
+
+- `plot(f, g, min, max)`: Dibuja la gráfica de la función paramétrica $(f(t), g(t))$ para valores del parámetro `t` entre `min` y `max`.
+
+```{julia}
+using Plots
+f(x) = sin(x)
+g(x) = sin(2x)
+plot(f, g, 0, 2π)
+```
+
+### Personalización de gráficos
+
+Los siguientes parámetros pueden añadirse a la función `plot` para modificar el aspecto de los gráficos.
+
+- `title`: Añade un título principal al gráfico.
+- `xlab`: Añade un título al eje x.
+- `ylab`: Añade un título al eje y.
+- `color`: Establece el color de la gráfica.
+- `linewidth`: Establece el grosor de la línea de la gráfica.
+- `linestyle`: Establece el estilo de la línea de la gráfica.
+- `aspect_ratio`: Establece la relación de aspecto entre la escala de los ejes.
+- `legend`: Activa o desactiva la leyenda del gráfico.
+
+### Ejemplo de personalización de gráficos
+
+```{julia}
+using Plots
+
+f(x) = sin(x)
+plot(f, -π, π, title = "Gráfica del seno",  xlab = "x", ylab = "f(x) = sen(x)",
+  color = "green", linewidth = 3, linestyle = :dash, aspec_ratio = :equal, legend = false)
+```
+
+## Gráficos en el espacio real
+
+Para dibujar superficies en el espacio real se utiliza la función
+
+`surface(x, y, f)`: Dibuja la superficie de la función $f(x,y)$ en el rango de valores `x` del eje x e `y` del eje y.
+
+```{julia}
+using Plots
+pyplot()
+x = range(1, stop=10, length=100)
+y = x
+f(x,y) = sin(x) + cos(y)
+plot(x, y, f, st=:surface)
+```
+
+## Gráficos con GadFly.jl
+
+[GadFly.js](http://gadflyjl.org/) es un paquete nativo que genera gráficos interactivos 2D y 3D por medio de librerías de Javascript basadas en la [gramática de gráficos](https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html) (usada también por el paquete ggplot2 de R).
+
+Al estar implementado en Julia es mucho más rápido que Plots.js pero ofrece menos posibilidades.
+
+![](img/logos/gadfly.svg)
+
+<!-- ### Gráfica de una función de una variable
+
+```julia
+using Gadfly
+
+plot([sin, cos], 0, 2pi)
+``` -->
+
+## Gráficos con VegaLite.jl
+
+[VegaLite.jl](https://www.queryverse.org/VegaLite.jl/stable/) es un paquete que genera gráficos estáticos por medio de las librerías de Javascript de la gramática de gráficos [Vega](https://vega.github.io/). 
+
+Dispone de muchas más opciones de personalización de gráficos que GadFly.jl.
+
+![](img/logos/vega-little.png)
+
+<!-- ### Gráfica de una función de una variable
+
+```julia
+using VegaLite
+
+@vlplot(
+    width=300,
+    height=150,
+    data={sequence={start=0,stop=12.7,step=0.1,as="x"}},
+    transform=[
+        {calculate="sin(datum.x)", as="sin(x)"},
+        {calculate="cos(datum.x)", as="cos(x)"},
+        {fold=["sin(x)", "cos(x)"]}
+    ],
+    mark=:line,
+    x="x:q",
+    y="value:q",
+    color={"key:n",title=nothing}
+)
+``` -->

@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Manual de Julia - 2&nbsp; Tipos de datos y variables</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./estructuras-control.html" rel="next">
+<link href="./intro.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tipos de datos y variables</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Manual de Julia</a> 
+        <div class="sidebar-tools-main">
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Manual-de-Julia.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Manual-de-Julia.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Prefacio</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tipos-datos.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tipos de datos y variables</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./estructuras-control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estructuras de control</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tipos-datos-compuestos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tipos de datos compuestos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./funciones.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Funciones</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./graficos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gráficos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./calculo-simbolico.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cálculo simbólico</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./analisis-datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análisis de datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./aplicaciones.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Otras aplicaciones</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">Referencias</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#tipos-de-datos-numéricos" id="toc-tipos-de-datos-numéricos" class="nav-link active" data-scroll-target="#tipos-de-datos-numéricos"> <span class="header-section-number">2.1</span> Tipos de datos numéricos</a></li>
+  <li><a href="#ejemplos-de-tipos-de-datos-numéricos" id="toc-ejemplos-de-tipos-de-datos-numéricos" class="nav-link" data-scroll-target="#ejemplos-de-tipos-de-datos-numéricos"> <span class="header-section-number">2.2</span> Ejemplos de tipos de datos numéricos</a></li>
+  <li><a href="#jerarquía-de-tipos-de-datos-numéricos" id="toc-jerarquía-de-tipos-de-datos-numéricos" class="nav-link" data-scroll-target="#jerarquía-de-tipos-de-datos-numéricos"> <span class="header-section-number">2.3</span> Jerarquía de tipos de datos numéricos</a></li>
+  <li><a href="#constantes-predefinidas" id="toc-constantes-predefinidas" class="nav-link" data-scroll-target="#constantes-predefinidas"> <span class="header-section-number">2.4</span> Constantes predefinidas</a></li>
+  <li><a href="#ejemplo-de-constantes-predefinidas" id="toc-ejemplo-de-constantes-predefinidas" class="nav-link" data-scroll-target="#ejemplo-de-constantes-predefinidas"> <span class="header-section-number">2.5</span> Ejemplo de constantes predefinidas</a></li>
+  <li><a href="#tipos-de-datos-alfanuméricos" id="toc-tipos-de-datos-alfanuméricos" class="nav-link" data-scroll-target="#tipos-de-datos-alfanuméricos"> <span class="header-section-number">2.6</span> Tipos de datos alfanuméricos</a></li>
+  <li><a href="#tipo-de-datos-booleanos" id="toc-tipo-de-datos-booleanos" class="nav-link" data-scroll-target="#tipo-de-datos-booleanos"> <span class="header-section-number">2.7</span> Tipo de datos booleanos</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables"> <span class="header-section-number">2.8</span> Variables</a></li>
+  <li><a href="#nombres-de-variables" id="toc-nombres-de-variables" class="nav-link" data-scroll-target="#nombres-de-variables"> <span class="header-section-number">2.9</span> Nombres de variables</a></li>
+  <li><a href="#operadores-aritméticos" id="toc-operadores-aritméticos" class="nav-link" data-scroll-target="#operadores-aritméticos"> <span class="header-section-number">2.10</span> Operadores aritméticos</a></li>
+  <li><a href="#operadores-de-comparación" id="toc-operadores-de-comparación" class="nav-link" data-scroll-target="#operadores-de-comparación"> <span class="header-section-number">2.11</span> Operadores de comparación</a></li>
+  <li><a href="#operadores-booleanos" id="toc-operadores-booleanos" class="nav-link" data-scroll-target="#operadores-booleanos"> <span class="header-section-number">2.12</span> Operadores booleanos</a></li>
+  <li><a href="#funciones-numéricas-predefinidas" id="toc-funciones-numéricas-predefinidas" class="nav-link" data-scroll-target="#funciones-numéricas-predefinidas"> <span class="header-section-number">2.13</span> Funciones numéricas predefinidas</a>
+  <ul class="collapse">
+  <li><a href="#funciones-de-redondeo" id="toc-funciones-de-redondeo" class="nav-link" data-scroll-target="#funciones-de-redondeo"> <span class="header-section-number">2.13.1</span> Funciones de redondeo</a></li>
+  <li><a href="#ejemplo-de-funciones-de-redondeo" id="toc-ejemplo-de-funciones-de-redondeo" class="nav-link" data-scroll-target="#ejemplo-de-funciones-de-redondeo"> <span class="header-section-number">2.13.2</span> Ejemplo de funciones de redondeo</a></li>
+  <li><a href="#funciones-de-división" id="toc-funciones-de-división" class="nav-link" data-scroll-target="#funciones-de-división"> <span class="header-section-number">2.13.3</span> Funciones de división</a></li>
+  <li><a href="#ejemplo-de-funciones-de-división" id="toc-ejemplo-de-funciones-de-división" class="nav-link" data-scroll-target="#ejemplo-de-funciones-de-división"> <span class="header-section-number">2.13.4</span> Ejemplo de funciones de división</a></li>
+  <li><a href="#funciones-para-el-signo-y-el-valor-absoluto" id="toc-funciones-para-el-signo-y-el-valor-absoluto" class="nav-link" data-scroll-target="#funciones-para-el-signo-y-el-valor-absoluto"> <span class="header-section-number">2.13.5</span> Funciones para el signo y el valor absoluto</a></li>
+  <li><a href="#raíces-exponenciales-y-logaritmos" id="toc-raíces-exponenciales-y-logaritmos" class="nav-link" data-scroll-target="#raíces-exponenciales-y-logaritmos"> <span class="header-section-number">2.13.6</span> Raíces, exponenciales y logaritmos</a></li>
+  <li><a href="#ejemplo-de-raíces-exponenciales-y-logaritmos" id="toc-ejemplo-de-raíces-exponenciales-y-logaritmos" class="nav-link" data-scroll-target="#ejemplo-de-raíces-exponenciales-y-logaritmos"> <span class="header-section-number">2.13.7</span> Ejemplo de raíces, exponenciales y logaritmos</a></li>
+  <li><a href="#funciones-trigonométricas" id="toc-funciones-trigonométricas" class="nav-link" data-scroll-target="#funciones-trigonométricas"> <span class="header-section-number">2.13.8</span> Funciones trigonométricas</a></li>
+  <li><a href="#ejemplo-de-funciones-trigonométricas" id="toc-ejemplo-de-funciones-trigonométricas" class="nav-link" data-scroll-target="#ejemplo-de-funciones-trigonométricas"> <span class="header-section-number">2.13.9</span> Ejemplo de funciones trigonométricas</a></li>
+  <li><a href="#funciones-trigonométricas-inversas" id="toc-funciones-trigonométricas-inversas" class="nav-link" data-scroll-target="#funciones-trigonométricas-inversas"> <span class="header-section-number">2.13.10</span> Funciones trigonométricas inversas</a></li>
+  <li><a href="#ejemplo-de-funciones-trigonométricas-inversas" id="toc-ejemplo-de-funciones-trigonométricas-inversas" class="nav-link" data-scroll-target="#ejemplo-de-funciones-trigonométricas-inversas"> <span class="header-section-number">2.13.11</span> Ejemplo de funciones trigonométricas inversas</a></li>
+  </ul></li>
+  <li><a href="#precedencia-de-operadores" id="toc-precedencia-de-operadores" class="nav-link" data-scroll-target="#precedencia-de-operadores"> <span class="header-section-number">2.14</span> Precedencia de operadores</a></li>
+  <li><a href="#operaciones-con-cadenas" id="toc-operaciones-con-cadenas" class="nav-link" data-scroll-target="#operaciones-con-cadenas"> <span class="header-section-number">2.15</span> Operaciones con cadenas</a>
+  <ul class="collapse">
+  <li><a href="#acceso-a-caracteres-unicode" id="toc-acceso-a-caracteres-unicode" class="nav-link" data-scroll-target="#acceso-a-caracteres-unicode"> <span class="header-section-number">2.15.1</span> Acceso a caracteres Unicode</a></li>
+  <li><a href="#ejemplo-de-acceso-a-caracteres-unicode" id="toc-ejemplo-de-acceso-a-caracteres-unicode" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-caracteres-unicode"> <span class="header-section-number">2.15.2</span> Ejemplo de acceso a caracteres Unicode</a></li>
+  <li><a href="#acceso-a-índices-en-cadenas" id="toc-acceso-a-índices-en-cadenas" class="nav-link" data-scroll-target="#acceso-a-índices-en-cadenas"> <span class="header-section-number">2.15.3</span> Acceso a índices en cadenas</a></li>
+  <li><a href="#ejemplo-de-acceso-a-índices-en-cadenas" id="toc-ejemplo-de-acceso-a-índices-en-cadenas" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-índices-en-cadenas"> <span class="header-section-number">2.15.4</span> Ejemplo de acceso a índices en cadenas</a></li>
+  <li><a href="#subcadenas" id="toc-subcadenas" class="nav-link" data-scroll-target="#subcadenas"> <span class="header-section-number">2.15.5</span> Subcadenas</a></li>
+  </ul></li>
+  <li><a href="#concatenación-de-cadenas" id="toc-concatenación-de-cadenas" class="nav-link" data-scroll-target="#concatenación-de-cadenas"> <span class="header-section-number">2.16</span> Concatenación de cadenas</a>
+  <ul class="collapse">
+  <li><a href="#interpolación-de-cadenas" id="toc-interpolación-de-cadenas" class="nav-link" data-scroll-target="#interpolación-de-cadenas"> <span class="header-section-number">2.16.1</span> Interpolación de cadenas</a></li>
+  <li><a href="#otras-operaciones-comunes-con-cadenas" id="toc-otras-operaciones-comunes-con-cadenas" class="nav-link" data-scroll-target="#otras-operaciones-comunes-con-cadenas"> <span class="header-section-number">2.16.2</span> Otras operaciones comunes con cadenas</a></li>
+  <li><a href="#otras-operaciones-comunes-con-cadenas-1" id="toc-otras-operaciones-comunes-con-cadenas-1" class="nav-link" data-scroll-target="#otras-operaciones-comunes-con-cadenas-1"> <span class="header-section-number">2.16.3</span> Otras operaciones comunes con cadenas</a></li>
+  <li><a href="#ejemplo-de-otras-operaciones-con-cadenas" id="toc-ejemplo-de-otras-operaciones-con-cadenas" class="nav-link" data-scroll-target="#ejemplo-de-otras-operaciones-con-cadenas"> <span class="header-section-number">2.16.4</span> Ejemplo de otras operaciones con cadenas</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tipos de datos y variables</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="tipos-de-datos-numéricos" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="tipos-de-datos-numéricos"><span class="header-section-number">2.1</span> Tipos de datos numéricos</h2>
+<ul>
+<li>Enteros: <code>Int64</code> (64 bits por defecto).</li>
+<li>Racionales: <code>Rational{Int64}</code>. Utilizando el operador <code>//</code>.</li>
+<li>Reales: <code>Float64</code> (64 bits por defecto).</li>
+<li>Complejos: <code>Complex{Int64}</code>. Utilizando <code>im</code> después de la parte imaginaria.</li>
+</ul>
+<p>Para averiguar el tipo de un dato se utiliza la función <code>typeof()</code>.</p>
+</section>
+<section id="ejemplos-de-tipos-de-datos-numéricos" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="ejemplos-de-tipos-de-datos-numéricos"><span class="header-section-number">2.2</span> Ejemplos de tipos de datos numéricos</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="fl">3</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Int64</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="fl">3</span><span class="op">/</span><span class="fl">2</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">Float64</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="fl">3</span><span class="op">//</span><span class="fl">2</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Rational</span>{<span class="dt">Int64</span>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="cn">π</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">Irrational</span>{<span class="op">:</span><span class="cn">π</span>}</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="fl">3</span><span class="op">+</span><span class="fl">2im</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="dt">Complex</span>{<span class="dt">Int64</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="jerarquía-de-tipos-de-datos-numéricos" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="jerarquía-de-tipos-de-datos-numéricos"><span class="header-section-number">2.3</span> Jerarquía de tipos de datos numéricos</h2>
+<p><img src="img/tipos-datos-numericos.png" class="img-fluid"></p>
+</section>
+<section id="constantes-predefinidas" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="constantes-predefinidas"><span class="header-section-number">2.4</span> Constantes predefinidas</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Símbolo</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>pi</code> o <code>π</code></td>
+<td style="text-align: left;">Número irracional <span class="math inline">\(\pi\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ℯ</code> (\euler + TAB)</td>
+<td style="text-align: left;">Número irracional <span class="math inline">\(e\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Inf</code></td>
+<td style="text-align: left;">Infinito</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>NaN</code></td>
+<td style="text-align: left;">Valor no numérico</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Missing</code></td>
+<td style="text-align: left;">Valor desconocido</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ejemplo-de-constantes-predefinidas" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="ejemplo-de-constantes-predefinidas"><span class="header-section-number">2.5</span> Ejemplo de constantes predefinidas</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="cn">π</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cn">π</span> <span class="op">=</span> <span class="fl">3.1415926535897</span><span class="op">...</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cn">Inf</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fl">0</span> <span class="op">/</span> <span class="fl">0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cn">NaN</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="cn">Inf</span> <span class="op">+</span> <span class="cn">Inf</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="cn">Inf</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="cn">Inf</span> <span class="op">-</span> <span class="cn">Inf</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="cn">NaN</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fl">0</span> <span class="op">*</span> <span class="cn">Inf</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="cn">NaN</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tipos-de-datos-alfanuméricos" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="tipos-de-datos-alfanuméricos"><span class="header-section-number">2.6</span> Tipos de datos alfanuméricos</h2>
+<ul>
+<li>Caracteres: <code>Char</code>. Se representan entre comillas simples.</li>
+<li>Cadenas: <code>String</code>. Se representan entre comillas dobles.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="ch">'a'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Char</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="st">"julia"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">String</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="st">"a"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="dt">String</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tipo-de-datos-booleanos" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="tipo-de-datos-booleanos"><span class="header-section-number">2.7</span> Tipo de datos booleanos</h2>
+<ul>
+<li>Booleanos: <code>bool</code>. Son un subtipo de los enteros <code>Integer</code>.</li>
+</ul>
+<p>Solo contienen dos posibles valores: <code>true</code> (1) y <code>false</code> (0).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="cn">true</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Bool</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="cn">false</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">Bool</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(<span class="fl">1</span> <span class="op">&lt;</span> <span class="fl">2</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="dt">Bool</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="cn">true</span> <span class="op">+</span> <span class="cn">true</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="variables" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="variables"><span class="header-section-number">2.8</span> Variables</h2>
+<p>Como lenguaje de tipado dinámico, no es necesario declarar una variable antes de usarla. Su tipo se infiere directamente del valor asociado.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(x)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">Int64</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">=</span> <span class="st">"julia"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">"julia"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(x)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="dt">String</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>No obstante, para variables de ámbito local, por ejemplo en funciones, es posible fijar el tipo de una variable indicándolo detrás de su nombre con el operador <code>::</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x<span class="op">::</span><span class="dt">Int64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- TODO: ## Conversión de tipos -->
+</section>
+<section id="nombres-de-variables" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="nombres-de-variables"><span class="header-section-number">2.9</span> Nombres de variables</h2>
+<p>Julia reconoce la codificación Unicode (UTF-8), lo que permite utilizar caracteres con tildes, letras griegas, símbolos matemáticos y hasta emoticonos en los nombres de variables o funciones. Para ello se utilizan <a href="https://docs.julialang.org/en/v1/manual/unicode-input/">códigos especiales</a> (en muchos casos son los mismos que en <span class="math inline">\(\LaTeX\)</span>), pulsando después la tecla de tabulación.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> α <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> β <span class="op">=</span> <span class="fl">2</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> α <span class="op">+</span> β</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> 😄 <span class="op">=</span> <span class="st">"julia"</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">"julia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Distingue entre mayúsculas y minúsculas.</p>
+</section>
+<section id="operadores-aritméticos" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="operadores-aritméticos"><span class="header-section-number">2.10</span> Operadores aritméticos</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operador</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>x + y</code></td>
+<td style="text-align: left;">Suma</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>x - y</code></td>
+<td style="text-align: left;">Resta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>x * y</code></td>
+<td style="text-align: left;">Producto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>x / y</code></td>
+<td style="text-align: left;">División</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>x ÷ y</code></td>
+<td style="text-align: left;">Cociente división entera</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>x % y</code></td>
+<td style="text-align: left;">Resto división entera</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>x ^ y</code></td>
+<td style="text-align: left;">Potencia</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="operadores-de-comparación" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="operadores-de-comparación"><span class="header-section-number">2.11</span> Operadores de comparación</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operador</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>==</code></td>
+<td style="text-align: left;">Igualdad</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>!=</code>, <code>≠</code></td>
+<td style="text-align: left;">Desigualdad</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>&lt;</code></td>
+<td style="text-align: left;">Menor que</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>&lt;=</code>, <code>≤</code></td>
+<td style="text-align: left;">Menor o igual que</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>&gt;</code></td>
+<td style="text-align: left;">Mayor que</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>&gt;=</code>, <code>≥</code></td>
+<td style="text-align: left;">Mayor o igual que</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="operadores-booleanos" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="operadores-booleanos"><span class="header-section-number">2.12</span> Operadores booleanos</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operador</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>!x</code></td>
+<td style="text-align: left;">Negación</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>x &amp;&amp; y</code></td>
+<td style="text-align: left;">Conjunción (y)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>x || y</code></td>
+<td style="text-align: left;">Disyunción (o)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="funciones-numéricas-predefinidas" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="funciones-numéricas-predefinidas"><span class="header-section-number">2.13</span> Funciones numéricas predefinidas</h2>
+<section id="funciones-de-redondeo" class="level3" data-number="2.13.1">
+<h3 data-number="2.13.1" class="anchored" data-anchor-id="funciones-de-redondeo"><span class="header-section-number">2.13.1</span> Funciones de redondeo</h3>
+<table class="table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Función</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>round(x)</code></td>
+<td style="text-align: left;">Devuelve el entero más próximo a <code>x</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>round(x, digits = n)</code></td>
+<td style="text-align: left;">Devuelve al valor más próximo a <code>x</code> con <code>n</code> decimales</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>floor(x)</code></td>
+<td style="text-align: left;">Redondea <code>x</code> al próximo entero menor</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ceil(x)</code></td>
+<td style="text-align: left;">Redondea <code>x</code> al próximo entero mayor</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>trunc(x)</code></td>
+<td style="text-align: left;">Devuelve la parte entera de <code>x</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ejemplo-de-funciones-de-redondeo" class="level3" data-number="2.13.2">
+<h3 data-number="2.13.2" class="anchored" data-anchor-id="ejemplo-de-funciones-de-redondeo"><span class="header-section-number">2.13.2</span> Ejemplo de funciones de redondeo</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">round</span>(<span class="fl">2.7</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3.0</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">floor</span>(<span class="fl">2.7</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fl">2.0</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">floor</span>(<span class="op">-</span><span class="fl">2.7</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="fl">3.0</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">ceil</span>(<span class="fl">2.7</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fl">3.0</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">ceil</span>(<span class="op">-</span><span class="fl">2.7</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="fl">2.0</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">trunc</span>(<span class="fl">2.7</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fl">2.0</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">trunc</span>(<span class="op">-</span><span class="fl">2.7</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="fl">2.0</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">round</span>(<span class="fl">2.5</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="fl">2.0</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">round</span>(<span class="fl">2.786</span>, digits <span class="op">=</span> <span class="fl">2</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="fl">2.79</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="funciones-de-división" class="level3" data-number="2.13.3">
+<h3 data-number="2.13.3" class="anchored" data-anchor-id="funciones-de-división"><span class="header-section-number">2.13.3</span> Funciones de división</h3>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Función</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>div(x,y)</code>, <code>x÷y</code></td>
+<td style="text-align: left;">Cociente de la división entera</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>fld(x,y)</code></td>
+<td style="text-align: left;">Cociente de la división entera redondeado hacia abajo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>cld(x,y)</code></td>
+<td style="text-align: left;">Cociente de la división entera redondeado hacia arriba</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>rem(x,y)</code>, <code>x%y</code></td>
+<td style="text-align: left;">Resto de la división entera. Se cumple <code>x == div(x,y)*y + rem(x,y)</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>mod(x,y)</code></td>
+<td style="text-align: left;">Módulo con respecto a <code>y</code>. Se cumple <code>x == fld(x,y)*y + mod(x,y)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>gcd(x,y...)</code></td>
+<td style="text-align: left;">Máximo común divisor positivo de <code>x</code>, <code>y</code>,…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>lcm(x,y...)</code></td>
+<td style="text-align: left;">Mínimo común múltiplo positivo de <code>x</code>, <code>y</code>,…</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ejemplo-de-funciones-de-división" class="level3" data-number="2.13.4">
+<h3 data-number="2.13.4" class="anchored" data-anchor-id="ejemplo-de-funciones-de-división"><span class="header-section-number">2.13.4</span> Ejemplo de funciones de división</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">div</span>(<span class="fl">5</span>,<span class="fl">3</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">cld</span>(<span class="fl">5</span>,<span class="fl">3</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fl">5</span><span class="op">%</span><span class="fl">3</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="op">-</span><span class="fl">5</span><span class="op">%</span><span class="fl">3</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="fl">2</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">mod</span>(<span class="fl">5</span>,<span class="fl">3</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">mod</span>(<span class="op">-</span><span class="fl">5</span>,<span class="fl">3</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">gcd</span>(<span class="fl">12</span>,<span class="fl">18</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fl">6</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">lcm</span>(<span class="fl">12</span>,<span class="fl">18</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fl">36</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="funciones-para-el-signo-y-el-valor-absoluto" class="level3" data-number="2.13.5">
+<h3 data-number="2.13.5" class="anchored" data-anchor-id="funciones-para-el-signo-y-el-valor-absoluto"><span class="header-section-number">2.13.5</span> Funciones para el signo y el valor absoluto</h3>
+<table class="table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Función</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>abs(x)</code></td>
+<td style="text-align: left;">Valor absoluto de <code>x</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sign(x)</code></td>
+<td style="text-align: left;">Devuelve -1 si <code>x</code> es positivo, -1 si es negativo y 0 si es 0.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">abs</span>(<span class="fl">2.5</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.5</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">abs</span>(<span class="op">-</span><span class="fl">2.5</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fl">2.5</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">sign</span>(<span class="op">-</span><span class="fl">2.5</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="fl">1.0</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">sign</span>(<span class="fl">0</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fl">0</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">sign</span>(<span class="fl">2.5</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fl">1.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="raíces-exponenciales-y-logaritmos" class="level3" data-number="2.13.6">
+<h3 data-number="2.13.6" class="anchored" data-anchor-id="raíces-exponenciales-y-logaritmos"><span class="header-section-number">2.13.6</span> Raíces, exponenciales y logaritmos</h3>
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Función</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>sqrt(x)</code>, <code>√x</code></td>
+<td style="text-align: left;">Raíz cuadrada de <code>x</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cbrt(x)</code>, <code>∛x</code></td>
+<td style="text-align: left;">Raíz cúbica de <code>x</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>exp(x)</code></td>
+<td style="text-align: left;">Exponencial de <code>x</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>log(x)</code></td>
+<td style="text-align: left;">Logaritmo neperiano de <code>x</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>log(b,x)</code></td>
+<td style="text-align: left;">Logaritmo en base <code>b</code> de <code>x</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>log2(x)</code></td>
+<td style="text-align: left;">Logaritmo en base 2 de <code>x</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>log10(x)</code></td>
+<td style="text-align: left;">Logaritmo en base 10 de <code>x</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ejemplo-de-raíces-exponenciales-y-logaritmos" class="level3" data-number="2.13.7">
+<h3 data-number="2.13.7" class="anchored" data-anchor-id="ejemplo-de-raíces-exponenciales-y-logaritmos"><span class="header-section-number">2.13.7</span> Ejemplo de raíces, exponenciales y logaritmos</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">sqrt</span>(<span class="fl">4</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.0</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">cbrt</span>(<span class="fl">27</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fl">3.0</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">exp</span>(<span class="fl">1</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fl">2.718281828459045</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">exp</span>(<span class="op">-</span><span class="cn">Inf</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">log</span>(<span class="fl">1</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">log</span>(<span class="fl">0</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="cn">Inf</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">log</span>(<span class="op">-</span><span class="fl">1</span>)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>ERROR<span class="op">:</span> <span class="dt">DomainError</span> with <span class="op">-</span><span class="fl">1.0</span><span class="op">:</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>log will only <span class="cf">return</span> a complex result <span class="cf">if</span> called with a complex argument.</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">log</span>(<span class="op">-</span><span class="fl">1</span><span class="op">+</span><span class="fl">0im</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0</span> <span class="op">+</span> <span class="fl">3.141592653589793im</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">log2</span>(<span class="fl">2</span><span class="op">^</span><span class="fl">3</span>)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="fl">3.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="funciones-trigonométricas" class="level3" data-number="2.13.8">
+<h3 data-number="2.13.8" class="anchored" data-anchor-id="funciones-trigonométricas"><span class="header-section-number">2.13.8</span> Funciones trigonométricas</h3>
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Función</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>hypot(x,y)</code></td>
+<td style="text-align: left;">Hipotenusa del triángulo rectángulo con catetos <code>x</code> e <code>y</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sin(x)</code></td>
+<td style="text-align: left;">Seno del ángulo <code>x</code> en radianes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>sind(x)</code></td>
+<td style="text-align: left;">Seno del ángulo <code>x</code> en grados</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cos(x)</code></td>
+<td style="text-align: left;">Coseno del ángulo <code>x</code> en radianes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>cosd(x)</code></td>
+<td style="text-align: left;">Coseno del ángulo <code>x</code> en grados</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tan(x)</code></td>
+<td style="text-align: left;">Tangente del ángulo <code>x</code> en radianes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>tand(x)</code></td>
+<td style="text-align: left;">Tangente del ángulo <code>x</code> en grados</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sec(x)</code></td>
+<td style="text-align: left;">Secante del ángulo <code>x</code> en radianes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>csc(x)</code></td>
+<td style="text-align: left;">Cosecante del ángulo <code>x</code> en radianes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>cot(x)</code></td>
+<td style="text-align: left;">Cotangente del ángulo <code>x</code> en radianes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ejemplo-de-funciones-trigonométricas" class="level3" data-number="2.13.9">
+<h3 data-number="2.13.9" class="anchored" data-anchor-id="ejemplo-de-funciones-trigonométricas"><span class="header-section-number">2.13.9</span> Ejemplo de funciones trigonométricas</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">sin</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">2</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.0</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">cos</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">2</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fl">6.123233995736766e-17</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">cosd</span>(<span class="fl">90</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">tan</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">4</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fl">0.9999999999999999</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">tand</span>(<span class="fl">45</span>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fl">1.0</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">tan</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">2</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fl">1.633123935319537e16</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">tand</span>(<span class="fl">90</span>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="cn">Inf</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">sin</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">4</span>)<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fu">cos</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">4</span>)<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fl">1.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="funciones-trigonométricas-inversas" class="level3" data-number="2.13.10">
+<h3 data-number="2.13.10" class="anchored" data-anchor-id="funciones-trigonométricas-inversas"><span class="header-section-number">2.13.10</span> Funciones trigonométricas inversas</h3>
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Función</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>asin(x)</code></td>
+<td style="text-align: left;">Arcoseno (inversa del seno) de <code>x</code> en radianes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>asind(x)</code></td>
+<td style="text-align: left;">Arcoseno (inversa del seno) de <code>x</code> en grados</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>acos(x)</code></td>
+<td style="text-align: left;">Arcocoseno (inversa del coseno) de <code>x</code> en radianes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>acosd(x)</code></td>
+<td style="text-align: left;">Arcocoseno (inversa del coseno) de <code>x</code> en grados</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>atan(x)</code></td>
+<td style="text-align: left;">Arcotangente (inversa de la tangente) de <code>x</code> en radianes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>atand(x)</code></td>
+<td style="text-align: left;">Arcotangente (inversa de la tangente) de <code>x</code> en grados</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>asec(x)</code></td>
+<td style="text-align: left;">Arcosecante (inversa de la secante) de <code>x</code> en radianes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>acsc(x)</code></td>
+<td style="text-align: left;">Arcocosecante (inversa de la cosecante) de <code>x</code> en radianes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>acot(x)</code></td>
+<td style="text-align: left;">Arcocotangente (inversa de la cotangente) de <code>x</code> en radianes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ejemplo-de-funciones-trigonométricas-inversas" class="level3" data-number="2.13.11">
+<h3 data-number="2.13.11" class="anchored" data-anchor-id="ejemplo-de-funciones-trigonométricas-inversas"><span class="header-section-number">2.13.11</span> Ejemplo de funciones trigonométricas inversas</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">asin</span>(<span class="fl">1</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.5707963267948966</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">asind</span>(<span class="fl">1</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fl">90.0</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">acos</span>(<span class="op">-</span><span class="fl">1</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fl">3.141592653589793</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">atan</span>(<span class="fl">1</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fl">0.7853981633974483</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">atand</span>(<span class="fu">tan</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">4</span>))</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fl">45.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="precedencia-de-operadores" class="level2" data-number="2.14">
+<h2 data-number="2.14" class="anchored" data-anchor-id="precedencia-de-operadores"><span class="header-section-number">2.14</span> Precedencia de operadores</h2>
+<p>De mayor a menor prioridad.</p>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 70%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Categoría</th>
+<th style="text-align: left;">Operadores</th>
+<th style="text-align: left;">Asociatividad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Exponenciación</td>
+<td style="text-align: left;"><code>^</code></td>
+<td style="text-align: left;">Derecha</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Unarios</td>
+<td style="text-align: left;"><code>+ - √</code></td>
+<td style="text-align: left;">Derecha</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fracciones</td>
+<td style="text-align: left;"><code>//</code></td>
+<td style="text-align: left;">Izquierda</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Multiplicación</td>
+<td style="text-align: left;"><code>* / % &amp; \ ÷</code></td>
+<td style="text-align: left;">Izquierda</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Adición</td>
+<td style="text-align: left;"><code>+ - |</code></td>
+<td style="text-align: left;">Izquierda</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Comparaciones</td>
+<td style="text-align: left;"><code>&gt; &lt; &gt;= &lt;= == != !==</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Asignaciones</td>
+<td style="text-align: left;"><code>= += -= *= /= //= ^= ÷= %= |= &amp;=</code></td>
+<td style="text-align: left;">Derecha</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="operaciones-con-cadenas" class="level2" data-number="2.15">
+<h2 data-number="2.15" class="anchored" data-anchor-id="operaciones-con-cadenas"><span class="header-section-number">2.15</span> Operaciones con cadenas</h2>
+<p>Las cadenas son secuencias de caracteres alfanuméricos del tipo <code>char</code> entre dobles comillas.</p>
+<p>Cada carácter tiene asociado un índice entero. El primer carácter de la cadena tiene índice 1.</p>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Índice</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cadena</td>
+<td style="text-align: center;">j</td>
+<td style="text-align: center;">u</td>
+<td style="text-align: center;">l</td>
+<td style="text-align: center;">i</td>
+<td style="text-align: center;">a</td>
+</tr>
+</tbody>
+</table>
+<p>Podemos acceder a cada carácter usando su índice entre corchetes a continuación de la cadena:</p>
+<ul>
+<li><code>s[i]</code>: Devuelve el carácter con índice <code>i</code> en la cadena <code>s</code>.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c <span class="op">=</span> <span class="st">"julia"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="st">"julia"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c[<span class="fl">2</span>]</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ch">'u'</span><span class="op">:</span> ASCII<span class="op">/</span><span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">0075</span> (category Ll<span class="op">:</span> Letter, lowercase)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="acceso-a-caracteres-unicode" class="level3" data-number="2.15.1">
+<h3 data-number="2.15.1" class="anchored" data-anchor-id="acceso-a-caracteres-unicode"><span class="header-section-number">2.15.1</span> Acceso a caracteres Unicode</h3>
+<p>Sin embargo, como Julia permite caracteres <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode</a>, el índice de un carácter en una cadena, no siempre se corresponde con su posición en la cadena. Ello es debido a que la codificación UTF-8 no utiliza el mismo número de bytes para representar los caracteres Unicode. Mientras que los caracteres habituales del código ASCII (letras romanas y números árabes) solo necesitan un byte, otros caracteres como los símbolos matemáticos requieren más.</p>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Índice</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cadena</td>
+<td style="text-align: center;">∀</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">∃</td>
+<td style="text-align: center;">y</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ejemplo-de-acceso-a-caracteres-unicode" class="level3" data-number="2.15.2">
+<h3 data-number="2.15.2" class="anchored" data-anchor-id="ejemplo-de-acceso-a-caracteres-unicode"><span class="header-section-number">2.15.2</span> Ejemplo de acceso a caracteres Unicode</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c <span class="op">=</span> <span class="st">"∀x ∃y"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">"∀x ∃y"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c[<span class="fl">1</span>]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ch">'∀'</span><span class="op">:</span> <span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">2200</span> (category Sm<span class="op">:</span> <span class="dt">Symbol</span>, math)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c[<span class="fl">2</span>]</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>ERROR<span class="op">:</span> <span class="dt">StringIndexError</span><span class="op">:</span> invalid index [<span class="fl">2</span>], </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>valid nearby indices [<span class="fl">1</span>]<span class="op">=&gt;</span><span class="ch">'∀'</span>, [<span class="fl">4</span>]<span class="op">=&gt;</span><span class="ch">'x'</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>Stacktrace<span class="op">:</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a> [<span class="fl">1</span>] <span class="fu">string_index_err</span>(s<span class="op">::</span><span class="dt">String</span>, i<span class="op">::</span><span class="dt">Int64</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">Base</span> <span class="op">./</span>strings<span class="op">/</span>string.jl<span class="op">:</span><span class="fl">12</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a> [<span class="fl">2</span>] <span class="fu">getindex_continued</span>(s<span class="op">::</span><span class="dt">String</span>, i<span class="op">::</span><span class="dt">Int64</span>, u<span class="op">::</span><span class="dt">UInt32</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">Base</span> <span class="op">./</span>strings<span class="op">/</span>string.jl<span class="op">:</span><span class="fl">233</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a> [<span class="fl">3</span>] <span class="fu">getindex</span>(s<span class="op">::</span><span class="dt">String</span>, i<span class="op">::</span><span class="dt">Int64</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">Base</span> <span class="op">./</span>strings<span class="op">/</span>string.jl<span class="op">:</span><span class="fl">226</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a> [<span class="fl">4</span>] top<span class="op">-</span>level scope</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>   @ <span class="bu">REPL</span>[<span class="fl">128</span>]<span class="op">:</span><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="acceso-a-índices-en-cadenas" class="level3" data-number="2.15.3">
+<h3 data-number="2.15.3" class="anchored" data-anchor-id="acceso-a-índices-en-cadenas"><span class="header-section-number">2.15.3</span> Acceso a índices en cadenas</h3>
+<p>Las siguientes funciones permiten acceder a los índices de una cadena:</p>
+<ul>
+<li><code>firsindex(c)</code>: Devuelve el índice del primer carácter de la cadena <code>c</code>.</li>
+<li><code>lastindex(c)</code>: Devuelve el índice del primer carácter de la cadena <code>c</code>.</li>
+<li><code>nextind(c, i)</code>: Devuelve el índice del carácter de la cadena <code>c</code> que sigue al carácter con índice <code>i</code>.</li>
+<li><code>prevind(c, i)</code>: Devuelve el índice del carácter de la cadena <code>c</code> que sigue al carácter con índice <code>i</code>.</li>
+</ul>
+</section>
+<section id="ejemplo-de-acceso-a-índices-en-cadenas" class="level3" data-number="2.15.4">
+<h3 data-number="2.15.4" class="anchored" data-anchor-id="ejemplo-de-acceso-a-índices-en-cadenas"><span class="header-section-number">2.15.4</span> Ejemplo de acceso a índices en cadenas</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">firstindex</span>(c)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">lastindex</span>(c)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fl">9</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c[<span class="fl">9</span>]</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="ch">'y'</span><span class="op">:</span> ASCII<span class="op">/</span><span class="bu">Unicode</span> U<span class="op">+</span><span class="fl">0079</span> (category Ll<span class="op">:</span> Letter, lowercase)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">nextind</span>(c,<span class="fl">1</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fl">4</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">prevind</span>(c, <span class="fu">lastindex</span>(c))</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fl">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="subcadenas" class="level3" data-number="2.15.5">
+<h3 data-number="2.15.5" class="anchored" data-anchor-id="subcadenas"><span class="header-section-number">2.15.5</span> Subcadenas</h3>
+<p>Para obtener subcadenas se usan también los corchetes indicando los índices de inicio y fin separados por <code>:</code>.</p>
+<ul>
+<li><code>s[i:j]</code>: Devuelve la subcadena que va desde el índice <code>i</code> al índice <code>j</code>, ambos incluidos.</li>
+</ul>
+<p>También se pueden obtener subcadenas con la siguiente función:</p>
+<ul>
+<li><code>SubString(s, i, j)</code>: Devuelve la subcadena que va desde el índice <code>i</code> al índice <code>j</code>, ambos incluidos.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c <span class="op">=</span> <span class="st">"julia"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">"julia"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c[<span class="fl">2</span><span class="op">:</span><span class="fl">4</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="st">"uli"</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">SubString</span>(c, <span class="fl">2</span>, <span class="fl">4</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="st">"uli"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="concatenación-de-cadenas" class="level2" data-number="2.16">
+<h2 data-number="2.16" class="anchored" data-anchor-id="concatenación-de-cadenas"><span class="header-section-number">2.16</span> Concatenación de cadenas</h2>
+<ul>
+<li><code>a * b</code>: Devuelve la cadena que resulta de concatenar las cadenas <code>a</code> y <code>b</code>.</li>
+<li><code>a ^ i</code>: Devuelve la cadena que resulta de repetir la cadena <code>a</code> el número de veces <code>i</code>.</li>
+<li><code>repeat(a, i)</code>: Devuelve la cadena que resulta de repetir la cadena <code>a</code> el número de veces <code>i</code>.</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> a <span class="op">=</span> <span class="st">"Hola"</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="st">"Hola"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> b <span class="op">=</span> <span class="st">"Julia"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="st">"Julia"</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> a <span class="op">*</span> b</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">"HolaJulia"</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> b <span class="op">^</span> <span class="fl">3</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="st">"JuliaJuliaJulia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="interpolación-de-cadenas" class="level3" data-number="2.16.1">
+<h3 data-number="2.16.1" class="anchored" data-anchor-id="interpolación-de-cadenas"><span class="header-section-number">2.16.1</span> Interpolación de cadenas</h3>
+<p>En una cadena se pueden introducir variables o expresiones precedidas del símbolo <code>$</code>, de manera que al evaluarlas julia sustituye la variable o expresión por su valor. Esto es muy util para formatear salidas.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="st">"1 + 2 = </span><span class="sc">$</span>(<span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span>)<span class="st">"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="st">"1 + 2 = 3"</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> s <span class="op">=</span> <span class="st">"Julia"</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="st">"Julia"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="st">"Hola </span><span class="sc">$</span>s<span class="st">"</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="st">"Hola Julia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="otras-operaciones-comunes-con-cadenas" class="level3" data-number="2.16.2">
+<h3 data-number="2.16.2" class="anchored" data-anchor-id="otras-operaciones-comunes-con-cadenas"><span class="header-section-number">2.16.2</span> Otras operaciones comunes con cadenas</h3>
+<ul>
+<li><code>length(c)</code>: Devuelve el número de caracteres de la cadena <code>c</code>.</li>
+<li><code>findfirst(a, c)</code>: Devuelve el índice de la primera ocurrencia de la cadena <code>a</code> en la cadena <code>c</code>. Si <code>a</code> no es una subcadena de <code>c</code> devuelve nada (tipo <code>Nothing</code>).</li>
+<li><code>findlast(a, c)</code>: Devuelve el índice de la última ocurrencia de la cadena <code>a</code> en la cadena <code>c</code>. Si <code>a</code> no es una subcadena de <code>c</code> devuelve nada (tipo <code>Nothing</code>).</li>
+<li><code>findnext(a, c, i)</code>: Devuelve el índice de la primera ocurrencia de la cadena <code>a</code> en la cadena <code>c</code> posterior al índice <code>i</code>.</li>
+<li><code>findprev(a, c, i)</code>: Devuelve el índice de la última ocurrencia de la cadena <code>a</code> en la cadena <code>c</code> anterior al índice <code>i</code>.</li>
+</ul>
+</section>
+<section id="otras-operaciones-comunes-con-cadenas-1" class="level3" data-number="2.16.3">
+<h3 data-number="2.16.3" class="anchored" data-anchor-id="otras-operaciones-comunes-con-cadenas-1"><span class="header-section-number">2.16.3</span> Otras operaciones comunes con cadenas</h3>
+<ul>
+<li><code>occursin(a, c)</code>: Devuelve <code>true</code> si la cadena <code>a</code> es una subcadena de <code>c</code>, y <code>false</code> en caso contrario.</li>
+<li><code>contains(c, a)</code>: Devuelve <code>true</code> si la cadena <code>a</code> es una subcadena de <code>c</code>, y <code>false</code> en caso contrario.</li>
+<li><code>replace(c, a =&gt; b)</code>: Devuelve la cadena que resulta de sustituir la cadena <code>a</code> por la <code>b</code> en la cadena <code>c</code>.</li>
+<li><code>lowercase(c)</code>: Devuelve la cadena <code>c</code> en minúsculas.</li>
+<li><code>uppercase(c)</code>: Devuelve la cadena <code>c</code> en mayúsculas.</li>
+<li><code>prefix(c, a)</code>: Devuelve <code>true</code> si la cadena <code>a</code> es un prefijo de la cadena <code>c</code>.</li>
+<li><code>suffix(c, a)</code>: Devuelve <code>true</code> si la cadena <code>a</code> es un sufijo de la cadena <code>c</code>.</li>
+<li><code>split(c, a)</code>: Devuelve una lista con las cadenas que resulpan de partir la cadena <code>c</code> por el delimitador <code>a</code>.</li>
+</ul>
+</section>
+<section id="ejemplo-de-otras-operaciones-con-cadenas" class="level3" data-number="2.16.4">
+<h3 data-number="2.16.4" class="anchored" data-anchor-id="ejemplo-de-otras-operaciones-con-cadenas"><span class="header-section-number">2.16.4</span> Ejemplo de otras operaciones con cadenas</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c <span class="op">=</span> <span class="st">"Hola Julia"</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="st">"Hola Julia"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">length</span>(c)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fl">10</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">findfirst</span>(<span class="st">"a"</span>, c) </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fl">4</span><span class="op">:</span><span class="fl">4</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">findlast</span>(<span class="st">"Ju"</span>, c)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fl">6</span><span class="op">:</span><span class="fl">7</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">findlast</span>(<span class="st">"x"</span>, c)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">occursin</span>(<span class="st">"Julia"</span>, c)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="cn">true</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">occursin</span>(<span class="st">"julia"</span>, c)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="cn">false</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">replace</span>(c, <span class="st">"a"</span> <span class="op">=&gt;</span> <span class="st">"o"</span>)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="st">"Holo Julio"</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">uppercase</span>(c)</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="st">"HOLA JULIA"</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">split</span>(c, <span class="st">" "</span>)</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">SubString</span>{<span class="dt">String</span>}}<span class="op">:</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a> <span class="st">"Hola"</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a> <span class="st">"Julia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./estructuras-control.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estructuras de control</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

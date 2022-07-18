@@ -1,0 +1,14 @@
+# Otras aplicaciones
+
+## Teoría de grafos
+
+- [JuliaGraphs](https://juliagraphs.org/). Graphs analysis in Julia.
+
+## Cálculo simbólico
+
+- [SymPy](https://docs.juliahub.com/SymPy/KzewI/1.0.31/). Sistema de Álgebra Computacional (CAS) basdado en la librería `SymPy` de Python.
+- [Symbolics](https://juliasymbolics.org/) Sistema de Álgebra Computacional (CAS) basado en Julia.
+
+## Aprendizaje automático
+
+- [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl). Funciones para los principales algoritmos de aprendizaje automático.

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Manual de Julia - 5&nbsp; Funciones</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./graficos.html" rel="next">
+<link href="./tipos-datos-compuestos.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Funciones</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Manual de Julia</a> 
+        <div class="sidebar-tools-main">
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Manual-de-Julia.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./Manual-de-Julia.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Prefacio</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tipos-datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tipos de datos y variables</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./estructuras-control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estructuras de control</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tipos-datos-compuestos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tipos de datos compuestos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./funciones.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Funciones</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./graficos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gráficos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./calculo-simbolico.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cálculo simbólico</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./analisis-datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análisis de datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./aplicaciones.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Otras aplicaciones</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">Referencias</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#creación-de-funciones" id="toc-creación-de-funciones" class="nav-link active" data-scroll-target="#creación-de-funciones"> <span class="header-section-number">5.1</span> Creación de funciones</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-de-creación-de-funciones" id="toc-ejemplo-de-creación-de-funciones" class="nav-link" data-scroll-target="#ejemplo-de-creación-de-funciones"> <span class="header-section-number">5.1.1</span> Ejemplo de creación de funciones</a></li>
+  </ul></li>
+  <li><a href="#parámetros-y-argumentos-de-una-función" id="toc-parámetros-y-argumentos-de-una-función" class="nav-link" data-scroll-target="#parámetros-y-argumentos-de-una-función"> <span class="header-section-number">5.2</span> Parámetros y argumentos de una función</a>
+  <ul class="collapse">
+  <li><a href="#paso-de-argumentos-a-una-función" id="toc-paso-de-argumentos-a-una-función" class="nav-link" data-scroll-target="#paso-de-argumentos-a-una-función"> <span class="header-section-number">5.2.1</span> Paso de argumentos a una función</a></li>
+  <li><a href="#ejemplo-de-paso-de-argumentos-a-una-función" id="toc-ejemplo-de-paso-de-argumentos-a-una-función" class="nav-link" data-scroll-target="#ejemplo-de-paso-de-argumentos-a-una-función"> <span class="header-section-number">5.2.2</span> Ejemplo de paso de argumentos a una función</a></li>
+  <li><a href="#argumentos-por-defecto" id="toc-argumentos-por-defecto" class="nav-link" data-scroll-target="#argumentos-por-defecto"> <span class="header-section-number">5.2.3</span> Argumentos por defecto</a></li>
+  <li><a href="#funciones-con-un-número-variable-de-argumentos" id="toc-funciones-con-un-número-variable-de-argumentos" class="nav-link" data-scroll-target="#funciones-con-un-número-variable-de-argumentos"> <span class="header-section-number">5.2.4</span> Funciones con un número variable de argumentos</a></li>
+  <li><a href="#parámetros-con-tipo" id="toc-parámetros-con-tipo" class="nav-link" data-scroll-target="#parámetros-con-tipo"> <span class="header-section-number">5.2.5</span> Parámetros con tipo</a></li>
+  <li><a href="#ejemplo-de-parámetros-con-tipo" id="toc-ejemplo-de-parámetros-con-tipo" class="nav-link" data-scroll-target="#ejemplo-de-parámetros-con-tipo"> <span class="header-section-number">5.2.6</span> Ejemplo de parámetros con tipo</a></li>
+  <li><a href="#paso-de-argumentos-por-asignación" id="toc-paso-de-argumentos-por-asignación" class="nav-link" data-scroll-target="#paso-de-argumentos-por-asignación"> <span class="header-section-number">5.2.7</span> Paso de argumentos por asignación</a></li>
+  <li><a href="#ámbito-de-los-parámetros-de-una-función" id="toc-ámbito-de-los-parámetros-de-una-función" class="nav-link" data-scroll-target="#ámbito-de-los-parámetros-de-una-función"> <span class="header-section-number">5.2.8</span> Ámbito de los parámetros de una función</a></li>
+  <li><a href="#ejemplo-del-ámbito-de-los-parámetros-de-una-función" id="toc-ejemplo-del-ámbito-de-los-parámetros-de-una-función" class="nav-link" data-scroll-target="#ejemplo-del-ámbito-de-los-parámetros-de-una-función"> <span class="header-section-number">5.2.9</span> Ejemplo del ámbito de los parámetros de una función</a></li>
+  </ul></li>
+  <li><a href="#retorno-de-una-función" id="toc-retorno-de-una-función" class="nav-link" data-scroll-target="#retorno-de-una-función"> <span class="header-section-number">5.3</span> Retorno de una función</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-de-retorno-de-una-función" id="toc-ejemplo-de-retorno-de-una-función" class="nav-link" data-scroll-target="#ejemplo-de-retorno-de-una-función"> <span class="header-section-number">5.3.1</span> Ejemplo de retorno de una función</a></li>
+  </ul></li>
+  <li><a href="#funciones-compactas" id="toc-funciones-compactas" class="nav-link" data-scroll-target="#funciones-compactas"> <span class="header-section-number">5.4</span> Funciones compactas</a></li>
+  <li><a href="#funciones-como-objetos" id="toc-funciones-como-objetos" class="nav-link" data-scroll-target="#funciones-como-objetos"> <span class="header-section-number">5.5</span> Funciones como objetos</a></li>
+  <li><a href="#funciones-anónimas" id="toc-funciones-anónimas" class="nav-link" data-scroll-target="#funciones-anónimas"> <span class="header-section-number">5.6</span> Funciones anónimas</a></li>
+  <li><a href="#funciones-asociadas-a-operadores" id="toc-funciones-asociadas-a-operadores" class="nav-link" data-scroll-target="#funciones-asociadas-a-operadores"> <span class="header-section-number">5.7</span> Funciones asociadas a operadores</a></li>
+  <li><a href="#funciones-recursivas" id="toc-funciones-recursivas" class="nav-link" data-scroll-target="#funciones-recursivas"> <span class="header-section-number">5.8</span> Funciones recursivas</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-de-funciones-recursivas" id="toc-ejemplo-de-funciones-recursivas" class="nav-link" data-scroll-target="#ejemplo-de-funciones-recursivas"> <span class="header-section-number">5.8.1</span> Ejemplo de funciones recursivas</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Funciones</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="creación-de-funciones" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="creación-de-funciones"><span class="header-section-number">5.1</span> Creación de funciones</h2>
+<p>Una función asocia un nombre a un bloque de código de manera que cada vez que se invoca a la función se ejecuta el bloque de código asociado.</p>
+<p>Para crear una función se utiliza la siguiente sintaxis</p>
+<blockquote class="blockquote">
+<p><code>function</code> <em>nombre</em><code>(</code><em>parámetros</em><code>)</code><br>
+&nbsp;&nbsp;&nbsp;bloque de código<br>
+<code>end</code></p>
+</blockquote>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La indentación del bloque de código no es necesaria pero es una buena práctica.</p>
+</div>
+</div>
+<p>Para invocar una función basta con escribir su nombre y pasarle entre paréntesis los valores de los parámetros (<em>argumentos</em>) separados por comas.</p>
+<section id="ejemplo-de-creación-de-funciones" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="ejemplo-de-creación-de-funciones"><span class="header-section-number">5.1.1</span> Ejemplo de creación de funciones</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">saludo</span>()  <span class="co"># Función sin parámetros</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">println</span>(<span class="st">"¡Bienvenido!"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>saludo (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">saludo</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>¡Bienvenido!</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(saludo)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(saludo) (singleton <span class="kw">type</span> of <span class="kw">function</span> saludo, subtype of <span class="dt">Function</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="parámetros-y-argumentos-de-una-función" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="parámetros-y-argumentos-de-una-función"><span class="header-section-number">5.2</span> Parámetros y argumentos de una función</h2>
+<p>Una función puede recibir valores cuando se invoca a través de unas variables conocidas como <em>parámetros</em> que se definen entre paréntesis y separados por comas en la declaración de la función. En el cuerpo de la función se pueden usar estos parámetros como si fuesen variables.</p>
+<p>Los valores que se pasan a la función en una llamada o invocación concreta de ella se conocen como <em>argumentos</em> y se asocian a los parámetros de la declaración de la función.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">calificacion</span>(nota)  <span class="co"># Función con un parámetro</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span> nota <span class="op">&lt;</span> <span class="fl">5</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="fu">println</span>(<span class="st">"Suspenso"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="cf">else</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">println</span>(<span class="st">"Aprobado"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         <span class="cf">end</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>calificacion (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">calificacion</span>(<span class="fl">7</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Aprobado</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="paso-de-argumentos-a-una-función" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="paso-de-argumentos-a-una-función"><span class="header-section-number">5.2.1</span> Paso de argumentos a una función</h3>
+<p>Los argumentos se pueden pasar de dos formas:</p>
+<ul>
+<li><strong>Argumentos posicionales</strong>: Se asocian a los parámetros de la función en el mismo orden que aparecen en la definición de la función.</li>
+<li><strong>Argumentos nominales</strong>: Se indica explícitamente el nombre del parámetro al que se asocia un argumento de la forma <code>parametro = argumento</code>.</li>
+</ul>
+<p>Cuando una función tiente parámetros posicionales y como nominales, los posicionales deben indicarse primero y los nominales después, separando ambos tipos de parámetros por punto y coma <code>;</code>.</p>
+</section>
+<section id="ejemplo-de-paso-de-argumentos-a-una-función" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="ejemplo-de-paso-de-argumentos-a-una-función"><span class="header-section-number">5.2.2</span> Ejemplo de paso de argumentos a una función</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">saludo</span>(nombre, apellidos; ciudad)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">println</span>(<span class="st">"¡Hola </span><span class="sc">$</span>nombre<span class="st"> </span><span class="sc">$</span>apellidos<span class="st">, bienvenido a </span><span class="sc">$</span>(ciudad)<span class="st">!"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>saludo (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">saludo</span>(<span class="st">"Alfredo"</span>, <span class="st">"Sánchez"</span>, ciudad <span class="op">=</span> <span class="st">"Madrid"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>¡Hola Alfredo Sánchez, bienvenido a Madrid!</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">saludo</span>(<span class="st">"Alfredo"</span>, ciudad <span class="op">=</span> <span class="st">"Madrid"</span>,  <span class="st">"Sánchez"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>¡Hola Alfredo Sánchez, bienvenido a Madrid!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="argumentos-por-defecto" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="argumentos-por-defecto"><span class="header-section-number">5.2.3</span> Argumentos por defecto</h3>
+<p>En la definición de una función se puede asignar a cada parámetro un argumento por defecto, de manera que si se invoca la función sin proporcionar ningún argumento para ese parámetro, se utiliza el argumento por defecto.</p>
+<p>El valor por defecto de un parámetro se indica con la siguiente sintaxis <code>parámetro = valor</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">saludo</span>(nombre, apellidos, ciudad <span class="op">=</span> <span class="st">"Madrid"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">println</span>(<span class="st">"¡Hola </span><span class="sc">$</span>nombre<span class="st"> </span><span class="sc">$</span>apellidos<span class="st">, bienvenido a </span><span class="sc">$</span>(ciudad)<span class="st">!"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>saludo (generic <span class="kw">function</span> with <span class="fl">2</span> methods)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">saludo</span>(<span class="st">"Alfredo"</span>, <span class="st">"Sánchez"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>¡Hola Alfredo Sánchez, bienvenido a Madrid!</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">saludo</span>(<span class="st">"Pepito"</span>, <span class="st">"Grillo"</span>, <span class="st">"Barcelona"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>¡Hola Pepito Grillo, bienvenido a Barcelona!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="funciones-con-un-número-variable-de-argumentos" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="funciones-con-un-número-variable-de-argumentos"><span class="header-section-number">5.2.4</span> Funciones con un número variable de argumentos</h3>
+<p>Julia permite definir funciones que pueden llamarse con un número variable de argumentos. Para que una función pueda recibir un número variable de argumentos hay que poner tres puntos suspensivos <code>...</code> al final de último parámetro posicional.</p>
+<p>Cuando se llame a la función los argumentos se irán asociando a los parámetros posicionales en orden y el último parámetro se asociará a una tupla con el resto de argumentos en la llamada.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">media</span>(x<span class="op">...</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">println</span>(<span class="st">"Media de "</span>, x)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">sum</span>(x) <span class="op">/</span> <span class="fu">length</span>(x)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>media (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">media</span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>Media de (<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fl">2.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="parámetros-con-tipo" class="level3" data-number="5.2.5">
+<h3 data-number="5.2.5" class="anchored" data-anchor-id="parámetros-con-tipo"><span class="header-section-number">5.2.5</span> Parámetros con tipo</h3>
+<p>Aunque Julia es un lenguaje de tipado dinámico también permite fijar el tipo de los parámetros de una una función. Esto permite definir diferentes variantes (<em>métodos</em>) de una misma función dependiendo del tipo de los argumentos, así como detectar errores cuando se llama a la función con argumentos de distinto tipo.</p>
+<p>Para indicar el tipo de los parámetros de una función se utiliza la sintaxis <code>parametro::tipo</code>.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Conviene no restringir demasiado el tipo de los parámetros de una función. Se debe elegir el tipo más general en la jerarquía de tipos para el que tiene sentido la función.</p>
+</div>
+</div>
+</section>
+<section id="ejemplo-de-parámetros-con-tipo" class="level3" data-number="5.2.6">
+<h3 data-number="5.2.6" class="anchored" data-anchor-id="ejemplo-de-parámetros-con-tipo"><span class="header-section-number">5.2.6</span> Ejemplo de parámetros con tipo</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">sumar</span>(x<span class="op">::</span><span class="dt">Number</span>, y<span class="op">::</span><span class="dt">Number</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       x <span class="op">+</span> y</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sumar (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">sumar</span>(x<span class="op">::</span><span class="dt">String</span>, y<span class="op">::</span><span class="dt">String</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>       x <span class="op">*</span> y</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>sumar (generic <span class="kw">function</span> with <span class="fl">2</span> methods)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">sumar</span>(<span class="fl">1</span>, <span class="fl">2</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">sumar</span>(<span class="fl">1.5</span>, <span class="fl">2.5</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fl">4.0</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">sumar</span>(<span class="st">"Hola"</span>, <span class="st">"Julia"</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="st">"HolaJulia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="paso-de-argumentos-por-asignación" class="level3" data-number="5.2.7">
+<h3 data-number="5.2.7" class="anchored" data-anchor-id="paso-de-argumentos-por-asignación"><span class="header-section-number">5.2.7</span> Paso de argumentos por asignación</h3>
+<p>En Julia los argumentos se pasan a una función por asignación, es decir, se asignan a los parámetros de la función como si fuesen variables locales. De este modo, cuando los argumentos son objetos mutables (arrays, diccionarios, etc.) se pasa al parámetro una referencia al objeto, de manera que cualquier cambio que se haga en la función mediante el parámetro asociado afectará al objeto original y serán visibles fuera de ella.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">matricular</span>(curso, asignatura)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">push!</span>(curso, asignatura)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>matricular (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> primer_curso <span class="op">=</span> [];</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">matricular</span>(primer_curso, <span class="st">"Álgebra Lineal"</span>);</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">matricular</span>(primer_curso, <span class="st">"Programación"</span>);</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> primer_curso</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Any</span>}<span class="op">:</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a> <span class="st">"Álgebra Lineal"</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a> <span class="st">"Programación"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="ámbito-de-los-parámetros-de-una-función" class="level3" data-number="5.2.8">
+<h3 data-number="5.2.8" class="anchored" data-anchor-id="ámbito-de-los-parámetros-de-una-función"><span class="header-section-number">5.2.8</span> Ámbito de los parámetros de una función</h3>
+<p>Los parámetros y las variables declaradas dentro de una función son de <em>ámbito local</em>, mientras que las variable definidas fuera de funciones son de ámbito <em>ámbito global</em>.</p>
+<p>Tanto los parámetros como las variables del ámbito local de una función sólo están accesibles durante la ejecución de la función. Es decir, cuando termina la ejecución de la función estas variables desaparecen y no son accesibles desde fuera de la función.</p>
+<p>Si en el ámbito local de una función existe una variable que también existe en el ámbito global, durante la ejecución de la función la variable global queda eclipsada por la variable local y no es accesible hasta que finaliza la ejecución de la función.</p>
+</section>
+<section id="ejemplo-del-ámbito-de-los-parámetros-de-una-función" class="level3" data-number="5.2.9">
+<h3 data-number="5.2.9" class="anchored" data-anchor-id="ejemplo-del-ámbito-de-los-parámetros-de-una-función"><span class="header-section-number">5.2.9</span> Ejemplo del ámbito de los parámetros de una función</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> lenguaje <span class="op">=</span> <span class="st">"Python"</span>;</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">saludo</span>(nombre)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>       lenguaje <span class="op">=</span> <span class="st">"Julia"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">println</span>(<span class="st">"¡Hola </span><span class="sc">$</span>(nombre)<span class="st">, bienvenido a </span><span class="sc">$</span>(lenguaje)<span class="st">!"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>saludo (generic <span class="kw">function</span> with <span class="fl">3</span> methods)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">saludo</span>(<span class="st">"Alf"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>¡Hola Alf, bienvenido a Julia!</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> lenguaje</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="st">"Python"</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> nombre</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>ERROR<span class="op">:</span> <span class="dt">UndefVarError</span><span class="op">:</span> nombre not defined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="retorno-de-una-función" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="retorno-de-una-función"><span class="header-section-number">5.3</span> Retorno de una función</h2>
+<p>Una función devuelve siempre el valor de la última expresión evaluada en su cuerpo. Sin embargo, puede devolverse cualquier otro valor indicándolo detrás de la palabra reservada <code>return</code>. Cuando el flujo de ejecución de la función alcanza esta palabra, la ejecución de la función termina y se devuelve el valor que la acompaña.</p>
+<p>Si una función no devuelve ningún valor se puede escribir la palabra <code>return</code> sin nada más.</p>
+<p>Cuando se desea devolver más de un valor se puede pueden indicar separados por comas y la función devolverá la tupla formada por esos valores.</p>
+<section id="ejemplo-de-retorno-de-una-función" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="ejemplo-de-retorno-de-una-función"><span class="header-section-number">5.3.1</span> Ejemplo de retorno de una función</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">area_triangulo</span>(base, altura)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>         <span class="cf">return</span> base <span class="op">*</span> altura <span class="op">/</span> <span class="fl">2</span>  <span class="co"># Devuelve un valor</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>area_triangulo (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">area_triangulo</span>(<span class="fl">3</span>, <span class="fl">4</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fl">6.0</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">area_perimetro_circulo</span>(r)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>         <span class="cf">return</span> <span class="cn">π</span> <span class="op">*</span> r <span class="op">^</span> <span class="fl">2</span>, <span class="fl">2</span>π <span class="op">*</span> r  <span class="co"># Devuelve dos valores </span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>area_perimetro_circulo (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">area_perimetro_circulo</span>(<span class="fl">1</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>(<span class="fl">3.141592653589793</span>, <span class="fl">6.283185307179586</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="funciones-compactas" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="funciones-compactas"><span class="header-section-number">5.4</span> Funciones compactas</h2>
+<p>Cuando el cuerpo de una función es una única expresión se puede definir la función de forma mucho más compacta de la siguiente manera:</p>
+<blockquote class="blockquote">
+<p><code>nombre(</code><em>parametros</em><code>)</code> <code>=</code> <em>expresión</em></p>
+</blockquote>
+<p>El valor que devuelve la función es el resultado de evaluar la expresión.</p>
+<p>Esta forma de definir funciones es muy habitual para funciones matemáticas.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">area_triangulo</span>(b, a) <span class="op">=</span> b <span class="op">*</span> a <span class="op">/</span> <span class="fl">2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>area_triangulo (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">area_triangulo</span>(<span class="fl">3</span>, <span class="fl">4</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fl">6.0</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">valor_absoluto</span>(x) <span class="op">=</span> x <span class="op">&lt;</span> <span class="fl">0</span> ? <span class="op">-</span>x <span class="op">:</span> x</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>valor_absoluto (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">valor_absoluto</span>(<span class="op">-</span><span class="fl">1</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="funciones-como-objetos" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="funciones-como-objetos"><span class="header-section-number">5.5</span> Funciones como objetos</h2>
+<p>En Julia las funciones son objetos como el resto de tipos de datos, de manera que es posible asignar una función a una variable y luego utilizar la variable para hacer la llamada a la función, pasar una función como argumento de otra función, o que una función devuelva otra función.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">suma</span>(x, y) <span class="op">=</span> x <span class="op">+</span> y</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>suma (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> adicion <span class="op">=</span> suma</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>suma (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">adicion</span>(<span class="fl">1</span>, <span class="fl">2</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">calculadora</span>(operador, x, y) <span class="op">=</span> <span class="fu">operador</span>(x, y) </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>calculadora (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">calculadora</span>(suma, <span class="fl">1</span>, <span class="fl">2</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="funciones-anónimas" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="funciones-anónimas"><span class="header-section-number">5.6</span> Funciones anónimas</h2>
+<p>Julia permite también definir funciones sin nombre. Para ello se utiliza la siguiente sintaxis.</p>
+<blockquote class="blockquote">
+<p><code>(</code><em>parametros</em><code>)</code> <code>-&gt;</code> <em>expresión</em></p>
+</blockquote>
+<p>El principal uso de las funciones anónimas es para pasarlas como argumentos de otras funciones.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ulia<span class="op">&gt;</span> <span class="fu">calculadora</span>(operador, x, y) <span class="op">=</span> <span class="fu">operador</span>(x, y) </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>calculadora (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">calculadora</span>((x, y) <span class="op">-&gt;</span> x <span class="op">+</span> y, <span class="fl">1</span>, <span class="fl">2</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">calculadora</span>((x, y) <span class="op">-&gt;</span> x <span class="op">-</span> y, <span class="fl">1</span>, <span class="fl">2</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="funciones-asociadas-a-operadores" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="funciones-asociadas-a-operadores"><span class="header-section-number">5.7</span> Funciones asociadas a operadores</h2>
+<p>En Julia los operadores tienen asociadas funciones que son llamadas por el intérprete cuando se evalúa una expresión con operadores.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">+</span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>)  <span class="co"># Equivalente a 1 + 2 + 3</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fl">6</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> ∑ <span class="op">=</span> <span class="op">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="op">+</span> (generic <span class="kw">function</span> with <span class="fl">208</span> methods)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">∑</span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fl">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="funciones-recursivas" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="funciones-recursivas"><span class="header-section-number">5.8</span> Funciones recursivas</h2>
+<p>Una función recursiva es una función que en su cuerpo contiene alguna llama a si misma.</p>
+<p>La recursión es una práctica común en la mayoría de los lenguajes de programación ya que permite resolver las tareas recursivas de manera más natural.</p>
+<p>Para garantizar el final de una función recursiva, las sucesivas llamadas tienen que reducir el grado de complejidad del problema, hasta que este pueda resolverse directamente sin necesidad de volver a llamar a la función.</p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Danger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La recursión es una técnica que suele ser poco eficiente computacionalmente y conviene evitarla siempre que sea posible.</p>
+</div>
+</div>
+<section id="ejemplo-de-funciones-recursivas" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="ejemplo-de-funciones-recursivas"><span class="header-section-number">5.8.1</span> Ejemplo de funciones recursivas</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="kw">function</span> <span class="fu">factorial</span>(n<span class="op">::</span><span class="dt">Integer</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="fl">1</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">return</span> <span class="fl">1</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>         <span class="cf">else</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>           <span class="cf">return</span> n <span class="op">*</span> <span class="fu">factorial</span>(n<span class="op">-</span><span class="fl">1</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>         <span class="cf">end</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>       <span class="kw">end</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>factorial (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">factorial</span>(<span class="fl">4</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fl">24</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">fib</span>(n<span class="op">::</span><span class="dt">Integer</span>) <span class="op">=</span> n <span class="op">≤</span> <span class="fl">2</span> ? <span class="fl">1</span> <span class="op">:</span> <span class="fu">fib</span>(n <span class="op">-</span> <span class="fl">1</span>) <span class="op">+</span> <span class="fu">fib</span>(n <span class="op">-</span> <span class="fl">2</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>fib (generic <span class="kw">function</span> with <span class="fl">1</span> method)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">fib</span>(<span class="fl">10</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fl">55</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- TODO: Comentarios de funciones -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./tipos-datos-compuestos.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tipos de datos compuestos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./graficos.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gráficos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

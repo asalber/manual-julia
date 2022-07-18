@@ -1,0 +1,63 @@
+# Análisis de datos
+
+## El paquete DataFrames.jl
+
+El principal paquete para análisis de datos es [`DataFrames.jl`](https://dataframes.juliadata.org/stable/) que proporciona herramientas para trabajar con conjuntos de datos en formato de tabla de forma similar a pandas en Python o data.frames y dplyr en R.
+
+En conjunción con este paquete es frecuente utilizar también alguno de los siguientes paquetes:
+
+- [FreqTables.jl](https://github.com/nalimilan/FreqTables.jl). Funciones para la construcción de tablas de frecuencias.
+- [Statistics.jl](https://docs.julialang.org/en/v1/stdlib/Statistics/). Funciones para los principales estadísticos descriptivos.
+- [HypothesisTests.jl](https://juliastats.org/HypothesisTests.jl/stable/) Funciones para los contrastes de hipótesis paramétricos y no paramétricos más comunes.
+- [GLM.jl](https://juliastats.org/GLM.jl/stable/). Funciones para modelos lineales generales.
+- [MultivariateStats.jl](https://multivariatestatsjl.readthedocs.io/en/stable/index.html). Funciones para análisis multivariante.
+- [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl). Funciones para los principales algoritmos de aprendizaje automático.
+
+### Creación de DataFrames
+
+Para crear un DataFrame su utiliza la siguiente función: 
+
+- `DataFrame(x1=v1, x2=v2, ...)`: Devuelve el DataFrame que formado por las columnas de los vectores `v1`, `v2`, etc, con los nombres `x1`, `x2`, etc, respectivamente.
+
+```julia
+using DataFrames
+
+julia> df = DataFrame(Nombre = ["María", "Luis", "Carmen"], Edad = [22, 18, 20])
+3×2 DataFrame
+ Row │ Nombre  Edad  
+     │ String  Int64 
+─────┼───────────────
+   1 │ María      22
+   2 │ Luis       18
+   3 │ Carmen     20
+```
+
+### Creación de DataFrames desde una url
+
+Para crear una DataFrame a partir de un fichero csv en la nube, se utiliza la siguiente función del paquete `CSV.jl`:
+
+- `CSV.read(download(url), DataFrame)`: Devuelve el DataFrame que resulta de importar el fichero csv con la url `url`.
+
+```julia
+using DataFrames, CSV
+
+julia> df = CSV.read(download("https://raw.githubusercontent.com/asalber/manual-python/master/datos/colesteroles.csv"), DataFrame)
+14×6 DataFrame
+ Row │ nombre                           edad   sexo     peso     altura   colesterol 
+     │ String                           Int64  String1  Int64?   String7  Int64?     
+─────┼───────────────────────────────────────────────────────────────────────────────
+   1 │ José Luis Martínez Izquierdo        18  H             85  1,79            182
+   2 │ Rosa Díaz Díaz                      32  M             65  1,73            232
+   3 │ Javier García Sánchez               24  H        missing  1,81            191
+   4 │ Carmen López Pinzón                 35  M             65  1,70            200
+   5 │ Marisa López Collado                46  M             51  1,58            148
+   6 │ Antonio Ruiz Cruz                   68  H             66  1,74            249
+   7 │ Antonio Fernández Ocaña             51  H             62  1,72            276
+   8 │ Pilar Martín González               22  M             60  1,66        missing 
+   9 │ Pedro Gálvez Tenorio                35  H             90  1,94            241
+  10 │ Santiago Reillo Manzano             46  H             75  1,85            280
+  11 │ Macarena Álvarez Luna               53  M             55  1,62            262
+  12 │ José María de la Guía Sanz          58  H             78  1,87            198
+  13 │ Miguel Angel Cuadrado Gutiérrez     27  H            109  1,98            210
+  14 │ Carolina Rubio Moreno               20  M             61  1,77            194
+```

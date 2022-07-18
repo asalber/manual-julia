@@ -1,0 +1,176 @@
+# Estructuras de control
+
+## Condicionales
+
+> `if` _condición 1_  
+  &nbsp;&nbsp;&nbsp;_bloque código 1_  
+  `elseif` _condición 2_  
+  &nbsp;&nbsp;&nbsp;_bloque código 2_  
+  ...  
+  `else`  
+  &nbsp;&nbsp;&nbsp;_bloque código n_  
+  `end`
+
+La indentación de los bloques de código no es necesaria, pero es una buena práctica.
+
+### Ejemplo de condicional
+
+```julia
+julia> x = -1
+-1
+
+julia> if x > 0
+         signo = "positivo"
+       elseif x < 0
+         signo = "negativo"
+       else
+         signo = "nulo"
+       end
+"negativo"
+```
+### Operador condicional
+
+Una forma abreviada de la estructura condicional es el operador condicional. 
+
+> _condición_ `?` _bloque true_ `:` _bloque false_
+
+Este operador ejecuta el primer bloque de código si la condición es `true` y el segundo en caso contrario.
+
+```julia
+julia> x > 0 ? signo = "positivo" : signo = "negativo"
+"negativo"
+```
+
+## Bucles
+
+## Bucles iterativos
+
+> `for` _iterador_ `in` _secuencia_  
+  &nbsp;&nbsp;&nbsp;_bloque código_  
+  `end`
+
+Ejecuta el bloque de código tantas veces como elementos tenga la _secuencia_. En cada iteración el _iterador_ toma como valor el siguiente elemento de la _secuencia_.  
+
+```julia
+julia> c = "Julia"
+"Julia"
+
+julia> for i in c
+         println(i)
+       end
+J
+u
+l
+i
+a
+```
+
+### Bucles iterativos con rangos
+
+En muchas ocasiones la secuencia que se recorre en un bucle iterativo se genera mediante un rango, que es una secuencia de números igualmente espaciados. Existen distintas funciones para generar rangos:
+
+- `i:j`: Genera la secuenciad de números desde `i` hasta `j`.
+- `i:j:k`: Genera la secuencia de números desde `i` hasta `k` dando saltos de `j`.
+- `StepRange(i, j, k)`: Genera la secuencia de números desde `i` hasta `k` dando saltos de `j`.
+- `range(i, j, n)`: Genera una secuencia de `n` números desde `i` hasta `j`.
+
+### Ejemplo de bucles iterativos con rangos
+
+```julia
+julia> for i in 1:2:10
+         println(i)
+       end
+1
+3
+5
+7
+9
+
+julia> for i = range(0, 10, 5)
+         println(i)
+       end
+0.0
+2.5
+5.0
+7.5
+10.0
+```
+
+### Bucles iterativos anidados
+
+En muchas ocasiones es habitual incluir un bucle iterativo en el bloque de código de otro bucle iterativo, lo que se conoce como _bucles anidados_.
+
+Julia permite simplificar estas estructuras indicando los iteradores en la cabecera de un único bucle.
+
+```julia
+julia> for i in "abc", j = 1:2
+         println(i,j)
+       end
+a1
+a2
+b1
+b2
+c1
+c2
+```
+
+## Bucles condicionales
+
+> `while` _condición_  
+  &nbsp;&nbsp;&nbsp;_bloque código_  
+  `end`
+
+Repite la ejecución del bloque de código mientras que la _condición_ sea cierta.
+
+```julia
+julia> x = 3
+3
+
+julia> while x >= 0
+          println(x)
+          x -= 1
+       end
+3
+2
+1
+0
+```
+
+### Interrupción de bucles
+
+La instrucción `break` provoca inmediatamente la finalización de un bucle tanto iterativo como condicional.
+
+```julia
+julia> x=3
+3
+
+julia> while true
+          if x < 0 
+             break
+          end
+          println(x)
+          x -= 1
+       end
+3
+2
+1
+0
+```
+
+### Salto de bucles
+
+La instrucción `continue` provoca la finalización del bloque de código de un bucle y pasa inmediatamente a la siguiente iteración.
+
+```julia
+julia> for i in 1:10
+          if i % 2 == 0
+             continue
+          end
+          println(i)
+       end
+1
+3
+5
+7
+9
+```
