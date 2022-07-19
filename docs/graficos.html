@@ -90,6 +90,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./calculo-simbolico.html" rel="next">
 <link href="./funciones.html" rel="prev">
+<link href="./img/logos/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -121,6 +122,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<meta property="og:title" content="Manual de Julia - 6&nbsp; Gráficos">
+<meta property="og:description" content="Existen muchos paquetes para la representación gráfica en Julia. Los más usados son:">
+<meta property="og:site-name" content="Manual de Julia">
+<meta name="twitter:title" content="Manual de Julia - 6&nbsp; Gráficos">
+<meta name="twitter:description" content="Existen muchos paquetes para la representación gráfica en Julia. Los más usados son:">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar floating">
@@ -140,22 +147,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./img/logos/logo-julia.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Manual de Julia</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://aprendeconalf.es" title="" class="sidebar-tool px-1"><i class="bi bi-house-fill"></i></a>
     <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./Manual-de-Julia.pdf">
+          <a class="dropdown-item sidebar-tools-main-item" href="./manual-julia.pdf">
             <i class="bi bi-bi-file-pdf pe-1"></i>
           Download PDF
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./Manual-de-Julia.epub">
+          <a class="dropdown-item sidebar-tools-main-item" href="./manual-julia.epub">
             <i class="bi bi-bi-journal pe-1"></i>
           Download ePub
+          </a>
+        </li>
+    </ul>
+    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
           </a>
         </li>
     </ul>
@@ -217,11 +243,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./aplicaciones.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Otras aplicaciones</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./referencias.html" class="sidebar-item-text sidebar-link">Referencias</a>
   </div>
 </li>
     </ul>
@@ -292,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://gr-framework.org/">GR</a>. Es el backend pro defecto. Es bastante rápida y permite tanto gráficos 2D como 3D no interactivos. Se inicializa con la función <code>gr()</code>. (<a href="https://docs.juliaplots.org/latest/gallery/gr/">Ver ejemplos</a>)</li>
 <li><a href="https://plotly.com/">PlotlyJS</a>. Es más lenta pero permite gráficos 2D y 3D interactivos con un montón de funcionalidades. Se inicializa con la función <code>plotlyjs()</code>. (<a href="https://docs.juliaplots.org/latest/gallery/plotlyjs/">Ver ejemplos</a>)</li>
 <li><a href="https://matplotlib.org/">PyPlot</a>. Utiliza la librería gráfica Matplotlib de Python por lo que es bastante lenta. Sin embargo, tiene ofrece todas las posibilidades de Matplotlib que es bastante madura. Se inicializa con la función <code>pyplot()</code>. (<a href="https://docs.juliaplots.org/latest/gallery/pyplot/">Ver ejemplos</a>)</li>
-<li><a href="">PGFPlotsX</a>. Utiliza la librería PGF/TikZ de <span class="math inline">\(\LaTeX\)</span> por lo que genera gráficos de muy alta calidad tanto en 2D como 3D, especialmente para publicaciones.Se inicializa con la función <code>pgfplotsx()</code>. (<a href="https://docs.juliaplots.org/latest/gallery/pgfplotsx/">Ver ejemplos</a>)</li>
+<li><a href="">PGFPlotsX</a>. Utiliza la librería PGF/TikZ de LaTeX por lo que genera gráficos de muy alta calidad tanto en 2D como 3D, especialmente para publicaciones.Se inicializa con la función <code>pgfplotsx()</code>. (<a href="https://docs.juliaplots.org/latest/gallery/pgfplotsx/">Ver ejemplos</a>)</li>
 <li>UnicodePlots. Permite dibujar gráficos en la terminal. Los gráficos son de poca calidad pero funciona con gran rapidez. Se inicializa con la función <code>unicodeplots()</code>. (<a href="https://docs.juliaplots.org/latest/gallery/unicodeplots/">Ver ejemplos</a>)</li>
 </ul>
 </section>
@@ -456,7 +477,7 @@ plot(f, -3, 3)
 <h2 data-number="6.4" class="anchored" data-anchor-id="gráficos-con-gadfly.jl"><span class="header-section-number">6.4</span> Gráficos con GadFly.jl</h2>
 <p><a href="http://gadflyjl.org/">GadFly.js</a> es un paquete nativo que genera gráficos interactivos 2D y 3D por medio de librerías de Javascript basadas en la <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">gramática de gráficos</a> (usada también por el paquete ggplot2 de R).</p>
 <p>Al estar implementado en Julia es mucho más rápido que Plots.js pero ofrece menos posibilidades.</p>
-<p><img src="img/logos/gadfly.svg" class="img-fluid"></p>
+<p><img src="img/logos/gadfly.png" class="img-fluid"></p>
 <!-- ### Gráfica de una función de una variable
 
 ```julia

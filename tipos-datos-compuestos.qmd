@@ -84,7 +84,7 @@ julia> fill(π, 2, 2)
 
 La siguientes funciones permiten cambiar las dimensiones de un array, reestructurando sus elementos:
 
-- `rehape(A, dim)`: Devuelve el array que resulta de redimiensionar el array `A` con las dimensiones indicadas por la tupla `dim`.
+- `reshape(A, dim)`: Devuelve el array que resulta de redimiensionar el array `A` con las dimensiones indicadas por la tupla `dim`.
 - `permutedims(A)`: Devuelve el array de resulta de trasponer el array `A`.
 
 :::{.callout-warning}
@@ -466,6 +466,8 @@ Con el paquete [`LinearAlgebra`](https://docs.julialang.org/en/v1/stdlib/LinearA
 ### Ejemplo de álgebra lineal con vectores
 
 ```julia
+using LinearAlgebra
+
 julia> u = [1, 2, 3]; v = [1, 0, 2];
 
 julia> u + v
@@ -820,6 +822,8 @@ El paquete [`LinearAlgebra`](https://docs.julialang.org/en/v1/stdlib/LinearAlgeb
 ### Ejemplo de álgebra lineal con matrices
 
 ```julia
+using LinearAlgebra
+
 julia> Matrix(I, 3, 3)
 3×3 Matrix{Bool}:
  1  0  0
@@ -877,6 +881,8 @@ Otras funciones más avanzadas del paquete `LinearAlgebra` son:
 ### Ejemplos de Álgebra lineal con matrices
 
 ```julia
+using LinearAlgebra
+
 julia> A = [1 2; 3 1]
 2×2 Matrix{Int64}:
  1  2
@@ -1060,7 +1066,7 @@ Se parecen a las tuplas con nombre, pero, a diferencia de estas, son mutables, e
 
 Se construyen con la siguiente constructor:
 
-- `Dic(k1 = v1, ...)`: Crea un diccionario con los pares indicados en formato `clave = valor`.
+- `Dict(k1 => v1, ...)`: Crea un diccionario con los pares indicados en formato `clave => valor`.
 
 :::{.callout-warning}
 En un diccionario no pueden existir dos pares con la misma clave, de modo que si se repite una clave se sobrescribe el par anterior.
@@ -1170,7 +1176,7 @@ Dict{String, String} with 4 entries:
 Las siguientes funciones permiten obtener todas las claves, valores y pares de un diccionario.
 
 - `keys(d)`: Devuelve un iterador con las claves del diccionario `d`.
-- `values(d)`: Devuelve un iterador con las claves del diccionario `d`.
+- `values(d)`: Devuelve un iterador con los valores del diccionario `d`.
 
 Estos iteradores permiten recorrer fácilmente los pares de un diccionario.
 

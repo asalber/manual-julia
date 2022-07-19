@@ -90,6 +90,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./estructuras-control.html" rel="next">
 <link href="./intro.html" rel="prev">
+<link href="./img/logos/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -121,6 +122,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<meta property="og:title" content="Manual de Julia - 2&nbsp; Tipos de datos y variables">
+<meta property="og:description" content="Para averiguar el tipo de un dato se utiliza la función typeof().">
+<meta property="og:site-name" content="Manual de Julia">
+<meta name="twitter:title" content="Manual de Julia - 2&nbsp; Tipos de datos y variables">
+<meta name="twitter:description" content="Para averiguar el tipo de un dato se utiliza la función typeof().">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar floating">
@@ -140,22 +147,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./img/logos/logo-julia.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Manual de Julia</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://aprendeconalf.es" title="" class="sidebar-tool px-1"><i class="bi bi-house-fill"></i></a>
     <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./Manual-de-Julia.pdf">
+          <a class="dropdown-item sidebar-tools-main-item" href="./manual-julia.pdf">
             <i class="bi bi-bi-file-pdf pe-1"></i>
           Download PDF
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./Manual-de-Julia.epub">
+          <a class="dropdown-item sidebar-tools-main-item" href="./manual-julia.epub">
             <i class="bi bi-bi-journal pe-1"></i>
           Download ePub
+          </a>
+        </li>
+    </ul>
+    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
           </a>
         </li>
     </ul>
@@ -219,11 +245,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./aplicaciones.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Otras aplicaciones</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./referencias.html" class="sidebar-item-text sidebar-link">Referencias</a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -274,6 +295,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#otras-operaciones-comunes-con-cadenas" id="toc-otras-operaciones-comunes-con-cadenas" class="nav-link" data-scroll-target="#otras-operaciones-comunes-con-cadenas"> <span class="header-section-number">2.16.2</span> Otras operaciones comunes con cadenas</a></li>
   <li><a href="#otras-operaciones-comunes-con-cadenas-1" id="toc-otras-operaciones-comunes-con-cadenas-1" class="nav-link" data-scroll-target="#otras-operaciones-comunes-con-cadenas-1"> <span class="header-section-number">2.16.3</span> Otras operaciones comunes con cadenas</a></li>
   <li><a href="#ejemplo-de-otras-operaciones-con-cadenas" id="toc-ejemplo-de-otras-operaciones-con-cadenas" class="nav-link" data-scroll-target="#ejemplo-de-otras-operaciones-con-cadenas"> <span class="header-section-number">2.16.4</span> Ejemplo de otras operaciones con cadenas</a></li>
+  </ul></li>
+  <li><a href="#entrada-y-salida-por-terminal" id="toc-entrada-y-salida-por-terminal" class="nav-link" data-scroll-target="#entrada-y-salida-por-terminal"> <span class="header-section-number">2.17</span> Entrada y salida por terminal</a>
+  <ul class="collapse">
+  <li><a href="#conversión-de-cadenas-en-números" id="toc-conversión-de-cadenas-en-números" class="nav-link" data-scroll-target="#conversión-de-cadenas-en-números"> <span class="header-section-number">2.17.1</span> Conversión de cadenas en números</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -434,7 +459,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="nombres-de-variables" class="level2" data-number="2.9">
 <h2 data-number="2.9" class="anchored" data-anchor-id="nombres-de-variables"><span class="header-section-number">2.9</span> Nombres de variables</h2>
-<p>Julia reconoce la codificación Unicode (UTF-8), lo que permite utilizar caracteres con tildes, letras griegas, símbolos matemáticos y hasta emoticonos en los nombres de variables o funciones. Para ello se utilizan <a href="https://docs.julialang.org/en/v1/manual/unicode-input/">códigos especiales</a> (en muchos casos son los mismos que en <span class="math inline">\(\LaTeX\)</span>), pulsando después la tecla de tabulación.</p>
+<p>Julia reconoce la codificación Unicode (UTF-8), lo que permite utilizar caracteres con tildes, letras griegas, símbolos matemáticos y hasta emoticonos en los nombres de variables o funciones. Para ello se utilizan <a href="https://docs.julialang.org/en/v1/manual/unicode-input/">códigos especiales</a> (en muchos casos son los mismos que en LaTeX), pulsando después la tecla de tabulación.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> α <span class="op">=</span> <span class="fl">1</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1096,7 +1121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="2.15.3" class="anchored" data-anchor-id="acceso-a-índices-en-cadenas"><span class="header-section-number">2.15.3</span> Acceso a índices en cadenas</h3>
 <p>Las siguientes funciones permiten acceder a los índices de una cadena:</p>
 <ul>
-<li><code>firsindex(c)</code>: Devuelve el índice del primer carácter de la cadena <code>c</code>.</li>
+<li><code>firstindex(c)</code>: Devuelve el índice del primer carácter de la cadena <code>c</code>.</li>
 <li><code>lastindex(c)</code>: Devuelve el índice del primer carácter de la cadena <code>c</code>.</li>
 <li><code>nextind(c, i)</code>: Devuelve el índice del carácter de la cadena <code>c</code> que sigue al carácter con índice <code>i</code>.</li>
 <li><code>prevind(c, i)</code>: Devuelve el índice del carácter de la cadena <code>c</code> que sigue al carácter con índice <code>i</code>.</li>
@@ -1224,6 +1249,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">SubString</span>{<span class="dt">String</span>}}<span class="op">:</span></span>
 <span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a> <span class="st">"Hola"</span></span>
 <span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a> <span class="st">"Julia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="entrada-y-salida-por-terminal" class="level2" data-number="2.17">
+<h2 data-number="2.17" class="anchored" data-anchor-id="entrada-y-salida-por-terminal"><span class="header-section-number">2.17</span> Entrada y salida por terminal</h2>
+<p>Las siguientes funciones muestran una cadena en la terminal:</p>
+<ul>
+<li><code>print(c)</code>: Muestra por la terminal la cadena <code>c</code> sin cambiar de línea.</li>
+<li><code>println(c)</code>: Muestra por la terminal la cadena <code>c</code> y cambia de línea.</li>
+</ul>
+<p>La siguiente función permite leer una línea de texto desde la terminal:</p>
+<ul>
+<li><code>readline()</code>: Devuelve en una cadena una línea de texto introducida por el usuario en la terminal (hasta el carácter de cambio de línea <code>\n</code>)</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">print</span>(<span class="st">"¿Cómo te llamas?"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>¿Cómo te llamas?</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> nombre <span class="op">=</span> <span class="fu">readline</span>()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>Alf            </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="st">"Alf"</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">println</span>(<span class="st">"Hola </span><span class="sc">$</span>nombre<span class="st">"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>Hola Alf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="conversión-de-cadenas-en-números" class="level3" data-number="2.17.1">
+<h3 data-number="2.17.1" class="anchored" data-anchor-id="conversión-de-cadenas-en-números"><span class="header-section-number">2.17.1</span> Conversión de cadenas en números</h3>
+<p>La función <code>readline()</code> siempre devuelve una cadena aún cuando se pregunte al usuario por un valor numérico. Para convertir una cadena en un dato numérico se utiliza la siguiente función:</p>
+<ul>
+<li><code>parse(tipo, c)</code>: Covierte la cadena <code>c</code> a un número del tipo numérico <code>tipo</code>, siempre que puedad realizarse la conversión.</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">print</span>(<span class="st">"Introduce tu edad"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>Introduce tu edad</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> edad <span class="op">=</span> <span class="fu">parse</span>(<span class="dt">Int</span>, <span class="fu">readline</span>())</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fl">18</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fl">18</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">println</span>(<span class="st">"Vas a cumplir </span><span class="sc">$</span>(edad <span class="op">+</span> <span class="fl">1</span>)<span class="st"> años"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>Vas a cumplir <span class="fl">19</span> años</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(edad)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="dt">Int64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

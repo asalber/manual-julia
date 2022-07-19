@@ -2,13 +2,31 @@ project:
   type: book
   output-dir: "docs"
 
+website:
+  comments: 
+    hypothesis:
+      theme: clean
+      openSidebar: true
+
 book:
   title: "Manual de Julia"
+  subtitle: "Orientado al cálculo científico y análisis de datos"
   author: "Alfredo Sánchez Alberca"
   date: "1/6/2022"
+  output-file: "manual-julia"
   image: cover.png
   cover-image: cover.png
+  sharing: [twitter, linkedin]
   downloads: [pdf, epub]
+  favicon: "img/logos/favicon.ico"
+  sidebar: 
+    logo: img/logos/logo-julia.svg
+    tools:
+      - icon: house-fill
+        href: https://aprendeconalf.es
+  open-graph: true
+  twitter-card: 
+    site: "@aprendeconalf"
   chapters:
     - index.qmd
     - intro.qmd
@@ -20,15 +38,16 @@ book:
     - calculo-simbolico.qmd
     - analisis-datos.qmd
     - aplicaciones.qmd
-    - referencias.qmd
+    # - referencias.qmd
 
 bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    dark: darkly
+    light: flatly
   pdf:
-    documentclass: scrreprt
+    documentclass: scrreport
   epub:
     cover-image: cover.png
 

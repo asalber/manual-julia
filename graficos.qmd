@@ -22,7 +22,7 @@ Implementa una interfaz para otras librerías gráficas (backends), por lo que e
 - [GR](https://gr-framework.org/). Es el backend pro defecto. Es bastante rápida y permite tanto gráficos 2D como 3D no interactivos. Se inicializa con la función `gr()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/gr/))
 - [PlotlyJS](https://plotly.com/). Es más lenta pero permite gráficos 2D y 3D interactivos con un montón de funcionalidades. Se inicializa con la función `plotlyjs()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/plotlyjs/))
 - [PyPlot](https://matplotlib.org/). Utiliza la librería gráfica Matplotlib de Python por lo que es bastante lenta. Sin embargo, tiene ofrece todas las posibilidades de Matplotlib que es bastante madura. Se inicializa con la función `pyplot()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/pyplot/))
-- [PGFPlotsX](). Utiliza la librería PGF/TikZ de $\LaTeX$ por lo que genera gráficos de muy alta calidad tanto en 2D como 3D, especialmente para publicaciones.Se inicializa con la función `pgfplotsx()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/pgfplotsx/))
+- [PGFPlotsX](). Utiliza la librería PGF/TikZ de LaTeX por lo que genera gráficos de muy alta calidad tanto en 2D como 3D, especialmente para publicaciones.Se inicializa con la función `pgfplotsx()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/pgfplotsx/))
 - UnicodePlots. Permite dibujar gráficos en la terminal. Los gráficos son de poca calidad pero funciona con gran rapidez. Se inicializa con la función `unicodeplots()`. ([Ver ejemplos](https://docs.juliaplots.org/latest/gallery/unicodeplots/))
 
 ### Gráfica de una función de una variable
@@ -164,7 +164,7 @@ plot(x, y, f, st=:surface)
 
 Al estar implementado en Julia es mucho más rápido que Plots.js pero ofrece menos posibilidades.
 
-![](img/logos/gadfly.svg)
+![](img/logos/gadfly.png)
 
 <!-- ### Gráfica de una función de una variable
 

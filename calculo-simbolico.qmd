@@ -12,7 +12,7 @@ Las variables y las expresiones simbólicas pueden utilizarse con la mayoría de
 
 Para declarar variables simbólicas se utiliza la siguiente macro:
 
-- `variables x y ...`: Declara las variables `x`, `y`, etc. como variables simbólicas.
+- `@variables x y ...`: Declara las variables `x`, `y`, etc. como variables simbólicas.
 
 El tipo de las variables simbólicas es `Num`.
 

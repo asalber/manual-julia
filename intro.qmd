@@ -35,7 +35,7 @@ De los creadores de Julia:
 
 ### Comparativa de rapidez de Julia con otros lenguajes
 
-![Comparativa de Julia con otros lenguajes](./img/benchmarks.svg)
+![Comparativa de Julia con otros lenguajes](./img/benchmarks.png)
 
 ## Algunas razones más para pensárselo
 
@@ -97,9 +97,34 @@ Tiene, además, varios modos:
 - [Descargar e instalar Python](https://www.python.org/downloads/)
 - [Descargar e instalar Jupyter](https://jupyter.org/install)
 - Instalar el paquete IJulia:
+
 ```julia
 julia> using Pkg
 julia> Pkg.add("IJulia")
 ```
 ![Jupyter con el kernel de Julia](img/jupyter.png)
 
+### [Pluto](https://www.juliapackages.com/p/pluto)
+
+Pluto es entorno de desarrollo propio de Julia similar a Jupyter. Pluto permite crear _notebooks_ reactivos cuyas celdas se actualizan cada vez que se produce un cambio en el estado del programa.
+
+Para usarlo basta instalar el paquete `Pluto.jl`.
+
+```julia
+julia> using Pkg
+
+julia> Pkg.add("Pluto");
+
+julia> using Pluto
+
+julia> Pluto.run()
+[ Info: Loading...
+┌ Info: 
+└ Opening http://localhost:1234/?secret=a63iBsIL in your default browser... ~ have fun!
+┌ Info: 
+│ Press Ctrl+C in this terminal to stop Pluto
+└ 
+Opening in existing browser session.
+```
+
+![Página inicial de Pluto](img/pluto.png)
