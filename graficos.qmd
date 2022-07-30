@@ -140,7 +140,7 @@ using Plots
 
 f(x) = sin(x)
 plot(f, -π, π, title = "Gráfica del seno",  xlab = "x", ylab = "f(x) = sen(x)",
-  color = "green", linewidth = 3, linestyle = :dash, aspec_ratio = :equal, legend = false)
+  color = "green", linewidth = 3, linestyle = :dash, legend = false)
 ```
 
 ## Gráficos en el espacio real

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.18">
+<meta name="generator" content="quarto-1.0.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -262,7 +262,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#tipos-de-datos-alfanuméricos" id="toc-tipos-de-datos-alfanuméricos" class="nav-link" data-scroll-target="#tipos-de-datos-alfanuméricos"> <span class="header-section-number">2.6</span> Tipos de datos alfanuméricos</a></li>
   <li><a href="#tipo-de-datos-booleanos" id="toc-tipo-de-datos-booleanos" class="nav-link" data-scroll-target="#tipo-de-datos-booleanos"> <span class="header-section-number">2.7</span> Tipo de datos booleanos</a></li>
   <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables"> <span class="header-section-number">2.8</span> Variables</a></li>
-  <li><a href="#nombres-de-variables" id="toc-nombres-de-variables" class="nav-link" data-scroll-target="#nombres-de-variables"> <span class="header-section-number">2.9</span> Nombres de variables</a></li>
+  <li><a href="#nombres-de-variables" id="toc-nombres-de-variables" class="nav-link" data-scroll-target="#nombres-de-variables"> <span class="header-section-number">2.9</span> Nombres de variables</a>
+  <ul class="collapse">
+  <li><a href="#caracteres-unicode" id="toc-caracteres-unicode" class="nav-link" data-scroll-target="#caracteres-unicode"> <span class="header-section-number">2.9.1</span> Caracteres Unicode</a></li>
+  </ul></li>
   <li><a href="#operadores-aritméticos" id="toc-operadores-aritméticos" class="nav-link" data-scroll-target="#operadores-aritméticos"> <span class="header-section-number">2.10</span> Operadores aritméticos</a></li>
   <li><a href="#operadores-de-comparación" id="toc-operadores-de-comparación" class="nav-link" data-scroll-target="#operadores-de-comparación"> <span class="header-section-number">2.11</span> Operadores de comparación</a></li>
   <li><a href="#operadores-booleanos" id="toc-operadores-booleanos" class="nav-link" data-scroll-target="#operadores-booleanos"> <span class="header-section-number">2.12</span> Operadores booleanos</a></li>
@@ -472,6 +475,117 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> 😄 <span class="op">=</span> <span class="st">"julia"</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">"julia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Distingue entre mayúsculas y minúsculas.</p>
+<section id="caracteres-unicode" class="level3" data-number="2.9.1">
+<h3 data-number="2.9.1" class="anchored" data-anchor-id="caracteres-unicode"><span class="header-section-number">2.9.1</span> Caracteres Unicode</h3>
+<p>La siguiente tabla contiene algunos caracteres Unicode habituales</p>
+<table class="table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 12%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Código</th>
+<th style="text-align: left;">Símbolo</th>
+<th style="text-align: left;">Uso notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>\euler</code></td>
+<td style="text-align: left;"><code>ℯ</code></td>
+<td style="text-align: left;">Constante de Euler <code>e</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>\pi</code></td>
+<td style="text-align: left;"><code>π</code></td>
+<td style="text-align: left;">Constante <span class="math inline">\(pi\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>\alpha</code></td>
+<td style="text-align: left;"><code>α</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>\beta</code></td>
+<td style="text-align: left;"><code>β</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>\delta</code></td>
+<td style="text-align: left;"><code>δ</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>\Delta</code></td>
+<td style="text-align: left;"><code>Δ</code></td>
+<td style="text-align: left;">Variación</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>\gamma</code></td>
+<td style="text-align: left;"><code>γ</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>\phi</code></td>
+<td style="text-align: left;"><code>ϕ</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>\Phi</code></td>
+<td style="text-align: left;"><code>Φ</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>x\_1</code></td>
+<td style="text-align: left;"><code>x₁</code></td>
+<td style="text-align: left;">Subíndices</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>x\^2</code></td>
+<td style="text-align: left;"><code>x²</code></td>
+<td style="text-align: left;">Superíndices</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>r\vec</code></td>
+<td style="text-align: left;"><code>r⃗</code></td>
+<td style="text-align: left;">Notación para vectores</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>T\hat</code></td>
+<td style="text-align: left;"><code>T̂</code></td>
+<td style="text-align: left;">Notación para vectores unitarios</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>\partial</code></td>
+<td style="text-align: left;"><code>∂</code></td>
+<td style="text-align: left;">Notación para derivadas parciales</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>\nabla</code></td>
+<td style="text-align: left;"><code>∇</code></td>
+<td style="text-align: left;">Notación para el gradiente</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>\circ</code></td>
+<td style="text-align: left;"><code>∘</code></td>
+<td style="text-align: left;">Operador de composición</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>\cdot</code></td>
+<td style="text-align: left;"><code>⋅</code></td>
+<td style="text-align: left;">Operador de producto escalar</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>\times</code></td>
+<td style="text-align: left;"><code>×</code></td>
+<td style="text-align: left;">Operador de producto vectorial</td>
+</tr>
+</tbody>
+</table>
+<p>Los operadores pueden necesitar paréntesis, como por ejemplo <code>(f ∘ g)(x)</code> para la composición de <code>g</code> con <code>f</code>.</p>
+</section>
 </section>
 <section id="operadores-aritméticos" class="level2" data-number="2.10">
 <h2 data-number="2.10" class="anchored" data-anchor-id="operadores-aritméticos"><span class="header-section-number">2.10</span> Operadores aritméticos</h2>
@@ -1307,7 +1421,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   const toggleBodyColorPrimary = () => {
-    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
   }
   toggleBodyColorPrimary();  
   const icon = "";

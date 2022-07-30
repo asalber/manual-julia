@@ -146,6 +146,33 @@ julia> 😄 = "julia"
 
 Distingue entre mayúsculas y minúsculas.
 
+### Caracteres Unicode
+
+La siguiente tabla contiene algunos caracteres Unicode habituales
+
+| Código          | Símbolo | Uso notes                     |
+|:---------------- |:------ |:------------------------------- |
+| `\euler`         | `ℯ`    | Constante de Euler `e`                |
+| `\pi`            | `π`    | Constante $pi$                                |
+| `\alpha`         | `α`    |                                 |
+| `\beta`          | `β`    |                                 |
+| `\delta`         | `δ`    |                                 |
+| `\Delta`         | `Δ`    | Variación              |
+| `\gamma`         | `γ`    |                                 |
+| `\phi`           | `ϕ`    |                                 |
+| `\Phi`           | `Φ`    |  |
+| `x\_1`           | `x₁`   | Subíndices                      |
+| `x\^2`           | `x²`   | Superíndices                    |
+| `r\vec`          | `r⃗`   | Notación para vectores              |
+| `T\hat`          | `T̂`    | Notación para vectores unitarios          |
+| `\partial`       | `∂`    | Notación para derivadas parciales                                |
+| `\nabla`         | `∇`    | Notación para el gradiente    |
+| `\circ`          | `∘`    | Operador de composición                     |
+| `\cdot`          | `⋅`    | Operador de producto escalar                     |
+| `\times`         | `×`    | Operador de producto vectorial                  |
+
+Los operadores pueden necesitar paréntesis, como por ejemplo `(f ∘ g)(x)` para la composición de `g` con `f`.
+
 ## Operadores aritméticos
 
 | Operador | Descripción           |

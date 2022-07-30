@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.18">
+<meta name="generator" content="quarto-1.0.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -450,7 +450,7 @@ plot(f, -3, 3)
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(x) <span class="op">=</span> <span class="fu">sin</span>(x)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(f, <span class="op">-</span><span class="cn">π</span>, <span class="cn">π</span>, title <span class="op">=</span> <span class="st">"Gráfica del seno"</span>,  xlab <span class="op">=</span> <span class="st">"x"</span>, ylab <span class="op">=</span> <span class="st">"f(x) = sen(x)"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  color <span class="op">=</span> <span class="st">"green"</span>, linewidth <span class="op">=</span> <span class="fl">3</span>, linestyle <span class="op">=</span> <span class="op">:</span>dash, aspec_ratio <span class="op">=</span> <span class="op">:</span>equal, legend <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  color <span class="op">=</span> <span class="st">"green"</span>, linewidth <span class="op">=</span> <span class="fl">3</span>, linestyle <span class="op">=</span> <span class="op">:</span>dash, legend <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <p><img src="graficos_files/figure-html/cell-8-output-1.svg" class="img-fluid"></p>
 </div>
@@ -530,7 +530,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   const toggleBodyColorPrimary = () => {
-    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
   }
   toggleBodyColorPrimary();  
   const icon = "";
