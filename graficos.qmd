@@ -1,3 +1,7 @@
+---
+lang: es
+---
+
 # Gráficos
 
 ## Paquetes gráficos

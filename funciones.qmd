@@ -1,3 +1,7 @@
+---
+lang: es
+---
+
 # Funciones
 
 ## Creación de funciones

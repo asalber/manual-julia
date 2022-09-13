@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.35">
+<meta name="generator" content="quarto-1.1.189">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -53,7 +58,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -66,7 +71,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -108,15 +113,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-no-results-text": "Sín resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la busqueda",
+    "search-hide-matches-text": "Esconder resultados adicionales",
+    "search-more-match-text": "hay más resultados en este documento",
+    "search-more-matches-text": "más resultados en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Eviar"
   }
 }</script>
 
@@ -249,26 +254,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Indice de contenidos</h2>
    
   <ul>
-  <li><a href="#condicionales" id="toc-condicionales" class="nav-link active" data-scroll-target="#condicionales"> <span class="header-section-number">3.1</span> Condicionales</a>
+  <li><a href="#condicionales" id="toc-condicionales" class="nav-link active" data-scroll-target="#condicionales"><span class="toc-section-number">3.1</span>  Condicionales</a>
   <ul class="collapse">
-  <li><a href="#ejemplo-de-condicional" id="toc-ejemplo-de-condicional" class="nav-link" data-scroll-target="#ejemplo-de-condicional"> <span class="header-section-number">3.1.1</span> Ejemplo de condicional</a></li>
-  <li><a href="#operador-condicional" id="toc-operador-condicional" class="nav-link" data-scroll-target="#operador-condicional"> <span class="header-section-number">3.1.2</span> Operador condicional</a></li>
+  <li><a href="#ejemplo-de-condicional" id="toc-ejemplo-de-condicional" class="nav-link" data-scroll-target="#ejemplo-de-condicional"><span class="toc-section-number">3.1.1</span>  Ejemplo de condicional</a></li>
+  <li><a href="#operador-condicional" id="toc-operador-condicional" class="nav-link" data-scroll-target="#operador-condicional"><span class="toc-section-number">3.1.2</span>  Operador condicional</a></li>
   </ul></li>
-  <li><a href="#bucles" id="toc-bucles" class="nav-link" data-scroll-target="#bucles"> <span class="header-section-number">3.2</span> Bucles</a></li>
-  <li><a href="#bucles-iterativos" id="toc-bucles-iterativos" class="nav-link" data-scroll-target="#bucles-iterativos"> <span class="header-section-number">3.3</span> Bucles iterativos</a>
+  <li><a href="#bucles" id="toc-bucles" class="nav-link" data-scroll-target="#bucles"><span class="toc-section-number">3.2</span>  Bucles</a></li>
+  <li><a href="#bucles-iterativos" id="toc-bucles-iterativos" class="nav-link" data-scroll-target="#bucles-iterativos"><span class="toc-section-number">3.3</span>  Bucles iterativos</a>
   <ul class="collapse">
-  <li><a href="#bucles-iterativos-con-rangos" id="toc-bucles-iterativos-con-rangos" class="nav-link" data-scroll-target="#bucles-iterativos-con-rangos"> <span class="header-section-number">3.3.1</span> Bucles iterativos con rangos</a></li>
-  <li><a href="#ejemplo-de-bucles-iterativos-con-rangos" id="toc-ejemplo-de-bucles-iterativos-con-rangos" class="nav-link" data-scroll-target="#ejemplo-de-bucles-iterativos-con-rangos"> <span class="header-section-number">3.3.2</span> Ejemplo de bucles iterativos con rangos</a></li>
-  <li><a href="#bucles-iterativos-anidados" id="toc-bucles-iterativos-anidados" class="nav-link" data-scroll-target="#bucles-iterativos-anidados"> <span class="header-section-number">3.3.3</span> Bucles iterativos anidados</a></li>
+  <li><a href="#bucles-iterativos-con-rangos" id="toc-bucles-iterativos-con-rangos" class="nav-link" data-scroll-target="#bucles-iterativos-con-rangos"><span class="toc-section-number">3.3.1</span>  Bucles iterativos con rangos</a></li>
+  <li><a href="#ejemplo-de-bucles-iterativos-con-rangos" id="toc-ejemplo-de-bucles-iterativos-con-rangos" class="nav-link" data-scroll-target="#ejemplo-de-bucles-iterativos-con-rangos"><span class="toc-section-number">3.3.2</span>  Ejemplo de bucles iterativos con rangos</a></li>
+  <li><a href="#bucles-iterativos-anidados" id="toc-bucles-iterativos-anidados" class="nav-link" data-scroll-target="#bucles-iterativos-anidados"><span class="toc-section-number">3.3.3</span>  Bucles iterativos anidados</a></li>
   </ul></li>
-  <li><a href="#bucles-condicionales" id="toc-bucles-condicionales" class="nav-link" data-scroll-target="#bucles-condicionales"> <span class="header-section-number">3.4</span> Bucles condicionales</a>
+  <li><a href="#bucles-condicionales" id="toc-bucles-condicionales" class="nav-link" data-scroll-target="#bucles-condicionales"><span class="toc-section-number">3.4</span>  Bucles condicionales</a>
   <ul class="collapse">
-  <li><a href="#interrupción-de-bucles" id="toc-interrupción-de-bucles" class="nav-link" data-scroll-target="#interrupción-de-bucles"> <span class="header-section-number">3.4.1</span> Interrupción de bucles</a></li>
-  <li><a href="#salto-de-bucles" id="toc-salto-de-bucles" class="nav-link" data-scroll-target="#salto-de-bucles"> <span class="header-section-number">3.4.2</span> Salto de bucles</a></li>
+  <li><a href="#interrupción-de-bucles" id="toc-interrupción-de-bucles" class="nav-link" data-scroll-target="#interrupción-de-bucles"><span class="toc-section-number">3.4.1</span>  Interrupción de bucles</a></li>
+  <li><a href="#salto-de-bucles" id="toc-salto-de-bucles" class="nav-link" data-scroll-target="#salto-de-bucles"><span class="toc-section-number">3.4.2</span>  Salto de bucles</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -317,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>       <span class="cf">else</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         signo <span class="op">=</span> <span class="st">"nulo"</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       <span class="cf">end</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">"negativo"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">"negativo"</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="operador-condicional" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="operador-condicional"><span class="header-section-number">3.1.2</span> Operador condicional</h3>
@@ -327,7 +332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>Este operador ejecuta el primer bloque de código si la condición es <code>true</code> y el segundo en caso contrario.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> x <span class="op">&gt;</span> <span class="fl">0</span> ? signo <span class="op">=</span> <span class="st">"positivo"</span> <span class="op">:</span> signo <span class="op">=</span> <span class="st">"negativo"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">"negativo"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">"negativo"</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="bucles" class="level2" data-number="3.2">
@@ -351,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>u</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>l</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>i</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="bucles-iterativos-con-rangos" class="level3" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="bucles-iterativos-con-rangos"><span class="header-section-number">3.3.1</span> Bucles iterativos con rangos</h3>
 <p>En muchas ocasiones la secuencia que se recorre en un bucle iterativo se genera mediante un rango, que es una secuencia de números igualmente espaciados. Existen distintas funciones para generar rangos:</p>
@@ -380,7 +385,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fl">2.5</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fl">5.0</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fl">7.5</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fl">10.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fl">10.0</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="bucles-iterativos-anidados" class="level3" data-number="3.3.3">
 <h3 data-number="3.3.3" class="anchored" data-anchor-id="bucles-iterativos-anidados"><span class="header-section-number">3.3.3</span> Bucles iterativos anidados</h3>
@@ -394,7 +399,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>b1</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>b2</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>c1</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>c2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>c2</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="bucles-condicionales" class="level2" data-number="3.4">
@@ -415,7 +420,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fl">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fl">0</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="interrupción-de-bucles" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="interrupción-de-bucles"><span class="header-section-number">3.4.1</span> Interrupción de bucles</h3>
 <p>La instrucción <code>break</code> provoca inmediatamente la finalización de un bucle tanto iterativo como condicional.</p>
@@ -432,7 +437,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fl">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fl">0</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="salto-de-bucles" class="level3" data-number="3.4.2">
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="salto-de-bucles"><span class="header-section-number">3.4.2</span> Salto de bucles</h3>
@@ -447,7 +452,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fl">5</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fl">7</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fl">9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fl">9</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -494,7 +499,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     setTimeout(function() {
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
@@ -523,7 +528,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

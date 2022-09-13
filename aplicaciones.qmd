@@ -1,3 +1,7 @@
+---
+lang: es
+---
+
 # Otras aplicaciones
 
 ## Teoría de grafos

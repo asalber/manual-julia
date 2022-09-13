@@ -1,3 +1,7 @@
+---
+lang: es
+---
+
 # Análisis de datos
 
 ## El paquete DataFrames.jl

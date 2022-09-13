@@ -1,3 +1,7 @@
+---
+lang: es
+---
+
 # Prefacio {.unnumbered}
 
 ¡Bienvenido al Manual de Julia!

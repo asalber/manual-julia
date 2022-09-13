@@ -1,3 +1,7 @@
+---
+lang: es
+---
+
 # Introducción
 
 ## ¿Por qué Julia?

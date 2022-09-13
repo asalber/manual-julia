@@ -1,3 +1,7 @@
+---
+lang: es
+---
+
 # Tipos de datos y variables
 
 ## Tipos de datos numéricos
@@ -292,7 +296,7 @@ julia> lcm(12,18)
 | Función                | Descripción                                                |
 |:----------------------- |:---------------------------------------------------------- |
 | `abs(x)`        | Valor absoluto de `x`                 |
-| `sign(x)`       | Devuelve -1 si `x` es positivo, -1 si es negativo y 0 si es 0.       |
+| `sign(x)`       | Devuelve 1 si `x` es positivo, -1 si es negativo y 0 si es 0.       |
 
 ```julia
 julia> abs(2.5)
