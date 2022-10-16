@@ -97,7 +97,7 @@ Cuando una función no está definida para algún valor del rango de valores del
 
 Este comportamiento no es deseable puesto que si la función no existe en un punto no debería existir gráfica para ese punto. 
 
-La siguiente función del paquete `MATH229` se encarga de evitar esto.
+La siguiente función del paquete `MTH229` se encarga de evitar esto.
 
 - `rangeclamp(f)`: Devuelve una función idéntica a la función `f` excepto para los puntos donde la función no existe o es infinito que devuelve `NaN`.
 
