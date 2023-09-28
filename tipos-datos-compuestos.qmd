@@ -560,7 +560,7 @@ Es posible extraer varios elementos de una matriz a la vez indicando los índice
 - `A[i:j, k:l]`: Devuelve una matriz con los elementos desde el índice de fila `i` al `j` y el índice de columna `k` al `l` de la matriz `A`.
 - `A[u, w]`: Devuelve una matriz con los elementos correspondientes a los índices de fila del vector `u` y los índices de columna del vector `w` de la matriz `A`.
 
-## Ejemplo de acceso a múltiples elementos de una matriz
+### Ejemplo de acceso a múltiples elementos de una matriz
 
 ```julia
 julia> A = reshape(1:9, 3, :)

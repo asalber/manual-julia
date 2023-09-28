@@ -9,6 +9,7 @@ lang: es
 Existen muchos paquetes para la representación gráfica en Julia. Los más usados son:
 
 - [Plots.jl](https://docs.juliaplots.org/)
+- [Makie.jl](https://docs.makie.org/)
 - [GadFly.jl](http://gadflyjl.org/).
 - [VegaLite.jl](https://www.queryverse.org/VegaLite.jl/stable/)
 
@@ -147,7 +148,7 @@ plot(f, -π, π, title = "Gráfica del seno",  xlab = "x", ylab = "f(x) = sen(x)
   color = "green", linewidth = 3, linestyle = :dash, legend = false)
 ```
 
-## Gráficos en el espacio real
+### Gráficos en el espacio real
 
 Para dibujar superficies en el espacio real se utiliza la función
 
@@ -155,11 +156,221 @@ Para dibujar superficies en el espacio real se utiliza la función
 
 ```{julia}
 using Plots
-pyplot()
-x = range(1, stop=10, length=100)
-y = x
-f(x,y) = sin(x) + cos(y)
-plot(x, y, f, st=:surface)
+xs = ys = range(1, stop=10, length=100)
+f(x, y) = sin(x) + cos(y)
+surface(xs, ys, f)
+```
+
+## Gráficos con Makie
+
+![](img/logos/logo-makie.png)
+
+[`Makie`](https://docs.makie.org/) es una colección de paquetes de visualización de datos eficiente y extensible que incorpora una gran variedad de tipos de gráficos tanto en 2D como en 3D.
+
+### Backends de `Makie`
+
+Al igual que el paquete `Plots`, `Makie` utiliza distintos backends para construir el gráfico según la salida que se quiera.
+
+- `CairoMakie.jl` se utiliza para crear gráficos no interactivos de alta calidad, especialmente para publicaciones impresas.
+- `GLMakie.jl` se utiliza para crear gráficos interactivos tanto en 2D como en 3D en una ventana gráfica.
+- `WGLMakie.jl` es similar a `GLMakie.jl` pero muestra el gráfico en un navegador web.
+
+### Figuras, ejes y objetos gráficos
+
+Un gráfico con `Makie` es básicamente una figura (`Figure`) que contiene uno o varios ejes (`Axis`) que, a su vez, contienen objetos gráficos como puntos o lineas.
+
+Para crear una figura se utiliza la función
+
+- `Figure(parámetros)`: Crea un área gráfica con la configuración indicada por los `parámetros`. Entre los parámetros se puede indicar la resolución (`resolution = (ancho, largo)`) o el color de fondo (`backgroundcolor = color`).
+
+```{julia}
+using GLMakie
+fig = Figure(backgroundcolor = :gray, resolution = (400, 300))
+```
+
+Para añadir unos ejes en 2D a una figura se utiliza la función
+
+- `Axis(fig[i,j], title = titulo, xlabel = etiqueta-x, ylabel = etiqueta-y)`: Crea unos ejes en la figura `fig` con el título principal dado en `titulo`, la etiqueta del eje $x$ dada en `etiqueta-x` y la etiqueta del eje $y$ dada en `etiqueta-y`.  
+Cuando se quiere incluir varios ejes en una misma figura, el vector `[i,j]`, indica la posición de los ejes, donde la primera componente indica la fila y la segunda la columna en una disposición de los ejes en forma de tabla. Si la figura solo contiene unos ejes, se utiliza el vector `[1,1]`.
+
+```{julia}
+fig = Figure()
+ax = Axis(fig[1,1], title = "Ejes 2D", xlabel = "Eje x", ylabel = "Eje y")
+fig
+```
+
+Y para añadir unos ejes en 3D a una figura se utiliza la función
+
+- `Axis3(fig[i,j], title = titulo, xlabel = etiqueta-x, ylabel = etiqueta-y, zlabel = etiqueta-z, azimuth = ángulo-azimuth, elevation = ángulo-elevación)`: Crea unos ejes 3D en la figura `fig` con el título principal dado en `titulo`, la etiqueta del eje $x$ dada en `etiqueta-x`, la etiqueta del eje $y$ dada en `etiqueta-y`, la etiqueta del eje $z$ dada en `etiqueta-z`, y un punto de visión dado por el ángulo de azimuth (izquierda-derecha) `angulo-azimuth` radianes ($1.275 \pi$ por defecto) y el ángulo de elevación (arriba-abajo) `ángulo-elevación` radianes ($\pi/8$ por defecto).
+Al igual que antes, cuando se quiere incluir varios ejes en una misma figura, el vector `[i,j]`, indica la posición de los ejes, donde la primera componente indica la fila y la segunda la columna en una disposición de los ejes en forma de tabla. Si la figura solo contiene unos ejes, se utiliza el vector `[1,1]`.
+
+```{julia}
+fig = Figure()
+ax = Axis3(fig[1,1], title = "Ejes 3D", xlabel = "Eje x", ylabel = "Eje y", zlabel = "Eje z")
+fig
+```
+
+```{julia}
+fig = Figure()
+ax = Axis3(fig[1,1], title = "Ejes 3D rotados", xlabel = "Eje x", ylabel = "Eje y", zlabel = "Eje z", azimuth = pi/8)
+fig
+```
+
+### Diagrama de puntos
+
+Para dibujar un diagrama de puntos se utiliza la función 
+
+- `scatter!(ax, xs, ys)`: Dibuja los ejes dados en `ax` los puntos con coordenadas dadas por los vectores `xs` e `ys`.
+
+```{julia}
+fig = Figure()
+ax = Axis(fig[1, 1], title = "Diagrama de puntos")
+xs = [1, 2, 3]
+ys = [2, 3, 1]
+Makie.scatter!(ax, xs, ys)
+fig
+```
+
+Los siguientes parámetros pueden añadirse a la función anterior para modificar el aspecto del diagrama de puntos.
+
+- `marker`: Establece el tipo de punto.
+- `color`: Establece el color de los puntos.
+- `markersize`: Establece el tamaño de los puntos.
+
+```{julia}
+fig = Figure()
+ax = Axis(fig[1, 1], title = "Diagrama de puntos")
+xs = [1, 2, 3]
+ys = [2, 3, 1]
+Makie.scatter!(ax, xs, ys, marker = :utriangle, color= :red, markersize = 20)
+fig
+```
+
+### Diagrama de líneas
+
+Para dibujar series de líneas se utiliza la función
+
+- `lines!(ax, xs, ys)`: Dibuja en los ejes dados por `ax` una línea en el plano que une los puntos con coordenadas dadas por los vectores `xs` e `ys`.
+
+```{julia}
+fig = Figure()
+ax = Axis(fig[1, 1], title = "Diagrama de líneas")
+xs = range(0, 2pi, length = 100)
+ys = sin.(xs)
+lines!(ax, xs, ys)
+fig
+```
+
+Si se añade un tercer vector de coordenadas `zs` sobre unos ejes 3D, se obtiene un diagrama de líneas en 3D. De esta forma se pueden representar, por ejemplo, la trayectorias de funciones vectoriales.
+
+```{julia}
+fig = Figure()
+ax = Axis3(fig[1, 1], title = "Diagrama de líneas 3D")
+ts = range(0, 6pi, length = 200)
+xs = cos.(ts)
+ys = sin.(ts)
+zs = ts/4
+lines!(ax, xs, ys, zs)
+fig
+```
+
+En lugar de pasar las coordenadas de los puntos en vectores separados, se pueden pasar empaquetadas en tuplas mediante las estructuras `Point(x,y)` para el plano real o `Point3(x,y,z)` para el espacio real, del paquete [`GeometryBasics.jl`](https://juliageometry.github.io/GeometryBasics.jl/stable/).  
+
+```{julia}
+fig = Figure()
+ax = Axis(fig[1, 1], title = "Diagrama de lineas")
+ts = range(0, 2pi, length = 200)
+points = Point.(cos.(ts), sin.(2ts))
+lines!(ax, points)
+fig
+```
+
+```{julia}
+fig = Figure()
+ax = Axis3(fig[1, 1], title = "Diagrama de líneas 3D")
+ts = range(0, 6pi, length = 200)
+f(t) = [cos(t), sin(t), t/4]
+points = Point3.(f.(ts))
+lines!(ax, points)
+fig
+```
+
+En el caso de figuras en 3D, es preferible utilizar los backend `GLMakie.jl` o `WGLMakie.jl` ya que permiten interaccionar con el el gráfico para visualizarlo desde distintas perspectivas.
+
+```{julia}
+fig = Figure()
+ax = Axis3(fig[1, 1], title = "Diagrama de líneas 3D")
+ts = range(0, 6pi, length = 200)
+f(t) = [cos(t), sin(t), t/4]
+points = Point3.(f.(ts))
+lines!(ax, points)
+fig
+```
+
+También es posible pasar a la función `lines!` un rango de valores y una función a dibujar. Esto simplifica la creación de gráficas de funciones.
+
+- `lines(ax, rango, función)`: Dibuja en los ejes dados por `ax` la gráfica de la función dada en `función` en el intervalo dado por `rango`. El intervalo del rango se especifica con la sintaxis `li..ls`, donde `li` es el límite inferior y `ls` el límite superior.
+
+```{julia}
+fig = Figure()
+ax = Axis(fig[1, 1], title = "Diagrama de líneas")
+lines!(ax, 0..2pi, cos)
+fig
+```
+Para añadir nuevas líneas al los ejes, basta con volver a usar la función `lines!`.
+
+```{julia}
+fig = Figure()
+ax = Axis(fig[1, 1], title = "Diagrama de líneas")
+lines!(ax, 0..2pi, cos)
+lines!(ax, 0..3pi, sin)
+fig
+```
+
+Los siguientes parámetros pueden añadirse a la función anterior para modificar el aspecto del diagrama de puntos.
+
+- `linewidth`: Establece el grosor de la línea de la gráfica.
+- `linestyle`: Establece el estilo de la línea de la gráfica.
+- `color`: Establece el color de la linea.
+
+```{julia}
+fig = Figure()
+ax = Axis(fig[1, 1], title = "Diagrama de líneas")
+lines!(ax, 0..2pi, cos, linewidth = 5, linestyle = :dash, color = :red)
+lines!(ax, 0..2pi, sin, linestyle = :dot, color = :green)
+fig
+```
+
+### Superficies
+
+Para dibujar superficies en 3D se utiliza la función 
+
+- `surface!(ax, xs, ys, zs)`: Dibuja en los ejes 3D dados por `ax` la superficie que se obtiene al unir los puntos con coordenadas $x$ dadas por el vector `xs`, coordenadas `y` dadas por el vector `ys` y coordenadas $z$ dadas por el vector `zs`.
+
+```{julia}
+using WGLMakie
+WGLMakie.activate!()
+fig = Figure()
+ax = Axis3(fig[1, 1], title = "Superficie")
+xs = ys = LinRange(0, 10, 100)
+zs = [cos(x) * sin(y) for x in xs, y in ys]
+WGLMakie.surface!(ax, xs, ys, zs)
+fig
+```
+
+### Leyenda
+
+Si tenemos más de una serie de datos representada en un diagrama, conviene añadir una leyenda para identificar cada serie. Podemos añadir una leyenda con la función 
+
+- `axislegend(ax)`: Añade una leyenda a los ejes dados en `ax`, con las etiquetas de cada serie de datos incluida en los ejes. Para ello es necesario etiquetar cada serie de datos pasándole el parámetro `label = etiqueta` a la función que crea el objeto gráfico que representa la serie.
+
+```{julia}
+fig = Figure()
+ax = Axis(fig[1, 1], title = "Diagrama de líneas con leyenda")
+lines!(ax, 0..2pi, cos, label = "Coseno")
+lines!(ax, 0..2pi, sin, label = "Seno")
+axislegend()
+current_figure()
 ```
 
 ## Gráficos con GadFly.jl

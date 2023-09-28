@@ -6,7 +6,9 @@ lang: es
 
 ## Teoría de grafos
 
-- [JuliaGraphs](https://juliagraphs.org/). Graphs analysis in Julia.
+- [JuliaGraphs](https://juliagraphs.org/). Análisis de grafos en Julia.
+- [Graphs](https://juliapackages.com/p/graphs). Creación y análisis de grafos.
+- [GraphPlot](https://juliapackages.com/p/graphplot). Dibujo de grafos.
 
 ## Cálculo simbólico
 

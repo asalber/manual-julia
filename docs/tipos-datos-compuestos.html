@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -101,10 +72,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -113,37 +86,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "Sín resultados",
+    "search-no-results-text": "Sin resultados",
     "search-matching-documents-text": "documentos encontrados",
-    "search-copy-link-title": "Copiar el enlace en la busqueda",
-    "search-hide-matches-text": "Esconder resultados adicionales",
-    "search-more-match-text": "hay más resultados en este documento",
-    "search-more-matches-text": "más resultados en este documento",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
     "search-clear-button-title": "Borrar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Eviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta property="og:title" content="Manual de Julia - 4&nbsp; Tipos de datos compuestos">
-<meta property="og:description" content="Colecciones de datos con distinta estructura y semántica.">
+<meta property="og:description" content="">
+<meta property="og:image" content="img/arrays.png">
 <meta property="og:site-name" content="Manual de Julia">
 <meta name="twitter:title" content="Manual de Julia - 4&nbsp; Tipos de datos compuestos">
-<meta name="twitter:description" content="Colecciones de datos con distinta estructura y semántica.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="img/arrays.png">
+<meta name="twitter:site" content="@aprendeconalf">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tipos de datos compuestos</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tipos-datos-compuestos.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tipos de datos compuestos</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -151,199 +134,213 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./" class="sidebar-logo-link">
+      <a href="./index.html" class="sidebar-logo-link">
       <img src="./img/logos/logo-julia.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Manual de Julia</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://aprendeconalf.es" title="" class="sidebar-tool px-1"><i class="bi bi-house-fill"></i></a>
-    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./manual-julia.pdf">
-            <i class="bi bi-bi-file-pdf pe-1"></i>
-          Download PDF
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./manual-julia.epub">
-            <i class="bi bi-bi-journal pe-1"></i>
-          Download ePub
-          </a>
-        </li>
-    </ul>
-    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
+    <a href="https://aprendeconalf.es" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-fill"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./manual-julia.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./manual-julia.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Buscar"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Prefacio</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tipos-datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tipos de datos y variables</span></a>
+  <a href="./tipos-datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Tipos de datos y variables</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./estructuras-control.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estructuras de control</span></a>
+  <a href="./estructuras-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Estructuras de control</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tipos-datos-compuestos.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tipos de datos compuestos</span></a>
+  <a href="./tipos-datos-compuestos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tipos de datos compuestos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./funciones.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Funciones</span></a>
+  <a href="./funciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Funciones</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./graficos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gráficos</span></a>
+  <a href="./graficos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gráficos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculo-simbolico.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cálculo simbólico</span></a>
+  <a href="./calculo-simbolico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cálculo simbólico</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analisis-datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análisis de datos</span></a>
+  <a href="./analisis-datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análisis de datos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./aplicaciones.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Otras aplicaciones</span></a>
+  <a href="./aplicaciones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Otras aplicaciones</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Indice de contenidos</h2>
+    <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#colecciones-de-datos" id="toc-colecciones-de-datos" class="nav-link active" data-scroll-target="#colecciones-de-datos"><span class="toc-section-number">4.1</span>  Colecciones de datos</a></li>
-  <li><a href="#arrays" id="toc-arrays" class="nav-link" data-scroll-target="#arrays"><span class="toc-section-number">4.2</span>  Arrays</a></li>
-  <li><a href="#arrays-multidimensionales" id="toc-arrays-multidimensionales" class="nav-link" data-scroll-target="#arrays-multidimensionales"><span class="toc-section-number">4.3</span>  Arrays multidimensionales</a>
+  <li><a href="#colecciones-de-datos" id="toc-colecciones-de-datos" class="nav-link active" data-scroll-target="#colecciones-de-datos"><span class="header-section-number">4.1</span> Colecciones de datos</a></li>
+  <li><a href="#arrays" id="toc-arrays" class="nav-link" data-scroll-target="#arrays"><span class="header-section-number">4.2</span> Arrays</a></li>
+  <li><a href="#arrays-multidimensionales" id="toc-arrays-multidimensionales" class="nav-link" data-scroll-target="#arrays-multidimensionales"><span class="header-section-number">4.3</span> Arrays multidimensionales</a>
   <ul class="collapse">
-  <li><a href="#funciones-de-arrays" id="toc-funciones-de-arrays" class="nav-link" data-scroll-target="#funciones-de-arrays"><span class="toc-section-number">4.3.1</span>  Funciones de arrays</a></li>
-  <li><a href="#constructores-de-arrays" id="toc-constructores-de-arrays" class="nav-link" data-scroll-target="#constructores-de-arrays"><span class="toc-section-number">4.3.2</span>  Constructores de arrays</a></li>
-  <li><a href="#ejemplos-de-constructores-de-arrays" id="toc-ejemplos-de-constructores-de-arrays" class="nav-link" data-scroll-target="#ejemplos-de-constructores-de-arrays"><span class="toc-section-number">4.3.3</span>  Ejemplos de constructores de arrays</a></li>
-  <li><a href="#redimensionamiento-de-arrays" id="toc-redimensionamiento-de-arrays" class="nav-link" data-scroll-target="#redimensionamiento-de-arrays"><span class="toc-section-number">4.3.4</span>  Redimensionamiento de arrays</a></li>
-  <li><a href="#ejemplo-de-redimensionamiento-de-arrays" id="toc-ejemplo-de-redimensionamiento-de-arrays" class="nav-link" data-scroll-target="#ejemplo-de-redimensionamiento-de-arrays"><span class="toc-section-number">4.3.5</span>  Ejemplo de redimensionamiento de arrays</a></li>
-  <li><a href="#comprensión-de-arrays" id="toc-comprensión-de-arrays" class="nav-link" data-scroll-target="#comprensión-de-arrays"><span class="toc-section-number">4.3.6</span>  Comprensión de arrays</a></li>
+  <li><a href="#funciones-de-arrays" id="toc-funciones-de-arrays" class="nav-link" data-scroll-target="#funciones-de-arrays"><span class="header-section-number">4.3.1</span> Funciones de arrays</a></li>
+  <li><a href="#constructores-de-arrays" id="toc-constructores-de-arrays" class="nav-link" data-scroll-target="#constructores-de-arrays"><span class="header-section-number">4.3.2</span> Constructores de arrays</a></li>
+  <li><a href="#ejemplos-de-constructores-de-arrays" id="toc-ejemplos-de-constructores-de-arrays" class="nav-link" data-scroll-target="#ejemplos-de-constructores-de-arrays"><span class="header-section-number">4.3.3</span> Ejemplos de constructores de arrays</a></li>
+  <li><a href="#redimensionamiento-de-arrays" id="toc-redimensionamiento-de-arrays" class="nav-link" data-scroll-target="#redimensionamiento-de-arrays"><span class="header-section-number">4.3.4</span> Redimensionamiento de arrays</a></li>
+  <li><a href="#ejemplo-de-redimensionamiento-de-arrays" id="toc-ejemplo-de-redimensionamiento-de-arrays" class="nav-link" data-scroll-target="#ejemplo-de-redimensionamiento-de-arrays"><span class="header-section-number">4.3.5</span> Ejemplo de redimensionamiento de arrays</a></li>
+  <li><a href="#comprensión-de-arrays" id="toc-comprensión-de-arrays" class="nav-link" data-scroll-target="#comprensión-de-arrays"><span class="header-section-number">4.3.6</span> Comprensión de arrays</a></li>
   </ul></li>
-  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores"><span class="toc-section-number">4.4</span>  Vectores</a>
+  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores"><span class="header-section-number">4.4</span> Vectores</a>
   <ul class="collapse">
-  <li><a href="#acceso-a-los-elementos-de-un-vector" id="toc-acceso-a-los-elementos-de-un-vector" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-un-vector"><span class="toc-section-number">4.4.1</span>  Acceso a los elementos de un vector</a></li>
-  <li><a href="#ejemplo-de-acceso-a-los-elementos-de-un-vector" id="toc-ejemplo-de-acceso-a-los-elementos-de-un-vector" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-los-elementos-de-un-vector"><span class="toc-section-number">4.4.2</span>  Ejemplo de acceso a los elementos de un vector</a></li>
-  <li><a href="#acceso-a-múltiples-elementos-de-un-vector" id="toc-acceso-a-múltiples-elementos-de-un-vector" class="nav-link" data-scroll-target="#acceso-a-múltiples-elementos-de-un-vector"><span class="toc-section-number">4.4.3</span>  Acceso a múltiples elementos de un vector</a></li>
-  <li><a href="#modificación-de-los-elementos-de-un-vector" id="toc-modificación-de-los-elementos-de-un-vector" class="nav-link" data-scroll-target="#modificación-de-los-elementos-de-un-vector"><span class="toc-section-number">4.4.4</span>  Modificación de los elementos de un vector</a></li>
-  <li><a href="#añadir-elementos-a-un-vector" id="toc-añadir-elementos-a-un-vector" class="nav-link" data-scroll-target="#añadir-elementos-a-un-vector"><span class="toc-section-number">4.4.5</span>  Añadir elementos a un vector</a></li>
-  <li><a href="#recorrer-un-vector" id="toc-recorrer-un-vector" class="nav-link" data-scroll-target="#recorrer-un-vector"><span class="toc-section-number">4.4.6</span>  Recorrer un vector</a></li>
-  <li><a href="#operaciones-con-vectores-numéricos" id="toc-operaciones-con-vectores-numéricos" class="nav-link" data-scroll-target="#operaciones-con-vectores-numéricos"><span class="toc-section-number">4.4.7</span>  Operaciones con vectores numéricos</a></li>
-  <li><a href="#ordenación-de-vectores" id="toc-ordenación-de-vectores" class="nav-link" data-scroll-target="#ordenación-de-vectores"><span class="toc-section-number">4.4.8</span>  Ordenación de vectores</a></li>
-  <li><a href="#ejemplo-de-ordenación-de-vectores" id="toc-ejemplo-de-ordenación-de-vectores" class="nav-link" data-scroll-target="#ejemplo-de-ordenación-de-vectores"><span class="toc-section-number">4.4.9</span>  Ejemplo de ordenación de vectores</a></li>
-  <li><a href="#extensión-de-funciones-a-vectores" id="toc-extensión-de-funciones-a-vectores" class="nav-link" data-scroll-target="#extensión-de-funciones-a-vectores"><span class="toc-section-number">4.4.10</span>  Extensión de funciones a vectores</a></li>
-  <li><a href="#ejemplo-de-extensión-de-funciones-a-vectores" id="toc-ejemplo-de-extensión-de-funciones-a-vectores" class="nav-link" data-scroll-target="#ejemplo-de-extensión-de-funciones-a-vectores"><span class="toc-section-number">4.4.11</span>  Ejemplo de extensión de funciones a vectores</a></li>
-  <li><a href="#filtrado-de-vectores" id="toc-filtrado-de-vectores" class="nav-link" data-scroll-target="#filtrado-de-vectores"><span class="toc-section-number">4.4.12</span>  Filtrado de vectores</a></li>
-  <li><a href="#ejemplo-de-filtrado-de-vectores" id="toc-ejemplo-de-filtrado-de-vectores" class="nav-link" data-scroll-target="#ejemplo-de-filtrado-de-vectores"><span class="toc-section-number">4.4.13</span>  Ejemplo de filtrado de vectores</a></li>
-  <li><a href="#álgebra-lineal-con-vectores" id="toc-álgebra-lineal-con-vectores" class="nav-link" data-scroll-target="#álgebra-lineal-con-vectores"><span class="toc-section-number">4.4.14</span>  Álgebra lineal con vectores</a></li>
-  <li><a href="#ejemplo-de-álgebra-lineal-con-vectores" id="toc-ejemplo-de-álgebra-lineal-con-vectores" class="nav-link" data-scroll-target="#ejemplo-de-álgebra-lineal-con-vectores"><span class="toc-section-number">4.4.15</span>  Ejemplo de álgebra lineal con vectores</a></li>
+  <li><a href="#acceso-a-los-elementos-de-un-vector" id="toc-acceso-a-los-elementos-de-un-vector" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-un-vector"><span class="header-section-number">4.4.1</span> Acceso a los elementos de un vector</a></li>
+  <li><a href="#ejemplo-de-acceso-a-los-elementos-de-un-vector" id="toc-ejemplo-de-acceso-a-los-elementos-de-un-vector" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-los-elementos-de-un-vector"><span class="header-section-number">4.4.2</span> Ejemplo de acceso a los elementos de un vector</a></li>
+  <li><a href="#acceso-a-múltiples-elementos-de-un-vector" id="toc-acceso-a-múltiples-elementos-de-un-vector" class="nav-link" data-scroll-target="#acceso-a-múltiples-elementos-de-un-vector"><span class="header-section-number">4.4.3</span> Acceso a múltiples elementos de un vector</a></li>
+  <li><a href="#modificación-de-los-elementos-de-un-vector" id="toc-modificación-de-los-elementos-de-un-vector" class="nav-link" data-scroll-target="#modificación-de-los-elementos-de-un-vector"><span class="header-section-number">4.4.4</span> Modificación de los elementos de un vector</a></li>
+  <li><a href="#añadir-elementos-a-un-vector" id="toc-añadir-elementos-a-un-vector" class="nav-link" data-scroll-target="#añadir-elementos-a-un-vector"><span class="header-section-number">4.4.5</span> Añadir elementos a un vector</a></li>
+  <li><a href="#recorrer-un-vector" id="toc-recorrer-un-vector" class="nav-link" data-scroll-target="#recorrer-un-vector"><span class="header-section-number">4.4.6</span> Recorrer un vector</a></li>
+  <li><a href="#operaciones-con-vectores-numéricos" id="toc-operaciones-con-vectores-numéricos" class="nav-link" data-scroll-target="#operaciones-con-vectores-numéricos"><span class="header-section-number">4.4.7</span> Operaciones con vectores numéricos</a></li>
+  <li><a href="#ordenación-de-vectores" id="toc-ordenación-de-vectores" class="nav-link" data-scroll-target="#ordenación-de-vectores"><span class="header-section-number">4.4.8</span> Ordenación de vectores</a></li>
+  <li><a href="#ejemplo-de-ordenación-de-vectores" id="toc-ejemplo-de-ordenación-de-vectores" class="nav-link" data-scroll-target="#ejemplo-de-ordenación-de-vectores"><span class="header-section-number">4.4.9</span> Ejemplo de ordenación de vectores</a></li>
+  <li><a href="#extensión-de-funciones-a-vectores" id="toc-extensión-de-funciones-a-vectores" class="nav-link" data-scroll-target="#extensión-de-funciones-a-vectores"><span class="header-section-number">4.4.10</span> Extensión de funciones a vectores</a></li>
+  <li><a href="#ejemplo-de-extensión-de-funciones-a-vectores" id="toc-ejemplo-de-extensión-de-funciones-a-vectores" class="nav-link" data-scroll-target="#ejemplo-de-extensión-de-funciones-a-vectores"><span class="header-section-number">4.4.11</span> Ejemplo de extensión de funciones a vectores</a></li>
+  <li><a href="#filtrado-de-vectores" id="toc-filtrado-de-vectores" class="nav-link" data-scroll-target="#filtrado-de-vectores"><span class="header-section-number">4.4.12</span> Filtrado de vectores</a></li>
+  <li><a href="#ejemplo-de-filtrado-de-vectores" id="toc-ejemplo-de-filtrado-de-vectores" class="nav-link" data-scroll-target="#ejemplo-de-filtrado-de-vectores"><span class="header-section-number">4.4.13</span> Ejemplo de filtrado de vectores</a></li>
+  <li><a href="#álgebra-lineal-con-vectores" id="toc-álgebra-lineal-con-vectores" class="nav-link" data-scroll-target="#álgebra-lineal-con-vectores"><span class="header-section-number">4.4.14</span> Álgebra lineal con vectores</a></li>
+  <li><a href="#ejemplo-de-álgebra-lineal-con-vectores" id="toc-ejemplo-de-álgebra-lineal-con-vectores" class="nav-link" data-scroll-target="#ejemplo-de-álgebra-lineal-con-vectores"><span class="header-section-number">4.4.15</span> Ejemplo de álgebra lineal con vectores</a></li>
   </ul></li>
-  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="toc-section-number">4.5</span>  Matrices</a>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="header-section-number">4.5</span> Matrices</a>
   <ul class="collapse">
-  <li><a href="#acceso-a-los-elementos-de-una-matriz" id="toc-acceso-a-los-elementos-de-una-matriz" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-una-matriz"><span class="toc-section-number">4.5.1</span>  Acceso a los elementos de una matriz</a></li>
-  <li><a href="#ejemplo-de-acceso-a-los-elementos-de-una-matriz" id="toc-ejemplo-de-acceso-a-los-elementos-de-una-matriz" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-los-elementos-de-una-matriz"><span class="toc-section-number">4.5.2</span>  Ejemplo de acceso a los elementos de una matriz</a></li>
-  <li><a href="#acceso-a-múltiples-elementos-de-una-matriz" id="toc-acceso-a-múltiples-elementos-de-una-matriz" class="nav-link" data-scroll-target="#acceso-a-múltiples-elementos-de-una-matriz"><span class="toc-section-number">4.5.3</span>  Acceso a múltiples elementos de una matriz</a></li>
+  <li><a href="#acceso-a-los-elementos-de-una-matriz" id="toc-acceso-a-los-elementos-de-una-matriz" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-una-matriz"><span class="header-section-number">4.5.1</span> Acceso a los elementos de una matriz</a></li>
+  <li><a href="#ejemplo-de-acceso-a-los-elementos-de-una-matriz" id="toc-ejemplo-de-acceso-a-los-elementos-de-una-matriz" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-los-elementos-de-una-matriz"><span class="header-section-number">4.5.2</span> Ejemplo de acceso a los elementos de una matriz</a></li>
+  <li><a href="#acceso-a-múltiples-elementos-de-una-matriz" id="toc-acceso-a-múltiples-elementos-de-una-matriz" class="nav-link" data-scroll-target="#acceso-a-múltiples-elementos-de-una-matriz"><span class="header-section-number">4.5.3</span> Acceso a múltiples elementos de una matriz</a></li>
+  <li><a href="#ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz" id="toc-ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz"><span class="header-section-number">4.5.4</span> Ejemplo de acceso a múltiples elementos de una matriz</a></li>
+  <li><a href="#modificación-de-los-elementos-de-una-matriz" id="toc-modificación-de-los-elementos-de-una-matriz" class="nav-link" data-scroll-target="#modificación-de-los-elementos-de-una-matriz"><span class="header-section-number">4.5.5</span> Modificación de los elementos de una matriz</a></li>
+  <li><a href="#concatenación-de-matrices" id="toc-concatenación-de-matrices" class="nav-link" data-scroll-target="#concatenación-de-matrices"><span class="header-section-number">4.5.6</span> Concatenación de matrices</a></li>
+  <li><a href="#ejemplo-de-concatenación-de-matrices" id="toc-ejemplo-de-concatenación-de-matrices" class="nav-link" data-scroll-target="#ejemplo-de-concatenación-de-matrices"><span class="header-section-number">4.5.7</span> Ejemplo de concatenación de matrices</a></li>
+  <li><a href="#concatenación-de-vectores" id="toc-concatenación-de-vectores" class="nav-link" data-scroll-target="#concatenación-de-vectores"><span class="header-section-number">4.5.8</span> Concatenación de vectores</a></li>
+  <li><a href="#ejemplo-de-concatenación-de-vectores" id="toc-ejemplo-de-concatenación-de-vectores" class="nav-link" data-scroll-target="#ejemplo-de-concatenación-de-vectores"><span class="header-section-number">4.5.9</span> Ejemplo de concatenación de vectores</a></li>
+  <li><a href="#recorrido-de-matrices" id="toc-recorrido-de-matrices" class="nav-link" data-scroll-target="#recorrido-de-matrices"><span class="header-section-number">4.5.10</span> Recorrido de matrices</a></li>
+  <li><a href="#operaciones-con-matrices-numéricas" id="toc-operaciones-con-matrices-numéricas" class="nav-link" data-scroll-target="#operaciones-con-matrices-numéricas"><span class="header-section-number">4.5.11</span> Operaciones con matrices numéricas</a></li>
+  <li><a href="#extensión-de-funciones-a-matrices" id="toc-extensión-de-funciones-a-matrices" class="nav-link" data-scroll-target="#extensión-de-funciones-a-matrices"><span class="header-section-number">4.5.12</span> Extensión de funciones a matrices</a></li>
+  <li><a href="#ejemplo-de-extensión-de-funciones-a-matrices" id="toc-ejemplo-de-extensión-de-funciones-a-matrices" class="nav-link" data-scroll-target="#ejemplo-de-extensión-de-funciones-a-matrices"><span class="header-section-number">4.5.13</span> Ejemplo de extensión de funciones a matrices</a></li>
+  <li><a href="#álgebra-lineal-con-matrices" id="toc-álgebra-lineal-con-matrices" class="nav-link" data-scroll-target="#álgebra-lineal-con-matrices"><span class="header-section-number">4.5.14</span> Álgebra lineal con matrices</a></li>
+  <li><a href="#ejemplo-de-álgebra-lineal-con-matrices" id="toc-ejemplo-de-álgebra-lineal-con-matrices" class="nav-link" data-scroll-target="#ejemplo-de-álgebra-lineal-con-matrices"><span class="header-section-number">4.5.15</span> Ejemplo de álgebra lineal con matrices</a></li>
+  <li><a href="#álgebra-lineal-con-matrices-1" id="toc-álgebra-lineal-con-matrices-1" class="nav-link" data-scroll-target="#álgebra-lineal-con-matrices-1"><span class="header-section-number">4.5.16</span> Álgebra lineal con matrices</a></li>
+  <li><a href="#ejemplo-de-álgebra-lineal-con-matrices-1" id="toc-ejemplo-de-álgebra-lineal-con-matrices-1" class="nav-link" data-scroll-target="#ejemplo-de-álgebra-lineal-con-matrices-1"><span class="header-section-number">4.5.17</span> Ejemplo de álgebra lineal con matrices</a></li>
+  <li><a href="#álgebra-lineal-con-matrices-2" id="toc-álgebra-lineal-con-matrices-2" class="nav-link" data-scroll-target="#álgebra-lineal-con-matrices-2"><span class="header-section-number">4.5.18</span> Álgebra lineal con matrices</a></li>
+  <li><a href="#ejemplos-de-álgebra-lineal-con-matrices" id="toc-ejemplos-de-álgebra-lineal-con-matrices" class="nav-link" data-scroll-target="#ejemplos-de-álgebra-lineal-con-matrices"><span class="header-section-number">4.5.19</span> Ejemplos de Álgebra lineal con matrices</a></li>
+  <li><a href="#copia-de-tipos-de-datos-compuestas" id="toc-copia-de-tipos-de-datos-compuestas" class="nav-link" data-scroll-target="#copia-de-tipos-de-datos-compuestas"><span class="header-section-number">4.5.20</span> Copia de tipos de datos compuestas</a></li>
+  <li><a href="#ejemplo-de-copia-de-tipos-de-datos-compuestos" id="toc-ejemplo-de-copia-de-tipos-de-datos-compuestos" class="nav-link" data-scroll-target="#ejemplo-de-copia-de-tipos-de-datos-compuestos"><span class="header-section-number">4.5.21</span> Ejemplo de copia de tipos de datos compuestos</a></li>
   </ul></li>
-  <li><a href="#ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz" id="toc-ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz"><span class="toc-section-number">4.6</span>  Ejemplo de acceso a múltiples elementos de una matriz</a>
+  <li><a href="#tuplas" id="toc-tuplas" class="nav-link" data-scroll-target="#tuplas"><span class="header-section-number">4.6</span> Tuplas</a>
   <ul class="collapse">
-  <li><a href="#modificación-de-los-elementos-de-una-matriz" id="toc-modificación-de-los-elementos-de-una-matriz" class="nav-link" data-scroll-target="#modificación-de-los-elementos-de-una-matriz"><span class="toc-section-number">4.6.1</span>  Modificación de los elementos de una matriz</a></li>
-  <li><a href="#concatenación-de-matrices" id="toc-concatenación-de-matrices" class="nav-link" data-scroll-target="#concatenación-de-matrices"><span class="toc-section-number">4.6.2</span>  Concatenación de matrices</a></li>
-  <li><a href="#ejemplo-de-concatenación-de-matrices" id="toc-ejemplo-de-concatenación-de-matrices" class="nav-link" data-scroll-target="#ejemplo-de-concatenación-de-matrices"><span class="toc-section-number">4.6.3</span>  Ejemplo de concatenación de matrices</a></li>
-  <li><a href="#concatenación-de-vectores" id="toc-concatenación-de-vectores" class="nav-link" data-scroll-target="#concatenación-de-vectores"><span class="toc-section-number">4.6.4</span>  Concatenación de vectores</a></li>
-  <li><a href="#ejemplo-de-concatenación-de-vectores" id="toc-ejemplo-de-concatenación-de-vectores" class="nav-link" data-scroll-target="#ejemplo-de-concatenación-de-vectores"><span class="toc-section-number">4.6.5</span>  Ejemplo de concatenación de vectores</a></li>
-  <li><a href="#recorrido-de-matrices" id="toc-recorrido-de-matrices" class="nav-link" data-scroll-target="#recorrido-de-matrices"><span class="toc-section-number">4.6.6</span>  Recorrido de matrices</a></li>
-  <li><a href="#operaciones-con-matrices-numéricas" id="toc-operaciones-con-matrices-numéricas" class="nav-link" data-scroll-target="#operaciones-con-matrices-numéricas"><span class="toc-section-number">4.6.7</span>  Operaciones con matrices numéricas</a></li>
-  <li><a href="#extensión-de-funciones-a-matrices" id="toc-extensión-de-funciones-a-matrices" class="nav-link" data-scroll-target="#extensión-de-funciones-a-matrices"><span class="toc-section-number">4.6.8</span>  Extensión de funciones a matrices</a></li>
-  <li><a href="#ejemplo-de-extensión-de-funciones-a-matrices" id="toc-ejemplo-de-extensión-de-funciones-a-matrices" class="nav-link" data-scroll-target="#ejemplo-de-extensión-de-funciones-a-matrices"><span class="toc-section-number">4.6.9</span>  Ejemplo de extensión de funciones a matrices</a></li>
-  <li><a href="#álgebra-lineal-con-matrices" id="toc-álgebra-lineal-con-matrices" class="nav-link" data-scroll-target="#álgebra-lineal-con-matrices"><span class="toc-section-number">4.6.10</span>  Álgebra lineal con matrices</a></li>
-  <li><a href="#ejemplo-de-álgebra-lineal-con-matrices" id="toc-ejemplo-de-álgebra-lineal-con-matrices" class="nav-link" data-scroll-target="#ejemplo-de-álgebra-lineal-con-matrices"><span class="toc-section-number">4.6.11</span>  Ejemplo de álgebra lineal con matrices</a></li>
-  <li><a href="#álgebra-lineal-con-matrices-1" id="toc-álgebra-lineal-con-matrices-1" class="nav-link" data-scroll-target="#álgebra-lineal-con-matrices-1"><span class="toc-section-number">4.6.12</span>  Álgebra lineal con matrices</a></li>
-  <li><a href="#ejemplo-de-álgebra-lineal-con-matrices-1" id="toc-ejemplo-de-álgebra-lineal-con-matrices-1" class="nav-link" data-scroll-target="#ejemplo-de-álgebra-lineal-con-matrices-1"><span class="toc-section-number">4.6.13</span>  Ejemplo de álgebra lineal con matrices</a></li>
-  <li><a href="#álgebra-lineal-con-matrices-2" id="toc-álgebra-lineal-con-matrices-2" class="nav-link" data-scroll-target="#álgebra-lineal-con-matrices-2"><span class="toc-section-number">4.6.14</span>  Álgebra lineal con matrices</a></li>
-  <li><a href="#ejemplos-de-álgebra-lineal-con-matrices" id="toc-ejemplos-de-álgebra-lineal-con-matrices" class="nav-link" data-scroll-target="#ejemplos-de-álgebra-lineal-con-matrices"><span class="toc-section-number">4.6.15</span>  Ejemplos de Álgebra lineal con matrices</a></li>
-  <li><a href="#copia-de-tipos-de-datos-compuestas" id="toc-copia-de-tipos-de-datos-compuestas" class="nav-link" data-scroll-target="#copia-de-tipos-de-datos-compuestas"><span class="toc-section-number">4.6.16</span>  Copia de tipos de datos compuestas</a></li>
-  <li><a href="#ejemplo-de-copia-de-tipos-de-datos-compuestos" id="toc-ejemplo-de-copia-de-tipos-de-datos-compuestos" class="nav-link" data-scroll-target="#ejemplo-de-copia-de-tipos-de-datos-compuestos"><span class="toc-section-number">4.6.17</span>  Ejemplo de copia de tipos de datos compuestos</a></li>
+  <li><a href="#tuplas-con-nombres" id="toc-tuplas-con-nombres" class="nav-link" data-scroll-target="#tuplas-con-nombres"><span class="header-section-number">4.6.1</span> Tuplas con nombres</a></li>
+  <li><a href="#acceso-a-los-elementos-de-una-tupla" id="toc-acceso-a-los-elementos-de-una-tupla" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-una-tupla"><span class="header-section-number">4.6.2</span> Acceso a los elementos de una tupla</a></li>
+  <li><a href="#asignación-múltiple-de-tuplas" id="toc-asignación-múltiple-de-tuplas" class="nav-link" data-scroll-target="#asignación-múltiple-de-tuplas"><span class="header-section-number">4.6.3</span> Asignación múltiple de tuplas</a></li>
+  <li><a href="#ejemplo-de-asignación-múltipe-de-tuplas" id="toc-ejemplo-de-asignación-múltipe-de-tuplas" class="nav-link" data-scroll-target="#ejemplo-de-asignación-múltipe-de-tuplas"><span class="header-section-number">4.6.4</span> Ejemplo de asignación múltipe de tuplas</a></li>
   </ul></li>
-  <li><a href="#tuplas" id="toc-tuplas" class="nav-link" data-scroll-target="#tuplas"><span class="toc-section-number">4.7</span>  Tuplas</a>
+  <li><a href="#diccionarios" id="toc-diccionarios" class="nav-link" data-scroll-target="#diccionarios"><span class="header-section-number">4.7</span> Diccionarios</a>
   <ul class="collapse">
-  <li><a href="#tuplas-con-nombres" id="toc-tuplas-con-nombres" class="nav-link" data-scroll-target="#tuplas-con-nombres"><span class="toc-section-number">4.7.1</span>  Tuplas con nombres</a></li>
-  <li><a href="#acceso-a-los-elementos-de-una-tupla" id="toc-acceso-a-los-elementos-de-una-tupla" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-una-tupla"><span class="toc-section-number">4.7.2</span>  Acceso a los elementos de una tupla</a></li>
-  <li><a href="#asignación-múltiple-de-tuplas" id="toc-asignación-múltiple-de-tuplas" class="nav-link" data-scroll-target="#asignación-múltiple-de-tuplas"><span class="toc-section-number">4.7.3</span>  Asignación múltiple de tuplas</a></li>
-  <li><a href="#ejemplo-de-asignación-múltipe-de-tuplas" id="toc-ejemplo-de-asignación-múltipe-de-tuplas" class="nav-link" data-scroll-target="#ejemplo-de-asignación-múltipe-de-tuplas"><span class="toc-section-number">4.7.4</span>  Ejemplo de asignación múltipe de tuplas</a></li>
+  <li><a href="#ejemplo-de-diccionarios" id="toc-ejemplo-de-diccionarios" class="nav-link" data-scroll-target="#ejemplo-de-diccionarios"><span class="header-section-number">4.7.1</span> Ejemplo de diccionarios</a></li>
+  <li><a href="#comprensión-de-diccionarios" id="toc-comprensión-de-diccionarios" class="nav-link" data-scroll-target="#comprensión-de-diccionarios"><span class="header-section-number">4.7.2</span> Comprensión de diccionarios</a></li>
+  <li><a href="#ejemplo-de-comprensión-de-diccionarios" id="toc-ejemplo-de-comprensión-de-diccionarios" class="nav-link" data-scroll-target="#ejemplo-de-comprensión-de-diccionarios"><span class="header-section-number">4.7.3</span> Ejemplo de comprensión de diccionarios</a></li>
+  <li><a href="#acceso-a-los-elementos-de-un-diccionario" id="toc-acceso-a-los-elementos-de-un-diccionario" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-un-diccionario"><span class="header-section-number">4.7.4</span> Acceso a los elementos de un diccionario</a></li>
+  <li><a href="#ejemplo-de-acceso-a-los-elementos-de-un-diccionario" id="toc-ejemplo-de-acceso-a-los-elementos-de-un-diccionario" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-los-elementos-de-un-diccionario"><span class="header-section-number">4.7.5</span> Ejemplo de acceso a los elementos de un diccionario</a></li>
+  <li><a href="#recorrido-de-las-claves-y-valores-de-un-diccionario" id="toc-recorrido-de-las-claves-y-valores-de-un-diccionario" class="nav-link" data-scroll-target="#recorrido-de-las-claves-y-valores-de-un-diccionario"><span class="header-section-number">4.7.6</span> Recorrido de las claves y valores de un diccionario</a></li>
+  <li><a href="#ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario" id="toc-ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario" class="nav-link" data-scroll-target="#ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario"><span class="header-section-number">4.7.7</span> Ejemplo de recorrido de las claves y valores de un diccionario</a></li>
+  <li><a href="#añadir-elementos-a-un-diccionario" id="toc-añadir-elementos-a-un-diccionario" class="nav-link" data-scroll-target="#añadir-elementos-a-un-diccionario"><span class="header-section-number">4.7.8</span> Añadir elementos a un diccionario</a></li>
+  <li><a href="#eliminar-elementos-de-un-diccionario" id="toc-eliminar-elementos-de-un-diccionario" class="nav-link" data-scroll-target="#eliminar-elementos-de-un-diccionario"><span class="header-section-number">4.7.9</span> Eliminar elementos de un diccionario</a></li>
   </ul></li>
-  <li><a href="#diccionarios" id="toc-diccionarios" class="nav-link" data-scroll-target="#diccionarios"><span class="toc-section-number">4.8</span>  Diccionarios</a>
+  <li><a href="#conjuntos" id="toc-conjuntos" class="nav-link" data-scroll-target="#conjuntos"><span class="header-section-number">4.8</span> Conjuntos</a>
   <ul class="collapse">
-  <li><a href="#ejemplo-de-diccionarios" id="toc-ejemplo-de-diccionarios" class="nav-link" data-scroll-target="#ejemplo-de-diccionarios"><span class="toc-section-number">4.8.1</span>  Ejemplo de diccionarios</a></li>
-  <li><a href="#comprensión-de-diccionarios" id="toc-comprensión-de-diccionarios" class="nav-link" data-scroll-target="#comprensión-de-diccionarios"><span class="toc-section-number">4.8.2</span>  Comprensión de diccionarios</a></li>
-  <li><a href="#ejemplo-de-comprensión-de-diccionarios" id="toc-ejemplo-de-comprensión-de-diccionarios" class="nav-link" data-scroll-target="#ejemplo-de-comprensión-de-diccionarios"><span class="toc-section-number">4.8.3</span>  Ejemplo de comprensión de diccionarios</a></li>
-  <li><a href="#acceso-a-los-elementos-de-un-diccionario" id="toc-acceso-a-los-elementos-de-un-diccionario" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-un-diccionario"><span class="toc-section-number">4.8.4</span>  Acceso a los elementos de un diccionario</a></li>
-  <li><a href="#ejemplo-de-acceso-a-los-elementos-de-un-diccionario" id="toc-ejemplo-de-acceso-a-los-elementos-de-un-diccionario" class="nav-link" data-scroll-target="#ejemplo-de-acceso-a-los-elementos-de-un-diccionario"><span class="toc-section-number">4.8.5</span>  Ejemplo de acceso a los elementos de un diccionario</a></li>
-  <li><a href="#recorrido-de-las-claves-y-valores-de-un-diccionario" id="toc-recorrido-de-las-claves-y-valores-de-un-diccionario" class="nav-link" data-scroll-target="#recorrido-de-las-claves-y-valores-de-un-diccionario"><span class="toc-section-number">4.8.6</span>  Recorrido de las claves y valores de un diccionario</a></li>
-  <li><a href="#ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario" id="toc-ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario" class="nav-link" data-scroll-target="#ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario"><span class="toc-section-number">4.8.7</span>  Ejemplo de recorrido de las claves y valores de un diccionario</a></li>
-  <li><a href="#añadir-elementos-a-un-diccionario" id="toc-añadir-elementos-a-un-diccionario" class="nav-link" data-scroll-target="#añadir-elementos-a-un-diccionario"><span class="toc-section-number">4.8.8</span>  Añadir elementos a un diccionario</a></li>
-  <li><a href="#eliminar-elementos-de-un-diccionario" id="toc-eliminar-elementos-de-un-diccionario" class="nav-link" data-scroll-target="#eliminar-elementos-de-un-diccionario"><span class="toc-section-number">4.8.9</span>  Eliminar elementos de un diccionario</a></li>
-  </ul></li>
-  <li><a href="#conjuntos" id="toc-conjuntos" class="nav-link" data-scroll-target="#conjuntos"><span class="toc-section-number">4.9</span>  Conjuntos</a>
-  <ul class="collapse">
-  <li><a href="#ejemplo-de-construcción-de-conjuntos" id="toc-ejemplo-de-construcción-de-conjuntos" class="nav-link" data-scroll-target="#ejemplo-de-construcción-de-conjuntos"><span class="toc-section-number">4.9.1</span>  Ejemplo de construcción de conjuntos</a></li>
-  <li><a href="#añadir-elementos-a-un-conjunto" id="toc-añadir-elementos-a-un-conjunto" class="nav-link" data-scroll-target="#añadir-elementos-a-un-conjunto"><span class="toc-section-number">4.9.2</span>  Añadir elementos a un conjunto</a></li>
-  <li><a href="#ejemplo-de-añadir-elementos-a-un-conjunto" id="toc-ejemplo-de-añadir-elementos-a-un-conjunto" class="nav-link" data-scroll-target="#ejemplo-de-añadir-elementos-a-un-conjunto"><span class="toc-section-number">4.9.3</span>  Ejemplo de añadir elementos a un conjunto</a></li>
-  <li><a href="#eliminar-elementos-de-un-conjunto" id="toc-eliminar-elementos-de-un-conjunto" class="nav-link" data-scroll-target="#eliminar-elementos-de-un-conjunto"><span class="toc-section-number">4.9.4</span>  Eliminar elementos de un conjunto</a></li>
-  <li><a href="#recorrido-de-los-elementos-de-un-conjunto" id="toc-recorrido-de-los-elementos-de-un-conjunto" class="nav-link" data-scroll-target="#recorrido-de-los-elementos-de-un-conjunto"><span class="toc-section-number">4.9.5</span>  Recorrido de los elementos de un conjunto</a></li>
-  <li><a href="#pertenencia-e-inclusión-de-conjuntos" id="toc-pertenencia-e-inclusión-de-conjuntos" class="nav-link" data-scroll-target="#pertenencia-e-inclusión-de-conjuntos"><span class="toc-section-number">4.9.6</span>  Pertenencia e inclusión de conjuntos</a></li>
-  <li><a href="#ejemplos-de-pertenencia-e-inclusión-de-conjuntos" id="toc-ejemplos-de-pertenencia-e-inclusión-de-conjuntos" class="nav-link" data-scroll-target="#ejemplos-de-pertenencia-e-inclusión-de-conjuntos"><span class="toc-section-number">4.9.7</span>  Ejemplos de pertenencia e inclusión de conjuntos</a></li>
-  <li><a href="#álgebra-de-conjuntos" id="toc-álgebra-de-conjuntos" class="nav-link" data-scroll-target="#álgebra-de-conjuntos"><span class="toc-section-number">4.9.8</span>  Álgebra de conjuntos</a></li>
-  <li><a href="#ejemplo-de-álgebra-de-conjuntos" id="toc-ejemplo-de-álgebra-de-conjuntos" class="nav-link" data-scroll-target="#ejemplo-de-álgebra-de-conjuntos"><span class="toc-section-number">4.9.9</span>  Ejemplo de álgebra de conjuntos</a></li>
+  <li><a href="#ejemplo-de-construcción-de-conjuntos" id="toc-ejemplo-de-construcción-de-conjuntos" class="nav-link" data-scroll-target="#ejemplo-de-construcción-de-conjuntos"><span class="header-section-number">4.8.1</span> Ejemplo de construcción de conjuntos</a></li>
+  <li><a href="#añadir-elementos-a-un-conjunto" id="toc-añadir-elementos-a-un-conjunto" class="nav-link" data-scroll-target="#añadir-elementos-a-un-conjunto"><span class="header-section-number">4.8.2</span> Añadir elementos a un conjunto</a></li>
+  <li><a href="#ejemplo-de-añadir-elementos-a-un-conjunto" id="toc-ejemplo-de-añadir-elementos-a-un-conjunto" class="nav-link" data-scroll-target="#ejemplo-de-añadir-elementos-a-un-conjunto"><span class="header-section-number">4.8.3</span> Ejemplo de añadir elementos a un conjunto</a></li>
+  <li><a href="#eliminar-elementos-de-un-conjunto" id="toc-eliminar-elementos-de-un-conjunto" class="nav-link" data-scroll-target="#eliminar-elementos-de-un-conjunto"><span class="header-section-number">4.8.4</span> Eliminar elementos de un conjunto</a></li>
+  <li><a href="#recorrido-de-los-elementos-de-un-conjunto" id="toc-recorrido-de-los-elementos-de-un-conjunto" class="nav-link" data-scroll-target="#recorrido-de-los-elementos-de-un-conjunto"><span class="header-section-number">4.8.5</span> Recorrido de los elementos de un conjunto</a></li>
+  <li><a href="#pertenencia-e-inclusión-de-conjuntos" id="toc-pertenencia-e-inclusión-de-conjuntos" class="nav-link" data-scroll-target="#pertenencia-e-inclusión-de-conjuntos"><span class="header-section-number">4.8.6</span> Pertenencia e inclusión de conjuntos</a></li>
+  <li><a href="#ejemplos-de-pertenencia-e-inclusión-de-conjuntos" id="toc-ejemplos-de-pertenencia-e-inclusión-de-conjuntos" class="nav-link" data-scroll-target="#ejemplos-de-pertenencia-e-inclusión-de-conjuntos"><span class="header-section-number">4.8.7</span> Ejemplos de pertenencia e inclusión de conjuntos</a></li>
+  <li><a href="#álgebra-de-conjuntos" id="toc-álgebra-de-conjuntos" class="nav-link" data-scroll-target="#álgebra-de-conjuntos"><span class="header-section-number">4.8.8</span> Álgebra de conjuntos</a></li>
+  <li><a href="#ejemplo-de-álgebra-de-conjuntos" id="toc-ejemplo-de-álgebra-de-conjuntos" class="nav-link" data-scroll-target="#ejemplo-de-álgebra-de-conjuntos"><span class="header-section-number">4.8.9</span> Ejemplo de álgebra de conjuntos</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -353,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tipos de datos compuestos</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tipos de datos compuestos</span></h1>
 </div>
 
 
@@ -361,6 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -452,12 +450,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>reshape(A, dim)</code>: Devuelve el array que resulta de redimiensionar el array <code>A</code> con las dimensiones indicadas por la tupla <code>dim</code>.</li>
 <li><code>permutedims(A)</code>: Devuelve el array de resulta de trasponer el array <code>A</code>.</li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -549,12 +547,12 @@ Advertencia
 <ul>
 <li><code>v[i]</code>: Devuelve el elemento del vector <code>v</code> con índice <code>i</code>.</li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -745,12 +743,12 @@ Advertencia
 <ul>
 <li><code>f.(v)</code>: Devuelve el vector que resulta de aplicar la función <code>f</code> a cada uno de los elementos del vector <code>v</code>.</li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -758,12 +756,12 @@ Advertencia
 <p>En la llamada a la función hay que pasarle com argumentos tantos vectores como parámetros tenga la función. Si los vectores son de distinto tamaño, se reciclan los de menor tamaño.</p>
 </div>
 </div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -900,12 +898,12 @@ Advertencia
 <ul>
 <li><code>A[i, j]</code>: Devuelve el elemento de la matriz <code>A</code> con índice de fila <code>i</code> e índice de columna <code>j</code>.</li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -936,9 +934,8 @@ Advertencia
 <li><code>A[u, w]</code>: Devuelve una matriz con los elementos correspondientes a los índices de fila del vector <code>u</code> y los índices de columna del vector <code>w</code> de la matriz <code>A</code>.</li>
 </ul>
 </section>
-</section>
-<section id="ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz"><span class="header-section-number">4.6</span> Ejemplo de acceso a múltiples elementos de una matriz</h2>
+<section id="ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz" class="level3" data-number="4.5.4">
+<h3 data-number="4.5.4" class="anchored" data-anchor-id="ejemplo-de-acceso-a-múltiples-elementos-de-una-matriz"><span class="header-section-number">4.5.4</span> Ejemplo de acceso a múltiples elementos de una matriz</h3>
 <div class="sourceCode" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> A <span class="op">=</span> <span class="fu">reshape</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, <span class="fl">3</span>, <span class="op">:</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span><span class="op">×</span><span class="fl">3</span> <span class="fu">reshape</span>(<span class="op">::</span><span class="dt">UnitRange{Int64}</span>, <span class="fl">3</span>, <span class="fl">3</span>) with eltype <span class="dt">Int64</span><span class="op">:</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span>  <span class="fl">4</span>  <span class="fl">7</span></span>
@@ -960,8 +957,9 @@ Advertencia
 <span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span></span>
 <span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a> <span class="fl">5</span></span>
 <span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a> <span class="fl">8</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="modificación-de-los-elementos-de-una-matriz" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="modificación-de-los-elementos-de-una-matriz"><span class="header-section-number">4.6.1</span> Modificación de los elementos de una matriz</h3>
+</section>
+<section id="modificación-de-los-elementos-de-una-matriz" class="level3" data-number="4.5.5">
+<h3 data-number="4.5.5" class="anchored" data-anchor-id="modificación-de-los-elementos-de-una-matriz"><span class="header-section-number">4.5.5</span> Modificación de los elementos de una matriz</h3>
 <p>También es posible modificar una matriz asignando nuevos elementos mediante los índices de fila y columna.</p>
 <ul>
 <li><code>A[i, j] = a</code>: Añade el elemento <code>a</code> a la matriz <code>A</code> con el índice de fila <code>i</code> y el índice de columna <code>j</code>.</li>
@@ -979,16 +977,16 @@ Advertencia
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span>  <span class="fl">0.0</span>  <span class="fl">0.0</span></span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span>  <span class="fl">0.0</span>  <span class="fl">1.0</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="concatenación-de-matrices" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="concatenación-de-matrices"><span class="header-section-number">4.6.2</span> Concatenación de matrices</h3>
+<section id="concatenación-de-matrices" class="level3" data-number="4.5.6">
+<h3 data-number="4.5.6" class="anchored" data-anchor-id="concatenación-de-matrices"><span class="header-section-number">4.5.6</span> Concatenación de matrices</h3>
 <p>Dos o más matrices pueden concatenarse horizontal o verticalmente siempre que sus dimensiones sean compatibles.</p>
 <ul>
 <li><code>[A B]</code>: Devuelve la matriz que resulta de concatenar horizontalmente las matrices <code>A</code> y <code>B</code>. Ambas matrices deben tener el mismo número de filas.</li>
 <li><code>[A; B]</code>: Devuelve la matriz que resulta de concatenar verticalmente las matrices <code>A</code> y <code>B</code>. Ambas matrices deben tener el mismo número de columnas.</li>
 </ul>
 </section>
-<section id="ejemplo-de-concatenación-de-matrices" class="level3" data-number="4.6.3">
-<h3 data-number="4.6.3" class="anchored" data-anchor-id="ejemplo-de-concatenación-de-matrices"><span class="header-section-number">4.6.3</span> Ejemplo de concatenación de matrices</h3>
+<section id="ejemplo-de-concatenación-de-matrices" class="level3" data-number="4.5.7">
+<h3 data-number="4.5.7" class="anchored" data-anchor-id="ejemplo-de-concatenación-de-matrices"><span class="header-section-number">4.5.7</span> Ejemplo de concatenación de matrices</h3>
 <div class="sourceCode" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> A <span class="op">=</span> <span class="fu">zeros</span>(<span class="fl">2</span>, <span class="fl">2</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">×</span><span class="fl">2</span> <span class="dt">Matrix</span>{<span class="dt">Float64</span>}<span class="op">:</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span>  <span class="fl">0.0</span></span>
@@ -1014,16 +1012,16 @@ Advertencia
 <span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span>  <span class="fl">0.0</span>  <span class="fl">1.0</span></span>
 <span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a> <span class="fl">1.0</span>  <span class="fl">1.0</span>  <span class="fl">1.0</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="concatenación-de-vectores" class="level3" data-number="4.6.4">
-<h3 data-number="4.6.4" class="anchored" data-anchor-id="concatenación-de-vectores"><span class="header-section-number">4.6.4</span> Concatenación de vectores</h3>
+<section id="concatenación-de-vectores" class="level3" data-number="4.5.8">
+<h3 data-number="4.5.8" class="anchored" data-anchor-id="concatenación-de-vectores"><span class="header-section-number">4.5.8</span> Concatenación de vectores</h3>
 <p>También es posible concatenar varios vectores horizontalmente o verticalmente para formar una matriz.</p>
 <ul>
 <li><code>hcat(v...)</code>: Devuelve la matriz que resulta de concatenar horizontalmente los vectores del vector <code>v</code>.</li>
 <li><code>vcat(v...)</code>: Devuelve la matriz que resulta de concatenar verticalmente los vectores del vector <code>v</code>.</li>
 </ul>
 </section>
-<section id="ejemplo-de-concatenación-de-vectores" class="level3" data-number="4.6.5">
-<h3 data-number="4.6.5" class="anchored" data-anchor-id="ejemplo-de-concatenación-de-vectores"><span class="header-section-number">4.6.5</span> Ejemplo de concatenación de vectores</h3>
+<section id="ejemplo-de-concatenación-de-vectores" class="level3" data-number="4.5.9">
+<h3 data-number="4.5.9" class="anchored" data-anchor-id="ejemplo-de-concatenación-de-vectores"><span class="header-section-number">4.5.9</span> Ejemplo de concatenación de vectores</h3>
 <div class="sourceCode" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> v <span class="op">=</span> [[<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>], [<span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>]]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">-</span>element <span class="dt">Vector</span>{<span class="dt">Vector</span>{<span class="dt">Int64</span>}}<span class="op">:</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>]</span>
@@ -1045,8 +1043,8 @@ Advertencia
 <span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span>  <span class="fl">2</span>  <span class="fl">3</span></span>
 <span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a> <span class="fl">4</span>  <span class="fl">5</span>  <span class="fl">6</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="recorrido-de-matrices" class="level3" data-number="4.6.6">
-<h3 data-number="4.6.6" class="anchored" data-anchor-id="recorrido-de-matrices"><span class="header-section-number">4.6.6</span> Recorrido de matrices</h3>
+<section id="recorrido-de-matrices" class="level3" data-number="4.5.10">
+<h3 data-number="4.5.10" class="anchored" data-anchor-id="recorrido-de-matrices"><span class="header-section-number">4.5.10</span> Recorrido de matrices</h3>
 <p>Una operación habitual es recorrer los elementos de una matriz para hacer una operación con ellos. El recorrido se suele hacer con dos bucles iterativos anidados.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> A <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span>; <span class="fl">4</span> <span class="fl">5</span> <span class="fl">6</span>]</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">×</span><span class="fl">3</span> <span class="dt">Matrix</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
@@ -1073,8 +1071,8 @@ Advertencia
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
 <span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="fl">6</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="operaciones-con-matrices-numéricas" class="level3" data-number="4.6.7">
-<h3 data-number="4.6.7" class="anchored" data-anchor-id="operaciones-con-matrices-numéricas"><span class="header-section-number">4.6.7</span> Operaciones con matrices numéricas</h3>
+<section id="operaciones-con-matrices-numéricas" class="level3" data-number="4.5.11">
+<h3 data-number="4.5.11" class="anchored" data-anchor-id="operaciones-con-matrices-numéricas"><span class="header-section-number">4.5.11</span> Operaciones con matrices numéricas</h3>
 <ul>
 <li><code>minimum(A)</code>: Devuelve el menor elemento de la matriz <code>A</code>.</li>
 <li><code>maximum(A)</code>: Devuelve el mayor elemento de la matriz <code>A</code>.</li>
@@ -1100,18 +1098,18 @@ Advertencia
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">prod</span>(A)</span>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="fl">720</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="extensión-de-funciones-a-matrices" class="level3" data-number="4.6.8">
-<h3 data-number="4.6.8" class="anchored" data-anchor-id="extensión-de-funciones-a-matrices"><span class="header-section-number">4.6.8</span> Extensión de funciones a matrices</h3>
+<section id="extensión-de-funciones-a-matrices" class="level3" data-number="4.5.12">
+<h3 data-number="4.5.12" class="anchored" data-anchor-id="extensión-de-funciones-a-matrices"><span class="header-section-number">4.5.12</span> Extensión de funciones a matrices</h3>
 <p>Al igual que para vectores, se puede aplicar una una función a todos los elementos de una matriz. Para ello basta con añadir un punto entre el nombre de la función y el paréntesis de los argumentos.</p>
 <ul>
 <li><code>f.(A)</code>: Devuelve la matriz que resulta de aplicar la función <code>f</code> a cada uno de los elementos de la matriz <code>A</code>.</li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -1121,8 +1119,8 @@ Advertencia
 </div>
 <p>La extensión de funciones también funciona con operadores, poniendo el punto delante del operador.</p>
 </section>
-<section id="ejemplo-de-extensión-de-funciones-a-matrices" class="level3" data-number="4.6.9">
-<h3 data-number="4.6.9" class="anchored" data-anchor-id="ejemplo-de-extensión-de-funciones-a-matrices"><span class="header-section-number">4.6.9</span> Ejemplo de extensión de funciones a matrices</h3>
+<section id="ejemplo-de-extensión-de-funciones-a-matrices" class="level3" data-number="4.5.13">
+<h3 data-number="4.5.13" class="anchored" data-anchor-id="ejemplo-de-extensión-de-funciones-a-matrices"><span class="header-section-number">4.5.13</span> Ejemplo de extensión de funciones a matrices</h3>
 <div class="sourceCode" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> A <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span>; <span class="fl">4</span> <span class="fl">5</span> <span class="fl">6</span>]</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">×</span><span class="fl">3</span> <span class="dt">Matrix</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span>  <span class="fl">2</span>  <span class="fl">3</span></span>
@@ -1138,8 +1136,8 @@ Advertencia
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a> <span class="fl">2</span>  <span class="fl">3</span>  <span class="fl">4</span></span>
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a> <span class="fl">5</span>  <span class="fl">6</span>  <span class="fl">7</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="álgebra-lineal-con-matrices" class="level3" data-number="4.6.10">
-<h3 data-number="4.6.10" class="anchored" data-anchor-id="álgebra-lineal-con-matrices"><span class="header-section-number">4.6.10</span> Álgebra lineal con matrices</h3>
+<section id="álgebra-lineal-con-matrices" class="level3" data-number="4.5.14">
+<h3 data-number="4.5.14" class="anchored" data-anchor-id="álgebra-lineal-con-matrices"><span class="header-section-number">4.5.14</span> Álgebra lineal con matrices</h3>
 <ul>
 <li><code>A</code> + <code>B</code>: Devuelve la matriz que resulta de la suma de las matrices <code>A</code> y <code>B</code>. Ambas matrices deben tener las mismas dimensiones.</li>
 <li><code>A</code> - <code>B</code>: Devuelve la matriz que resulta de la resta de las matrices <code>A</code> y <code>B</code>. Ambas matrices deben tener las mismas dimensiones.</li>
@@ -1149,8 +1147,8 @@ Advertencia
 <li><code>transpose(A)</code>: Devuelve la matriz traspuesta de la matriz <code>A</code>.</li>
 </ul>
 </section>
-<section id="ejemplo-de-álgebra-lineal-con-matrices" class="level3" data-number="4.6.11">
-<h3 data-number="4.6.11" class="anchored" data-anchor-id="ejemplo-de-álgebra-lineal-con-matrices"><span class="header-section-number">4.6.11</span> Ejemplo de álgebra lineal con matrices</h3>
+<section id="ejemplo-de-álgebra-lineal-con-matrices" class="level3" data-number="4.5.15">
+<h3 data-number="4.5.15" class="anchored" data-anchor-id="ejemplo-de-álgebra-lineal-con-matrices"><span class="header-section-number">4.5.15</span> Ejemplo de álgebra lineal con matrices</h3>
 <div class="sourceCode" id="cb25"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> A <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span> <span class="fl">3</span>; <span class="fl">4</span> <span class="fl">5</span> <span class="fl">6</span>]</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2</span><span class="op">×</span><span class="fl">3</span> <span class="dt">Matrix</span>{<span class="dt">Int64</span>}<span class="op">:</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a> <span class="fl">1</span>  <span class="fl">2</span>  <span class="fl">3</span></span>
@@ -1183,8 +1181,8 @@ Advertencia
 <span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a> <span class="fl">22</span>  <span class="fl">29</span>  <span class="fl">36</span></span>
 <span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a> <span class="fl">27</span>  <span class="fl">36</span>  <span class="fl">45</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="álgebra-lineal-con-matrices-1" class="level3" data-number="4.6.12">
-<h3 data-number="4.6.12" class="anchored" data-anchor-id="álgebra-lineal-con-matrices-1"><span class="header-section-number">4.6.12</span> Álgebra lineal con matrices</h3>
+<section id="álgebra-lineal-con-matrices-1" class="level3" data-number="4.5.16">
+<h3 data-number="4.5.16" class="anchored" data-anchor-id="álgebra-lineal-con-matrices-1"><span class="header-section-number">4.5.16</span> Álgebra lineal con matrices</h3>
 <p>El paquete <a href="https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/"><code>LinearAlgebra</code></a> define las siguientes funciones:</p>
 <ul>
 <li><code>Matrix(I, n, n)</code>. Devuelve la matriz identidad de dimensión <code>n</code>.</li>
@@ -1196,8 +1194,8 @@ Advertencia
 <li><code>A \ B</code>: Devuelve el vector <code>x</code> solución del sistema de ecuaciones <span class="math inline">\(Ax = B\)</span>, donde <code>A</code> es una matriz cuadrada y <code>B</code> es un vector del mismo tamaño que el número de filas o columnas de <code>A</code>.</li>
 </ul>
 </section>
-<section id="ejemplo-de-álgebra-lineal-con-matrices-1" class="level3" data-number="4.6.13">
-<h3 data-number="4.6.13" class="anchored" data-anchor-id="ejemplo-de-álgebra-lineal-con-matrices-1"><span class="header-section-number">4.6.13</span> Ejemplo de álgebra lineal con matrices</h3>
+<section id="ejemplo-de-álgebra-lineal-con-matrices-1" class="level3" data-number="4.5.17">
+<h3 data-number="4.5.17" class="anchored" data-anchor-id="ejemplo-de-álgebra-lineal-con-matrices-1"><span class="header-section-number">4.5.17</span> Ejemplo de álgebra lineal con matrices</h3>
 <div class="sourceCode" id="cb26"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">Matrix</span>(I, <span class="fl">3</span>, <span class="fl">3</span>)</span>
@@ -1245,8 +1243,8 @@ Advertencia
 <span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.0</span></span>
 <span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a> <span class="fl">1.0</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="álgebra-lineal-con-matrices-2" class="level3" data-number="4.6.14">
-<h3 data-number="4.6.14" class="anchored" data-anchor-id="álgebra-lineal-con-matrices-2"><span class="header-section-number">4.6.14</span> Álgebra lineal con matrices</h3>
+<section id="álgebra-lineal-con-matrices-2" class="level3" data-number="4.5.18">
+<h3 data-number="4.5.18" class="anchored" data-anchor-id="álgebra-lineal-con-matrices-2"><span class="header-section-number">4.5.18</span> Álgebra lineal con matrices</h3>
 <p>Otras funciones más avanzadas del paquete <code>LinearAlgebra</code> son:</p>
 <ul>
 <li><code>eigvals(A)</code>: Devuelve un vector con los autovalores de la matriz <code>A</code>.</li>
@@ -1254,8 +1252,8 @@ Advertencia
 <li><code>factorize(A)</code>: Devuelve las matrices resultantes de la factorización de la matriz <code>A</code>. La factorización dependerá de las propiedades de <code>A</code> (ver <a href="https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/#man-linalg-factorizations">tipos de factorización</a>)</li>
 </ul>
 </section>
-<section id="ejemplos-de-álgebra-lineal-con-matrices" class="level3" data-number="4.6.15">
-<h3 data-number="4.6.15" class="anchored" data-anchor-id="ejemplos-de-álgebra-lineal-con-matrices"><span class="header-section-number">4.6.15</span> Ejemplos de Álgebra lineal con matrices</h3>
+<section id="ejemplos-de-álgebra-lineal-con-matrices" class="level3" data-number="4.5.19">
+<h3 data-number="4.5.19" class="anchored" data-anchor-id="ejemplos-de-álgebra-lineal-con-matrices"><span class="header-section-number">4.5.19</span> Ejemplos de Álgebra lineal con matrices</h3>
 <div class="sourceCode" id="cb27"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> A <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span>; <span class="fl">3</span> <span class="fl">1</span>]</span>
@@ -1289,16 +1287,16 @@ Advertencia
 <span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a> <span class="fl">2.0</span>  <span class="fl">1.0</span></span>
 <span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span>  <span class="fl">1.5</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="copia-de-tipos-de-datos-compuestas" class="level3" data-number="4.6.16">
-<h3 data-number="4.6.16" class="anchored" data-anchor-id="copia-de-tipos-de-datos-compuestas"><span class="header-section-number">4.6.16</span> Copia de tipos de datos compuestas</h3>
+<section id="copia-de-tipos-de-datos-compuestas" class="level3" data-number="4.5.20">
+<h3 data-number="4.5.20" class="anchored" data-anchor-id="copia-de-tipos-de-datos-compuestas"><span class="header-section-number">4.5.20</span> Copia de tipos de datos compuestas</h3>
 <p>En Julia cuando se asigna una variable de un tipo de datos compuesto a otra variable, no se hace una copia de la estructura de datos referenciada por la primera variable, sino que se la nueva variable apunta a la misma dirección de memoria de la estructura de datos (copia por referencia). El resultado son dos variables que apuntan a la misma estructura de datos y cualquier cambio en una de ellas se verá reflejado en la otra.</p>
 <p>Para hacer copias por valor de un tipo de datos compuesto debe usarse explícitamente la siguiente función:</p>
 <ul>
 <li><code>b = copy(a)</code>: Crea una copia de la estructura de datos referencia por <code>a</code> y asigna su referencia a <code>b</code>.</li>
 </ul>
 </section>
-<section id="ejemplo-de-copia-de-tipos-de-datos-compuestos" class="level3" data-number="4.6.17">
-<h3 data-number="4.6.17" class="anchored" data-anchor-id="ejemplo-de-copia-de-tipos-de-datos-compuestos"><span class="header-section-number">4.6.17</span> Ejemplo de copia de tipos de datos compuestos</h3>
+<section id="ejemplo-de-copia-de-tipos-de-datos-compuestos" class="level3" data-number="4.5.21">
+<h3 data-number="4.5.21" class="anchored" data-anchor-id="ejemplo-de-copia-de-tipos-de-datos-compuestos"><span class="header-section-number">4.5.21</span> Ejemplo de copia de tipos de datos compuestos</h3>
 <div class="sourceCode" id="cb28"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> v <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>];</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> u <span class="op">=</span> <span class="fu">copy</span>(v);  <span class="co"># Copia por valor</span></span>
@@ -1328,17 +1326,17 @@ Advertencia
 <span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a> <span class="fl">3</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="tuplas" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="tuplas"><span class="header-section-number">4.7</span> Tuplas</h2>
+<section id="tuplas" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="tuplas"><span class="header-section-number">4.6</span> Tuplas</h2>
 <p>Una tupla es una colección ordenada de tamaño fijo que puede contener elementos de distintos tipos.</p>
 <p>Generalmente se usan para pasar parámetros o devolver valores de funciones.</p>
 <p>Se crean escribiendo sus elementos separados por comas entre paréntesis.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -1357,20 +1355,20 @@ Advertencia
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(t)</span>
 <span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="dt">Tuple</span>{<span class="dt">Int64</span>, <span class="dt">String</span>, <span class="dt">Int64</span>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="tuplas-con-nombres" class="level3" data-number="4.7.1">
-<h3 data-number="4.7.1" class="anchored" data-anchor-id="tuplas-con-nombres"><span class="header-section-number">4.7.1</span> Tuplas con nombres</h3>
+<section id="tuplas-con-nombres" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="tuplas-con-nombres"><span class="header-section-number">4.6.1</span> Tuplas con nombres</h3>
 <p>Es posible asignar un nombre a cada uno de los elementos de la tupla. Para ello cada elemento de la tupla con nombre debe escribirse con la sintaxis <code>nombre = valor</code>.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> t <span class="op">=</span> (día <span class="op">=</span> <span class="fl">1</span>, mes <span class="op">=</span> <span class="st">"enero"</span>, año <span class="op">=</span>  <span class="fl">2020</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>(día <span class="op">=</span> <span class="fl">1</span>, mes <span class="op">=</span> <span class="st">"enero"</span>, año <span class="op">=</span> <span class="fl">2020</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(t)</span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="dt">NamedTuple</span>{(<span class="op">:</span>día, <span class="op">:</span>mes, <span class="op">:</span>año), <span class="dt">Tuple</span>{<span class="dt">Int64</span>, <span class="dt">String</span>, <span class="dt">Int64</span>}}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -1380,8 +1378,8 @@ Advertencia
 </div>
 <p>La ventaja de usar tuplas con nombres es que podemos acceder a sus elementos por nombre, además de por índice.</p>
 </section>
-<section id="acceso-a-los-elementos-de-una-tupla" class="level3" data-number="4.7.2">
-<h3 data-number="4.7.2" class="anchored" data-anchor-id="acceso-a-los-elementos-de-una-tupla"><span class="header-section-number">4.7.2</span> Acceso a los elementos de una tupla</h3>
+<section id="acceso-a-los-elementos-de-una-tupla" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="acceso-a-los-elementos-de-una-tupla"><span class="header-section-number">4.6.2</span> Acceso a los elementos de una tupla</h3>
 <p>Como las tuplas tienen orden, podemos acceder a sus elementos mediante índices, al igual que con los arrays de una dimensión.</p>
 <ul>
 <li><code>t[i]</code>: Devuelve el elemento con íncide <code>i</code> de la tupla <code>t</code>.</li>
@@ -1401,14 +1399,14 @@ Advertencia
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="asignación-múltiple-de-tuplas" class="level3" data-number="4.7.3">
-<h3 data-number="4.7.3" class="anchored" data-anchor-id="asignación-múltiple-de-tuplas"><span class="header-section-number">4.7.3</span> Asignación múltiple de tuplas</h3>
+<section id="asignación-múltiple-de-tuplas" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="asignación-múltiple-de-tuplas"><span class="header-section-number">4.6.3</span> Asignación múltiple de tuplas</h3>
 <p>Es posible asignar los elementos de una tupla a distintas variables en una sola asignación.</p>
 <p><code>x, y, ... = t</code>: Asigna a las variables <code>x</code>, <code>y</code>, etc los elementos de la tupla <code>t</code> en orden. Si el número de variables es menor que el tamaño de la tupla, los últimos elementos quedan sin asignar.</p>
 <p><code>x, y... = t</code>: Asigna el primer elemento de la tupla <code>t</code> a la variable <code>x</code> y la tupla con los elementos restantes a la variable <code>y</code>.</p>
 </section>
-<section id="ejemplo-de-asignación-múltipe-de-tuplas" class="level3" data-number="4.7.4">
-<h3 data-number="4.7.4" class="anchored" data-anchor-id="ejemplo-de-asignación-múltipe-de-tuplas"><span class="header-section-number">4.7.4</span> Ejemplo de asignación múltipe de tuplas</h3>
+<section id="ejemplo-de-asignación-múltipe-de-tuplas" class="level3" data-number="4.6.4">
+<h3 data-number="4.6.4" class="anchored" data-anchor-id="ejemplo-de-asignación-múltipe-de-tuplas"><span class="header-section-number">4.6.4</span> Ejemplo de asignación múltipe de tuplas</h3>
 <div class="sourceCode" id="cb32"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> t <span class="op">=</span> (<span class="fl">1</span>, <span class="st">"enero"</span>, <span class="fl">2020</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>(<span class="fl">1</span>, <span class="st">"enero"</span>, <span class="fl">2020</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1434,20 +1432,20 @@ Advertencia
 <span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>(<span class="st">"enero"</span>, <span class="fl">2020</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="diccionarios" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="diccionarios"><span class="header-section-number">4.8</span> Diccionarios</h2>
+<section id="diccionarios" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="diccionarios"><span class="header-section-number">4.7</span> Diccionarios</h2>
 <p>Un diccionario es una colección asociativa sin orden cuyos elementos son pares formados por una <em>clave</em> y un <em>valor</em> asociado a la clave.</p>
 <p>Se parecen a las tuplas con nombre, pero, a diferencia de estas, son mutables, es decir, su contenido se puede alterar.</p>
 <p>Se construyen con la siguiente constructor:</p>
 <ul>
 <li><code>Dict(k1 =&gt; v1, ...)</code>: Crea un diccionario con los pares indicados en formato <code>clave =&gt; valor</code>.</li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -1455,8 +1453,8 @@ Advertencia
 <p>En un diccionario no pueden existir dos pares con la misma clave, de modo que si se repite una clave se sobrescribe el par anterior.</p>
 </div>
 </div>
-<section id="ejemplo-de-diccionarios" class="level3" data-number="4.8.1">
-<h3 data-number="4.8.1" class="anchored" data-anchor-id="ejemplo-de-diccionarios"><span class="header-section-number">4.8.1</span> Ejemplo de diccionarios</h3>
+<section id="ejemplo-de-diccionarios" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="ejemplo-de-diccionarios"><span class="header-section-number">4.7.1</span> Ejemplo de diccionarios</h3>
 <div class="sourceCode" id="cb33"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">Dict</span>()  <span class="co"># Diccionario vacío</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Dict</span><span class="dt">{Any, Any}</span>()</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1469,8 +1467,8 @@ Advertencia
 <span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(d)</span>
 <span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="dt">Dict</span>{<span class="dt">String</span>, <span class="dt">String</span>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="comprensión-de-diccionarios" class="level3" data-number="4.8.2">
-<h3 data-number="4.8.2" class="anchored" data-anchor-id="comprensión-de-diccionarios"><span class="header-section-number">4.8.2</span> Comprensión de diccionarios</h3>
+<section id="comprensión-de-diccionarios" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="comprensión-de-diccionarios"><span class="header-section-number">4.7.2</span> Comprensión de diccionarios</h3>
 <p>Al igual que para arrays se puede usar la técnica de compresión para generar diccionarios a partir de uno o varios iteradores.</p>
 <ul>
 <li><p><code>Dict(kexp =&gt; vexp for i = ite)</code>: Devuelve el diccionario cuyos pares están formados por la claves y valores resultan de evaluar las expresiones <code>kexp</code> y <code>vexp</code> respectivamente, para cada valor <code>i</code> del iterador <code>ite</code>.</p></li>
@@ -1478,8 +1476,8 @@ Advertencia
 </ul>
 <p>Se pueden utilizar más de un iterador después de la palabra reservada <code>for</code>.</p>
 </section>
-<section id="ejemplo-de-comprensión-de-diccionarios" class="level3" data-number="4.8.3">
-<h3 data-number="4.8.3" class="anchored" data-anchor-id="ejemplo-de-comprensión-de-diccionarios"><span class="header-section-number">4.8.3</span> Ejemplo de comprensión de diccionarios</h3>
+<section id="ejemplo-de-comprensión-de-diccionarios" class="level3" data-number="4.7.3">
+<h3 data-number="4.7.3" class="anchored" data-anchor-id="ejemplo-de-comprensión-de-diccionarios"><span class="header-section-number">4.7.3</span> Ejemplo de comprensión de diccionarios</h3>
 <div class="sourceCode" id="cb34"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">Dict</span>(i <span class="op">=&gt;</span> i<span class="op">^</span><span class="fl">2</span> <span class="cf">for</span> i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Dict</span>{<span class="dt">Int64</span>, <span class="dt">Int64</span>} with <span class="fl">4</span> entries<span class="op">:</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fl">4</span> <span class="op">=&gt;</span> <span class="fl">16</span></span>
@@ -1499,18 +1497,18 @@ Advertencia
 <span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  (<span class="fl">1</span>, <span class="fl">4</span>) <span class="op">=&gt;</span> <span class="fl">5</span></span>
 <span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>  (<span class="fl">2</span>, <span class="fl">3</span>) <span class="op">=&gt;</span> <span class="fl">5</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="acceso-a-los-elementos-de-un-diccionario" class="level3" data-number="4.8.4">
-<h3 data-number="4.8.4" class="anchored" data-anchor-id="acceso-a-los-elementos-de-un-diccionario"><span class="header-section-number">4.8.4</span> Acceso a los elementos de un diccionario</h3>
+<section id="acceso-a-los-elementos-de-un-diccionario" class="level3" data-number="4.7.4">
+<h3 data-number="4.7.4" class="anchored" data-anchor-id="acceso-a-los-elementos-de-un-diccionario"><span class="header-section-number">4.7.4</span> Acceso a los elementos de un diccionario</h3>
 <p>Para acceder a los valores de un diccionario se utilizan sus claves asociadas entre corchetes.</p>
 <ul>
 <li><code>d[k]</code>: Devuelve el valor asociado a la clave <code>k</code> en el diccionario <code>d</code>.</li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -1525,8 +1523,8 @@ Advertencia
 <li><code>get!(d, k, v)</code>: Devuelve el valor asociado a la clave <code>k</code> en el diccionario <code>d</code>. Si la clave <code>k</code> no existe en el diccionario <code>d</code> añade el par con la clave <code>k</code> y el valor <code>v</code> y devuelve el valor <code>v</code>.</li>
 </ul>
 </section>
-<section id="ejemplo-de-acceso-a-los-elementos-de-un-diccionario" class="level3" data-number="4.8.5">
-<h3 data-number="4.8.5" class="anchored" data-anchor-id="ejemplo-de-acceso-a-los-elementos-de-un-diccionario"><span class="header-section-number">4.8.5</span> Ejemplo de acceso a los elementos de un diccionario</h3>
+<section id="ejemplo-de-acceso-a-los-elementos-de-un-diccionario" class="level3" data-number="4.7.5">
+<h3 data-number="4.7.5" class="anchored" data-anchor-id="ejemplo-de-acceso-a-los-elementos-de-un-diccionario"><span class="header-section-number">4.7.5</span> Ejemplo de acceso a los elementos de un diccionario</h3>
 <div class="sourceCode" id="cb35"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> d <span class="op">=</span> <span class="fu">Dict</span>(<span class="st">"ES"</span> <span class="op">=&gt;</span> <span class="st">"Euro"</span>, <span class="st">"US"</span> <span class="op">=&gt;</span> <span class="st">"Dollar"</span>, <span class="st">"CN"</span> <span class="op">=&gt;</span> <span class="st">"Yuan"</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Dict</span>{<span class="dt">String</span>, <span class="dt">String</span>} with <span class="fl">3</span> entries<span class="op">:</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CN"</span> <span class="op">=&gt;</span> <span class="st">"Yuan"</span></span>
@@ -1557,8 +1555,8 @@ Advertencia
 <span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JP"</span> <span class="op">=&gt;</span> <span class="st">"Yen"</span></span>
 <span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"US"</span> <span class="op">=&gt;</span> <span class="st">"Dollar"</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="recorrido-de-las-claves-y-valores-de-un-diccionario" class="level3" data-number="4.8.6">
-<h3 data-number="4.8.6" class="anchored" data-anchor-id="recorrido-de-las-claves-y-valores-de-un-diccionario"><span class="header-section-number">4.8.6</span> Recorrido de las claves y valores de un diccionario</h3>
+<section id="recorrido-de-las-claves-y-valores-de-un-diccionario" class="level3" data-number="4.7.6">
+<h3 data-number="4.7.6" class="anchored" data-anchor-id="recorrido-de-las-claves-y-valores-de-un-diccionario"><span class="header-section-number">4.7.6</span> Recorrido de las claves y valores de un diccionario</h3>
 <p>Las siguientes funciones permiten obtener todas las claves, valores y pares de un diccionario.</p>
 <ul>
 <li><code>keys(d)</code>: Devuelve un iterador con las claves del diccionario <code>d</code>.</li>
@@ -1566,8 +1564,8 @@ Advertencia
 </ul>
 <p>Estos iteradores permiten recorrer fácilmente los pares de un diccionario.</p>
 </section>
-<section id="ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario" class="level3" data-number="4.8.7">
-<h3 data-number="4.8.7" class="anchored" data-anchor-id="ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario"><span class="header-section-number">4.8.7</span> Ejemplo de recorrido de las claves y valores de un diccionario</h3>
+<section id="ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario" class="level3" data-number="4.7.7">
+<h3 data-number="4.7.7" class="anchored" data-anchor-id="ejemplo-de-recorrido-de-las-claves-y-valores-de-un-diccionario"><span class="header-section-number">4.7.7</span> Ejemplo de recorrido de las claves y valores de un diccionario</h3>
 <div class="sourceCode" id="cb36"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> d <span class="op">=</span> <span class="fu">Dict</span>(<span class="st">"ES"</span> <span class="op">=&gt;</span> <span class="st">"Euro"</span>, <span class="st">"US"</span> <span class="op">=&gt;</span> <span class="st">"Dollar"</span>, <span class="st">"CN"</span> <span class="op">=&gt;</span> <span class="st">"Yuan"</span>)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Dict</span>{<span class="dt">String</span>, <span class="dt">String</span>} with <span class="fl">3</span> entries<span class="op">:</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CN"</span> <span class="op">=&gt;</span> <span class="st">"Yuan"</span></span>
@@ -1600,8 +1598,8 @@ Advertencia
 <span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>ES <span class="op">=</span> Euro</span>
 <span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>US <span class="op">=</span> Dollar</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="añadir-elementos-a-un-diccionario" class="level3" data-number="4.8.8">
-<h3 data-number="4.8.8" class="anchored" data-anchor-id="añadir-elementos-a-un-diccionario"><span class="header-section-number">4.8.8</span> Añadir elementos a un diccionario</h3>
+<section id="añadir-elementos-a-un-diccionario" class="level3" data-number="4.7.8">
+<h3 data-number="4.7.8" class="anchored" data-anchor-id="añadir-elementos-a-un-diccionario"><span class="header-section-number">4.7.8</span> Añadir elementos a un diccionario</h3>
 <p>Se pueden añadir pares nuevos a un diccionario de la siguiente manera:</p>
 <ul>
 <li><p><code>d[k] = v</code>: Añade el par con clave <code>k</code> y valor <code>v</code> al diccionario <code>d</code>. Si la clave <code>k</code> ya existía en el diccionario <code>d</code>, cambia su valor asociado por <code>v</code>.</p></li>
@@ -1622,8 +1620,8 @@ Advertencia
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"JP"</span> <span class="op">=&gt;</span> <span class="st">"Yen"</span></span>
 <span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"US"</span> <span class="op">=&gt;</span> <span class="st">"Dollar"</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="eliminar-elementos-de-un-diccionario" class="level3" data-number="4.8.9">
-<h3 data-number="4.8.9" class="anchored" data-anchor-id="eliminar-elementos-de-un-diccionario"><span class="header-section-number">4.8.9</span> Eliminar elementos de un diccionario</h3>
+<section id="eliminar-elementos-de-un-diccionario" class="level3" data-number="4.7.9">
+<h3 data-number="4.7.9" class="anchored" data-anchor-id="eliminar-elementos-de-un-diccionario"><span class="header-section-number">4.7.9</span> Eliminar elementos de un diccionario</h3>
 <p>Para eliminar un par de un diccionario se utiliza la siguiente función:</p>
 <ul>
 <li><code>delete!(d, k)</code>: Elimina el par cuya clave es <code>k</code> del diccionario <code>d</code>.</li>
@@ -1641,20 +1639,20 @@ Advertencia
 <hr>
 </section>
 </section>
-<section id="conjuntos" class="level2" data-number="4.9">
-<h2 data-number="4.9" class="anchored" data-anchor-id="conjuntos"><span class="header-section-number">4.9</span> Conjuntos</h2>
+<section id="conjuntos" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="conjuntos"><span class="header-section-number">4.8</span> Conjuntos</h2>
 <p>Un conjunto es una colección de elementos del mismo tipo sin orden y sin repeticiones.</p>
 <p>Se construyen con la siguiente constructor:</p>
 <ul>
 <li><code>Set(a)</code>: Crea un conjunto con los elementos del array <code>a</code>.</li>
 </ul>
 <p>Al igual que para arrays el tipo se infiere automáticamente a partir de los tipos de sus elementos. Si los elementos son de distintos tipos se convierten al tipo más específico de la jerarquía de tipos del que los tipos de los elementos son subtipos.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -1662,8 +1660,8 @@ Advertencia
 <p>Un conjunto no puede tener elementos repetidos, por lo que si el array contiene elementos repetidos solo se incluyen una vez.</p>
 </div>
 </div>
-<section id="ejemplo-de-construcción-de-conjuntos" class="level3" data-number="4.9.1">
-<h3 data-number="4.9.1" class="anchored" data-anchor-id="ejemplo-de-construcción-de-conjuntos"><span class="header-section-number">4.9.1</span> Ejemplo de construcción de conjuntos</h3>
+<section id="ejemplo-de-construcción-de-conjuntos" class="level3" data-number="4.8.1">
+<h3 data-number="4.8.1" class="anchored" data-anchor-id="ejemplo-de-construcción-de-conjuntos"><span class="header-section-number">4.8.1</span> Ejemplo de construcción de conjuntos</h3>
 <div class="sourceCode" id="cb39"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">Set</span>()</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Set</span><span class="dt">{Any}</span>()</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1676,18 +1674,18 @@ Advertencia
 <span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">typeof</span>(c)</span>
 <span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="dt">Set</span>{<span class="dt">Any</span>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="añadir-elementos-a-un-conjunto" class="level3" data-number="4.9.2">
-<h3 data-number="4.9.2" class="anchored" data-anchor-id="añadir-elementos-a-un-conjunto"><span class="header-section-number">4.9.2</span> Añadir elementos a un conjunto</h3>
+<section id="añadir-elementos-a-un-conjunto" class="level3" data-number="4.8.2">
+<h3 data-number="4.8.2" class="anchored" data-anchor-id="añadir-elementos-a-un-conjunto"><span class="header-section-number">4.8.2</span> Añadir elementos a un conjunto</h3>
 <p>Para añadir elementos a un conjunto se utiliza la siguiente función:</p>
 <ul>
 <li><code>push!(c, e)</code>: Añade el elemento <code>e</code> al conjunto <code>c</code>.</li>
 </ul>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Advertencia
 </div>
 </div>
@@ -1696,8 +1694,8 @@ Advertencia
 </div>
 </div>
 </section>
-<section id="ejemplo-de-añadir-elementos-a-un-conjunto" class="level3" data-number="4.9.3">
-<h3 data-number="4.9.3" class="anchored" data-anchor-id="ejemplo-de-añadir-elementos-a-un-conjunto"><span class="header-section-number">4.9.3</span> Ejemplo de añadir elementos a un conjunto</h3>
+<section id="ejemplo-de-añadir-elementos-a-un-conjunto" class="level3" data-number="4.8.3">
+<h3 data-number="4.8.3" class="anchored" data-anchor-id="ejemplo-de-añadir-elementos-a-un-conjunto"><span class="header-section-number">4.8.3</span> Ejemplo de añadir elementos a un conjunto</h3>
 <div class="sourceCode" id="cb40"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c <span class="op">=</span> <span class="fu">Set</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Set</span>{<span class="dt">Int64</span>} with <span class="fl">3</span> elements<span class="op">:</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2</span></span>
@@ -1719,8 +1717,8 @@ Advertencia
 <span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">convert</span>(<span class="op">::</span><span class="dt">Type{T}</span>, <span class="op">::</span><span class="dt">Base.TwicePrecision</span>) <span class="kw">where</span> T<span class="op">&lt;:</span><span class="dt">Number </span>at <span class="op">/</span>usr<span class="op">/</span>share<span class="op">/</span>julia<span class="op">/</span>base<span class="op">/</span>twiceprecision.jl<span class="op">:</span><span class="fl">262</span></span>
 <span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="eliminar-elementos-de-un-conjunto" class="level3" data-number="4.9.4">
-<h3 data-number="4.9.4" class="anchored" data-anchor-id="eliminar-elementos-de-un-conjunto"><span class="header-section-number">4.9.4</span> Eliminar elementos de un conjunto</h3>
+<section id="eliminar-elementos-de-un-conjunto" class="level3" data-number="4.8.4">
+<h3 data-number="4.8.4" class="anchored" data-anchor-id="eliminar-elementos-de-un-conjunto"><span class="header-section-number">4.8.4</span> Eliminar elementos de un conjunto</h3>
 <p>Para eliminar elementos de un conjunto se utiliza la siguiente función:</p>
 <ul>
 <li><code>delete!(c, e)</code>: Elimina el elemento <code>e</code> del conjunto <code>c</code>.</li>
@@ -1736,8 +1734,8 @@ Advertencia
 <span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fl">3</span></span>
 <span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="recorrido-de-los-elementos-de-un-conjunto" class="level3" data-number="4.9.5">
-<h3 data-number="4.9.5" class="anchored" data-anchor-id="recorrido-de-los-elementos-de-un-conjunto"><span class="header-section-number">4.9.5</span> Recorrido de los elementos de un conjunto</h3>
+<section id="recorrido-de-los-elementos-de-un-conjunto" class="level3" data-number="4.8.5">
+<h3 data-number="4.8.5" class="anchored" data-anchor-id="recorrido-de-los-elementos-de-un-conjunto"><span class="header-section-number">4.8.5</span> Recorrido de los elementos de un conjunto</h3>
 <p>Un conjunto puede utilizarse también como un iterador para recorrer sus elementos.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> c <span class="op">=</span> <span class="fu">Set</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>)</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Set</span>{<span class="dt">Int64</span>} with <span class="fl">3</span> elements<span class="op">:</span></span>
@@ -1752,8 +1750,8 @@ Advertencia
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fl">3</span></span>
 <span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="pertenencia-e-inclusión-de-conjuntos" class="level3" data-number="4.9.6">
-<h3 data-number="4.9.6" class="anchored" data-anchor-id="pertenencia-e-inclusión-de-conjuntos"><span class="header-section-number">4.9.6</span> Pertenencia e inclusión de conjuntos</h3>
+<section id="pertenencia-e-inclusión-de-conjuntos" class="level3" data-number="4.8.6">
+<h3 data-number="4.8.6" class="anchored" data-anchor-id="pertenencia-e-inclusión-de-conjuntos"><span class="header-section-number">4.8.6</span> Pertenencia e inclusión de conjuntos</h3>
 <ul>
 <li><code>in(e, c)</code>, <code>e ∈ c</code> : Devuelve <code>true</code> si el elemento <code>e</code> pertenece al conjunto <code>c</code> y <code>false</code> en caso contrario.</li>
 <li><code>e ∉ c</code>: Devuelve <code>true</code> si el elemento <code>e</code> no pertenece al conjunto <code>c</code> y <code>false</code> en caso contrario.</li>
@@ -1763,8 +1761,8 @@ Advertencia
 <li><code>isdisjoint(a, b)</code>: Devuelve <code>true</code> si los conjuntos <code>a</code> y <code>b</code> no tienen elementos en común y <code>false</code> en caso contrario.</li>
 </ul>
 </section>
-<section id="ejemplos-de-pertenencia-e-inclusión-de-conjuntos" class="level3" data-number="4.9.7">
-<h3 data-number="4.9.7" class="anchored" data-anchor-id="ejemplos-de-pertenencia-e-inclusión-de-conjuntos"><span class="header-section-number">4.9.7</span> Ejemplos de pertenencia e inclusión de conjuntos</h3>
+<section id="ejemplos-de-pertenencia-e-inclusión-de-conjuntos" class="level3" data-number="4.8.7">
+<h3 data-number="4.8.7" class="anchored" data-anchor-id="ejemplos-de-pertenencia-e-inclusión-de-conjuntos"><span class="header-section-number">4.8.7</span> Ejemplos de pertenencia e inclusión de conjuntos</h3>
 <div class="sourceCode" id="cb43"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> a <span class="op">=</span> <span class="fu">Set</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>);</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">in</span>(<span class="fl">2</span>, a)</span>
@@ -1784,8 +1782,8 @@ Advertencia
 <span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> <span class="fu">isdisjoint</span>(a, b)</span>
 <span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a><span class="cn">false</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="álgebra-de-conjuntos" class="level3" data-number="4.9.8">
-<h3 data-number="4.9.8" class="anchored" data-anchor-id="álgebra-de-conjuntos"><span class="header-section-number">4.9.8</span> Álgebra de conjuntos</h3>
+<section id="álgebra-de-conjuntos" class="level3" data-number="4.8.8">
+<h3 data-number="4.8.8" class="anchored" data-anchor-id="álgebra-de-conjuntos"><span class="header-section-number">4.8.8</span> Álgebra de conjuntos</h3>
 <ul>
 <li><code>union(a, b)</code>, <code>a ∪ b</code>: Devuelve el conjunto unión de los conjuntos <code>a</code> y <code>b</code>.</li>
 <li><code>intersect(a, b)</code>, <code>a ∩ b</code>: Devuelve el conjunto intersección de los conjuntos <code>a</code> y <code>b</code>.</li>
@@ -1794,8 +1792,8 @@ Advertencia
 </ul>
 <p>Existen versiones de estas funciones acabadas en <code>!</code> que sobreescriben el conjunto dado como primer argumento con el resultado de la operación.</p>
 </section>
-<section id="ejemplo-de-álgebra-de-conjuntos" class="level3" data-number="4.9.9">
-<h3 data-number="4.9.9" class="anchored" data-anchor-id="ejemplo-de-álgebra-de-conjuntos"><span class="header-section-number">4.9.9</span> Ejemplo de álgebra de conjuntos</h3>
+<section id="ejemplo-de-álgebra-de-conjuntos" class="level3" data-number="4.8.9">
+<h3 data-number="4.8.9" class="anchored" data-anchor-id="ejemplo-de-álgebra-de-conjuntos"><span class="header-section-number">4.8.9</span> Ejemplo de álgebra de conjuntos</h3>
 <div class="sourceCode" id="cb44"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> a <span class="op">=</span> <span class="fu">Set</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="dt">Set</span>{<span class="dt">Int64</span>} with <span class="fl">3</span> elements<span class="op">:</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2</span></span>
@@ -1853,6 +1851,121 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1860,9 +1973,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1873,8 +2000,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copiada");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1910,24 +2054,128 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
