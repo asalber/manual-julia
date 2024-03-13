@@ -22,7 +22,7 @@ book:
   title: "Manual de Julia"
   subtitle: "Orientado al cálculo científico y análisis de datos"
   author: "Alfredo Sánchez Alberca"
-  date: "1/6/2022"
+  date: "1/3/2024"
   output-file: "manual-julia"
   image: cover.png
   cover-image: cover.png

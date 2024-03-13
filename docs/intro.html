@@ -351,22 +351,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="instalación-de-julia" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="instalación-de-julia"><span class="header-section-number">1.5</span> Instalación de Julia</h2>
-<ol type="1">
-<li><a href="https://julialang.org/downloads/">Descargar e instalar Julia</a>.</li>
-<li>Añadir Julia al PATH del sistema.</li>
-</ol>
-<p>Una vez instalado, para ejecutar el intérprete de Julia basta con abrir una terminal y teclear <code>julia</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prompt</span><span class="op">&gt;</span> julia</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               <span class="ex">_</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   <span class="ex">_</span>       _ _<span class="er">(</span><span class="ex">_</span><span class="kw">)</span><span class="ex">_</span>     <span class="kw">|</span>  <span class="ex">Documentation:</span> https://docs.julialang.org</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">(</span><span class="ex">_</span><span class="kw">)</span>     <span class="kw">|</span> <span class="kw">(</span><span class="ex">_</span><span class="kw">)</span> <span class="kw">(</span><span class="ex">_</span><span class="kw">)</span>    <span class="kw">|</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>   <span class="ex">_</span> _   _<span class="kw">|</span> <span class="kw">|</span><span class="ex">_</span>  __ _   <span class="kw">|</span>  <span class="ex">Type</span> <span class="st">"?"</span> for help, <span class="st">"]?"</span> for Pkg help.</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span><span class="ex">/</span> _<span class="kw">`</span> <span class="kw">|</span>  <span class="kw">|</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span><span class="ex">_</span><span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">|</span> <span class="kw">(</span><span class="ex">_</span><span class="kw">|</span> <span class="kw">|</span>  <span class="kw">|</span>  <span class="ex">Version</span> 1.7.3 <span class="er">(</span><span class="ex">2022-05-06</span><span class="kw">)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">_/</span> <span class="kw">|</span><span class="ex">\__</span><span class="st">'_|_|_|\__'</span><span class="ex">_</span><span class="kw">|</span>  <span class="kw">|</span>  <span class="ex">Official</span> https://julialang.org/ release</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="ex">__/</span>                   <span class="kw">|</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span><span class="op">&gt;</span> </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>La mejor manera de instalar Julia es mediante la aplicación <a href="https://github.com/JuliaLang/juliaup"><code>juliaup</code></a> que permite instalar diferentes versiones de Julia en diferentes sistemas operativos. En la propia página web de Julia se ofrecen <a href="https://julialang.org/downloads/">instrucciones detalladas</a> para instalarla en cada sistema operativo.</p>
+<p>La aplicación <code>juliaup</code> además de instalar Julia y añadir el ejecutable al <code>PATH</code> del sistema, permite otras operaciones como:</p>
+<ul>
+<li><code>julia status</code>: Muestra todas las versiones de Julia instaladas en el sistema y cuál es la activa por defecto, así como y el canal activo.</li>
+<li><code>julia list</code>: Da una lista de los canales (repositorios) disponibles para descargar Julia. Para instalar Julia hay que añadir al menos un canal por lo que si no aparece ninguno previamente abrá que añadirlo mediante el siguiente comando. El canal con la última versión estable de Julia es <code>release</code>.</li>
+<li><code>julia add version|canal</code>: Añade el canal <code>canal</code> a la lista de canales disponibles o instala una versión específica de Julia en el sistema. Si no se especifica la versión, se instalará la última versión estable.</li>
+<li><code>julia update</code>: Actualiza la versión de Julia activa a la última versión estable en todos los canales configurados.</li>
+<li><code>julia remove version</code>: Elimina la versión <code>version</code> de Julia del sistema.</li>
+</ul>
+<pre><code>
+Una vez instalado julia, se puede comprobar que la instalación ha sido correcta abriendo una terminal y tecleando `julia`. Debería aparecer algo parecido a esto:
+
+```bash
+prompt&gt; julia
+              _
+   _       _ _(_)_     |  Documentation: https://docs.julialang.org
+  (_)     | (_) (_)    |
+   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 1.10.2 (2024-03-01)
+ _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
+|__/                   |
+
+julia&gt; </code></pre>
 </section>
 <section id="el-repl-de-julia" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="el-repl-de-julia"><span class="header-section-number">1.6</span> El REPL de Julia</h2>

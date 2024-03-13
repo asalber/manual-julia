@@ -49,19 +49,27 @@ De los creadores de Julia:
 
 ## Instalación de Julia
 
-1. [Descargar e instalar Julia](https://julialang.org/downloads/).
-2. Añadir Julia al PATH del sistema.
+La mejor manera de instalar Julia es mediante la aplicación [`juliaup`](https://github.com/JuliaLang/juliaup) que permite instalar diferentes versiones de Julia en diferentes sistemas operativos. En la propia página web de Julia se ofrecen [instrucciones detalladas](https://julialang.org/downloads/) para instalarla en cada sistema operativo.
 
-Una vez instalado, para ejecutar el intérprete de Julia basta con abrir una terminal y teclear `julia`.
+La aplicación `juliaup` además de instalar Julia y añadir el ejecutable al `PATH` del sistema, permite otras operaciones como:
+
+- `julia status`: Muestra todas las versiones de Julia instaladas en el sistema y cuál es la activa por defecto, así como y el canal activo.
+- `julia list`: Da una lista de los canales (repositorios) disponibles para descargar Julia. Para instalar Julia hay que añadir al menos un canal por lo que si no aparece ninguno previamente abrá que añadirlo mediante el siguiente comando. El canal con la última versión estable de Julia es `release`.
+- `julia add version|canal`: Añade el canal `canal` a la lista de canales disponibles o instala una versión específica de Julia en el sistema. Si no se especifica la versión, se instalará la última versión estable.
+- `julia update`: Actualiza la versión de Julia activa a la última versión estable en todos los canales configurados.
+- `julia remove version`: Elimina la versión `version` de Julia del sistema.
+```
+
+Una vez instalado julia, se puede comprobar que la instalación ha sido correcta abriendo una terminal y tecleando `julia`. Debería aparecer algo parecido a esto:
 
 ```bash
 prompt> julia
-               _
+              _
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
   (_)     | (_) (_)    |
    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
   | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.7.3 (2022-05-06)
+  | | |_| | | | (_| |  |  Version 1.10.2 (2024-03-01)
  _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
 |__/                   |
 
